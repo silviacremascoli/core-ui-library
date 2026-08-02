@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html";
-// @ts-ignore - tells TS to accept importing .twig files as functions
 import buttonTemplate from "./Button.twig";
 import "./Button.css";
 
