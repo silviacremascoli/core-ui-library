@@ -1,8 +1,9 @@
-import { mergeConfig } from "vite";
-import twig from "vite-plugin-twig-drupal";
+import type { StorybookConfig } from '@storybook/html-vite';
+import { mergeConfig, type UserConfig } from 'vite';
+// @ts-expect-error plugin lacks type definitions
+import twig from 'vite-plugin-twig-drupal';
 
-/** @type { import('@storybook/html-vite').StorybookConfig } */
-const config = {
+const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|ts)"],
   addons: [
     "@chromatic-com/storybook",
@@ -14,7 +15,7 @@ const config = {
     name: "@storybook/html-vite",
     options: {},
   },
-  async viteFinal(config) {
+  async viteFinal(config: UserConfig) {
     return mergeConfig(config, {
       plugins: [twig()],
     });
