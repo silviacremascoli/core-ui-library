@@ -1,0 +1,7 @@
+<button 
+  type="{{ type|default('button') }}"
+  class="btn btn--{{ variant|default('primary') }} btn--{{ size|default('medium') }} {{ className|default('') }}"
+  {% if disabled %}disabled{% endif %}
+>
+  {{ label }}
+</button>

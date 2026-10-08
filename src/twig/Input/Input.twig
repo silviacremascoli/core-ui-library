@@ -1,0 +1,8 @@
+<input
+  type="{{ type | default('text') }}"
+  {% if label %}aria-label="{{ label }}"{% endif %}
+  {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+  {% if disabled %}disabled{% endif %}
+  class="input {{ className|default('') }}"
+  {% if value %}value="{{ value }}"{% endif %}
+/>

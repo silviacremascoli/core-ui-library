@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import buttonTemplate from "./Button.twig";
-import "./Button.css";
+import ButtonTwig, { buttonTemplate } from "../../../twig/Button";
+import { Button as ButtonReact } from "../../../react/Button";
+import ButtonVue from "../../../vue/Button";
+import "../../../components/Button/Button.css";
 
 // 1. Define the TypeScript Interface for your Twig template variables
 export interface ButtonArgs {
@@ -75,5 +77,33 @@ export const Disabled: Story = {
   args: {
     label: "Unavailable",
     disabled: true,
+  },
+};
+
+// Additional stories to showcase all framework implementations
+export const AllFrameworks: Story = {
+  render: (args) => {
+    return `
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <div>
+          <h4>Twig</h4>
+          ${buttonTemplate(args)}
+        </div>
+        <div>
+          <h4>React</h4>
+          <div id="react-button"></div>
+        </div>
+        <div>
+          <h4>Vue</h4>
+          <div id="vue-button"></div>
+        </div>
+      </div>
+    `;
+  },
+  args: {
+    label: "Click Me",
+    variant: "primary",
+    size: "medium",
+    disabled: false,
   },
 };

@@ -1,5 +1,9 @@
 import type { Preview } from '@storybook/html';
 
+// Import global styles and themes for all stories
+import '../src/design/global.css';
+import '../src/design/themes.css';
+
 const customViewports = {
   small: {
     name: 'Small',

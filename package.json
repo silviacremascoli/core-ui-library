@@ -16,15 +16,45 @@
     "@storybook/addon-docs": "^10.6.1",
     "@storybook/addon-vitest": "^10.6.1",
     "@storybook/html-vite": "^10.6.1",
+    "@types/react": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "@vitejs/plugin-vue": "^6.0.9",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
     "playwright": "^1.62.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "storybook": "^10.6.1",
     "vite": "^8.3.3",
     "vite-plugin-twig-drupal": "^1.6.2",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "vue": "^3.5.43"
   },
   "dependencies": {
     "twig": "^3.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/core-ui.es.js",
+      "require": "./dist/core-ui.cjs.js"
+    },
+    "./react": {
+      "import": "./dist/react/index.es.js",
+      "require": "./dist/react/index.cjs.js"
+    },
+    "./vue": {
+      "import": "./dist/vue/index.es.js",
+      "require": "./dist/vue/index.cjs.js"
+    },
+    "./twig": {
+      "import": "./dist/twig/index.es.js",
+      "require": "./dist/twig/index.cjs.js"
+    },
+    "./styles": "./dist/core-ui-library.css"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "vue": "^3.0.0"
   }
 }
