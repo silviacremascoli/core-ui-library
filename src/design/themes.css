@@ -1,9 +1,6 @@
-/* ========================================
-   CORE UI LIBRARY - THEME SUPPORT
-   Light and Dark mode definitions
-   ======================================== */
+/* CORE UI LIBRARY - Light and Dark mode definitions */
 
-/* ===== DARK MODE (Automatic - prefers-color-scheme) ===== */
+/* DARK MODE (prefers-color-scheme) */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Background colors */
@@ -47,8 +44,8 @@
   }
 }
 
-/* ===== DARK MODE (Manual - .dark-mode class) ===== */
-/* Use this for explicit dark mode toggles */
+/* DARK MODE (.dark-mode class) */
+
 html.dark-mode {
   /* Background colors */
   --color-background: #111827;
@@ -90,8 +87,8 @@ html.dark-mode {
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== FORCED LIGHT MODE ===== */
-/* Use this to override system preference */
+/* FORCED LIGHT MODE */
+
 html.light-mode {
   /* Reset to light mode values (same as :root defaults) */
   --color-background: #ffffff;
