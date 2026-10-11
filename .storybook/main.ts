@@ -1,9 +1,9 @@
 import type { StorybookConfig } from '@storybook/html-vite';
 import { mergeConfig, type UserConfig } from 'vite';
-// @ts-expect-error plugin lacks type definitions
 import twig from 'vite-plugin-twig-drupal';
 
 const config: StorybookConfig = {
+  staticDirs: ['../public'],
   stories: ["../src/**/*.stories.@(js|ts)"],
   addons: [
     "@chromatic-com/storybook",
