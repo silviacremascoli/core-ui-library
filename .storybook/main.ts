@@ -4,7 +4,7 @@ import twig from 'vite-plugin-twig-drupal';
 
 const config: StorybookConfig = {
   staticDirs: ['../public'],
-  stories: ["../src/**/*.stories.@(js|ts)"],
+  stories: ["../src/**/*.stories.@(js|ts)", "../docs/**/*.mdx"],
   addons: [
     "@chromatic-com/storybook",
     "@storybook/addon-vitest",

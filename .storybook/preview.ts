@@ -43,6 +43,11 @@ const customViewports = {
 const preview: Preview = {
   parameters: {
     layout: 'padded',
+    options: {
+      storySort: {
+        order: ['Project', 'Components', '*'],
+      },
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,

@@ -6,6 +6,8 @@ A reusable component library for consistent UI elements across multiple projects
 
 This is a shared component library designed to be used across my various web applications and projects. It provides reusable UI components with consistent styling and behavior, built with Storybook for easy development and documentation.
 
+For a recruiter-friendly explanation of the project's purpose and architecture, see the [Project Overview](docs/PROJECT-OVERVIEW.md).
+
 **🎯 Core Value Proposition:** Write once, use everywhere - Framework-agnostic components with React, Vue, and Twig implementations, powered by a shared CSS foundation.
 
 ## Projects Using This Library
@@ -36,7 +38,7 @@ This library uses a **CSS-first design system** approach with CSS custom propert
 
 ### Design Values (CSS Variables)
 
-All design values are defined as CSS custom properties in `src/design/global.css`:
+All global design values are defined as CSS custom properties in `src/design/global.css`:
 
 ## 🏗️ Architecture
 
@@ -109,7 +111,7 @@ This builds a static version of Storybook for deployment.
 ```
 src/
 ├── design/
-│   ├── global.css           # CSS custom properties (tokens) + utility classes
+│   ├── global.css           # CSS custom properties + utility classes
 │   └── themes.css           # Dark/light mode theme definitions
 ├── components/
 │   ├── Button/
@@ -414,10 +416,10 @@ export default {
 
 ## 🎯 Project Goals
 
-- **✅ Phase 1 (Week 1-2):** Foundation components (Button, Typography, Container, Card, Input)
-- **🔄 Phase 2 (Week 3-4):** Form components (Label, Select, Checkbox, Radio, Textarea, Form)
-- **⏳ Phase 3 (Week 5-6):** Advanced components (Modal, Tooltip, Alert, Badge, Loader, Table, Grid)
-- **🌟 Phase 4 (Week 7+):** Framework adapters and project integration
+- **✅ Phase 1 (Week 1):** Foundation components (Button, Typography, Container, Card, Input)
+- **🔄 Phase 2 (Week 2):** Form components (Label, Select, Checkbox, Radio, Textarea, Form)
+- **⏳ Phase 3 (Week 3-4):** Advanced components (Modal, Tooltip, Alert, Badge, Loader, Table, Grid)
+- **🌟 Phase 4 (Week 5+):** Framework adapters and project integration
 
 ## 🛠️ Development Workflow
 
