@@ -16,7 +16,7 @@ Storybook is the library's interactive catalog and development workspace. Each s
 
 ## Current scope
 
-The Storybook catalog currently contains 12 component story files, covering controls, forms, layout, typography, overlays, surfaces, and icons. The library is actively growing; planned ideas and future work are not presented here as completed features.
+The Storybook catalog will soon contain 12 component story files, covering controls, forms, layout, typography, overlays, surfaces, and icons. The library is actively growing; planned ideas and future work are not presented here as completed features.
 
 The Storybook configuration uses `@storybook/html-vite` with a Twig Vite plugin. React and Vue implementations are part of the library as well, alongside the shared styles and Twig templates.
 
