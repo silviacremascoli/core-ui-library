@@ -72,3 +72,22 @@ export const Search: Story = {
     placeholder: "Search...",
   },
 };
+
+export const Accessibility: Story = {
+  args: {
+    label: "First name",
+    type: "text",
+    placeholder: "e.g. Maria",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The input is announced to screen readers through its accessible name (WCAG 4.1.2 Name, Role, Value). " +
+          "Try it: press Tab to move focus into the field — the browser speaks the label, not the placeholder. " +
+          "A visible focus ring appears on focus (WCAG 2.4.7 Focus Visible), and the field is keyboard-operable by default " +
+          "because it uses the native <input> element (WCAG 2.1.1 Keyboard).",
+      },
+    },
+  },
+};
