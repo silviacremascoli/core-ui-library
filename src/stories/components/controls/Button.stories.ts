@@ -80,30 +80,13 @@ export const Disabled: Story = {
   },
 };
 
-// Additional stories to showcase all framework implementations
-export const AllFrameworks: Story = {
-  render: (args) => {
-    return `
-      <div style="display: flex; gap: 16px; align-items: center;">
-        <div>
-          <h4>Twig</h4>
-          ${buttonTemplate(args)}
-        </div>
-        <div>
-          <h4>React</h4>
-          <div id="react-button"></div>
-        </div>
-        <div>
-          <h4>Vue</h4>
-          <div id="vue-button"></div>
-        </div>
-      </div>
-    `;
-  },
-  args: {
-    label: "Click Me",
-    variant: "primary",
-    size: "medium",
-    disabled: false,
+export const Accessibility: Story = {
+  args: { label: 'Submit' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keyboard navigation: press Tab to focus the button — a visible focus ring appears (WCAG 2.4.7 Focus Visible). Buttons use native `<button>` semantics, so Enter and Space activate them without extra JavaScript (WCAG 4.1.2 Name, Role, Value).',
+      },
+    },
   },
 };
