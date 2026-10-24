@@ -1,8 +1,11 @@
 {
   "name": "core-ui-library",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "./dist/core-ui.es.js",
+  "sideEffects": ["**/*.css"],
+  "files": ["dist"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -35,26 +38,22 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/core-ui.es.js",
-      "require": "./dist/core-ui.cjs.js"
+      "import": "./dist/core-ui.es.js"
     },
     "./react": {
-      "import": "./dist/react/index.es.js",
-      "require": "./dist/react/index.cjs.js"
+      "import": "./dist/react/index.es.js"
     },
     "./vue": {
-      "import": "./dist/vue/index.es.js",
-      "require": "./dist/vue/index.cjs.js"
+      "import": "./dist/vue/index.es.js"
     },
     "./twig": {
-      "import": "./dist/twig/index.es.js",
-      "require": "./dist/twig/index.cjs.js"
+      "import": "./dist/twig/index.es.js"
     },
     "./styles": "./dist/core-ui-library.css"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "vue": "^3.0.0"
   }
 }
