@@ -17,11 +17,13 @@ const meta: Meta<ButtonArgs> = {
   title: "Components/Button",
   tags: ["autodocs"],
 
-  // Render function passes typed args to the Twig template
   render: (args) => buttonTemplate(args),
 
-  // Controls in the Storybook UI panel
   argTypes: {
+    label: {
+      control: "text",
+      description: "Accessible label for the button (used as aria-label)",
+    },
     variant: {
       control: "select",
       options: ["primary", "secondary", "danger"],
