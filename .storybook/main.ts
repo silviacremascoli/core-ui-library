@@ -3,7 +3,7 @@ import { mergeConfig, type UserConfig } from 'vite';
 import twig from 'vite-plugin-twig-drupal';
 
 const config: StorybookConfig = {
-  staticDirs: ['../public'],
+  staticDirs: ['../public', '../src/assets'],
   stories: ["../src/**/*.stories.@(js|ts)", "../docs/**/*.mdx"],
   addons: [
     "@chromatic-com/storybook",
