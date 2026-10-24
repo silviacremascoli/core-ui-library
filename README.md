@@ -45,6 +45,20 @@ At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3
 
 To add a component, you write the CSS and the TypeScript types once — then thin adapters make it usable from React, Vue, and Twig. The [Adding New Components](#adding-new-components) section shows the full walkthrough using a Card as the example.
 
+As new components are added to the library, I will implement each one in its corresponding React, Vue, and Twig projects.
+
+## Why Three Adapters?
+
+Each adapter exists for a specific consumer — the adapter matches the consumer, never the other way around:
+
+- **Twig** — the canonical template implementation. Twig is how these components render in the CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 v13). In this library, the Twig template is the framework-neutral reference: the Storybook docs render through it, and the React and Vue adapters are checked against it. (Twig deliberately does not run in the browser — server-side templating belongs on the server.)
+
+- **Vue** — for componentized sites. Vue adapters power the Vue-based pages in my projects (e.g. the contact form on my portfolio site).
+
+- **React** — for React applications. Used by my React projects (weather app, dictionary app).
+
+The point of the architecture: one visual and behavioral contract, consumed wherever each project needs it.
+
 ## Tech Stack
 
 - **Vite** — build tool and dev server
@@ -252,10 +266,12 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [x] **Phase 1 — Foundation:** Button, Input (live in Storybook)
+- [ ] **Phase 1 — Foundation:** Button, Input, Typography
 - [ ] **Phase 2 — Forms:** Label, Select, Checkbox, Radio, Textarea, Form
-- [ ] **Phase 3 — Surfaces &amp; feedback:** Card, Modal, Tooltip, Alert, Badge, Loader
-- [ ] **Phase 4 — Integration:** use the library in my own projects (starting with my portfolio site)
+- [ ] **Phase 3 — Media:** Image, Icon, Video
+- [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader
+
+- **Ongoing — Integration:** use and expand the library in my own projects (starting with my portfolio site)
 
 ## Author
 
