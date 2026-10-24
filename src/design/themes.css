@@ -4,114 +4,114 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* Background colors */
-    --color-background: #111827;
-    --color-background-secondary: #1f2937;
+    --cui-color-background: #111827;
+    --cui-color-background-secondary: #1f2937;
     
     /* Text colors */
-    --color-text: #f9fafb;
-    --color-text-light: #d1d5db;
-    --color-text-inverse: #111827;
+    --cui-color-text: #f9fafb;
+    --cui-color-text-light: #d1d5db;
+    --cui-color-text-inverse: #111827;
     
     /* Border colors */
-    --color-border: #4b5563;
-    --color-border-light: #374151;
-    --color-border-dark: #6b7280;
+    --cui-color-border: #4b5563;
+    --cui-color-border-light: #374151;
+    --cui-color-border-dark: #6b7280;
     
     /* Primary colors - slightly adjusted for dark mode */
-    --color-primary: #3b82f6;
-    --color-primary-hover: #2563eb;
-    --color-primary-active: #1d4ed8;
+    --cui-color-primary: #3b82f6;
+    --cui-color-primary-hover: #2563eb;
+    --cui-color-primary-active: #1d4ed8;
     
     /* Secondary colors - adjusted for dark mode */
-    --color-secondary: #374151;
-    --color-secondary-hover: #4b5563;
-    --color-secondary-active: #6b7280;
+    --cui-color-secondary: #374151;
+    --cui-color-secondary-hover: #4b5563;
+    --cui-color-secondary-active: #6b7280;
     
     /* Danger colors - adjusted for dark mode */
-    --color-danger: #ef4444;
-    --color-danger-hover: #dc2626;
-    --color-danger-active: #b91c1c;
+    --cui-color-danger: #ef4444;
+    --cui-color-danger-hover: #dc2626;
+    --cui-color-danger-active: #b91c1c;
     
     /* Feedback colors - adjusted for dark mode */
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-    --color-info: #60a5fa;
+    --cui-color-success: #10b981;
+    --cui-color-warning: #f59e0b;
+    --cui-color-info: #60a5fa;
     
     /* Shadows - darker for dark mode */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
   }
 }
 
-/* DARK MODE (.dark-mode class) */
+/* DARK MODE (.cui-theme--dark class) */
 
-html.dark-mode {
+.cui-theme--dark {
   /* Background colors */
-  --color-background: #111827;
-  --color-background-secondary: #1f2937;
+  --cui-color-background: #111827;
+  --cui-color-background-secondary: #1f2937;
   
   /* Text colors */
-  --color-text: #f9fafb;
-  --color-text-light: #d1d5db;
-  --color-text-inverse: #111827;
+  --cui-color-text: #f9fafb;
+  --cui-color-text-light: #d1d5db;
+  --cui-color-text-inverse: #111827;
   
   /* Border colors */
-  --color-border: #4b5563;
-  --color-border-light: #374151;
-  --color-border-dark: #6b7280;
+  --cui-color-border: #4b5563;
+  --cui-color-border-light: #374151;
+  --cui-color-border-dark: #6b7280;
   
   /* Primary colors */
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-primary-active: #1d4ed8;
+  --cui-color-primary: #3b82f6;
+  --cui-color-primary-hover: #2563eb;
+  --cui-color-primary-active: #1d4ed8;
   
   /* Secondary colors */
-  --color-secondary: #374151;
-  --color-secondary-hover: #4b5563;
-  --color-secondary-active: #6b7280;
+  --cui-color-secondary: #374151;
+  --cui-color-secondary-hover: #4b5563;
+  --cui-color-secondary-active: #6b7280;
   
   /* Danger colors */
-  --color-danger: #ef4444;
-  --color-danger-hover: #dc2626;
-  --color-danger-active: #b91c1c;
+  --cui-color-danger: #ef4444;
+  --cui-color-danger-hover: #dc2626;
+  --cui-color-danger-active: #b91c1c;
   
   /* Feedback colors */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-info: #60a5fa;
+  --cui-color-success: #10b981;
+  --cui-color-warning: #f59e0b;
+  --cui-color-info: #60a5fa;
   
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* FORCED LIGHT MODE */
 
-html.light-mode {
+.cui-theme--light {
   /* Reset to light mode values (same as :root defaults) */
-  --color-background: #ffffff;
-  --color-background-secondary: #f1f5f9;
-  --color-text: #1e293b;
-  --color-text-light: #64748b;
-  --color-text-inverse: #ffffff;
-  --color-border: #ccc;
-  --color-border-light: #e2e8f0;
-  --color-border-dark: #94a3b8;
-  --color-primary: #0066cc;
-  --color-primary-hover: #0052a3;
-  --color-primary-active: #004488;
-  --color-secondary: #e2e8f0;
-  --color-secondary-hover: #cbd5e1;
-  --color-secondary-active: #94a3b8;
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-danger-active: #991b1b;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-info: #3b82f6;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --cui-color-background: #ffffff;
+  --cui-color-background-secondary: #f1f5f9;
+  --cui-color-text: #1e293b;
+  --cui-color-text-light: #64748b;
+  --cui-color-text-inverse: #ffffff;
+  --cui-color-border: #ccc;
+  --cui-color-border-light: #e2e8f0;
+  --cui-color-border-dark: #94a3b8;
+  --cui-color-primary: #0066cc;
+  --cui-color-primary-hover: #0052a3;
+  --cui-color-primary-active: #004488;
+  --cui-color-secondary: #e2e8f0;
+  --cui-color-secondary-hover: #cbd5e1;
+  --cui-color-secondary-active: #94a3b8;
+  --cui-color-danger: #dc2626;
+  --cui-color-danger-hover: #b91c1c;
+  --cui-color-danger-active: #991b1b;
+  --cui-color-success: #10b981;
+  --cui-color-warning: #f59e0b;
+  --cui-color-info: #3b82f6;
+  --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
