@@ -21,11 +21,16 @@ export type * from './components/Checkbox/Checkbox.types';
 export type * from './components/Radio/Radio.types';
 export type * from './components/Textarea/Textarea.types';
 
-// Re-export React components
-export * from './react';
-
-// Re-export Vue components
-export * from './vue';
-
-// Re-export Twig components
-export * from './twig';
+// Preserve framework-qualified names at the combined package root.
+export {
+	Button as ReactButton,
+	Input as ReactInput,
+} from './react';
+export {
+	Button as VueButton,
+	Input as VueInput,
+} from './vue';
+export {
+	Button as TwigButton,
+	Input as TwigInput,
+} from './twig';
