@@ -16,9 +16,19 @@ Storybook is the library's interactive catalog and development workspace. Each s
 
 ## Current scope
 
-The Storybook catalog will soon contain 12 component story files, covering controls, forms, layout, typography, overlays, surfaces, and icons. The library is actively growing; planned ideas and future work are not presented here as completed features.
+Currently, only **Button** and **Input** are live in the catalog and repository (the rest of the components are in local development and have not been committed to Git yet). More components — including Typography, Card, Container, Label, Select, Checkbox, Radio, Textarea, Modal, and Icon — are actively on the way.
 
 The Storybook configuration uses `@storybook/html-vite` with a Twig Vite plugin. React and Vue implementations are part of the library as well, alongside the shared styles and Twig templates.
+
+## Tonal Theming & Production Reusability
+
+Rather than locking styles to individual application names, Core UI Library uses generic tonal themes in `src/design/themes.css`:
+- **Sage (`.cui-theme--sage`)**: Soft sage green (`#b6cdbd`), dark purple typography (`#272142`), muted green borders (`#5c715e`), and 24px pill radii.
+- **Amber (`.cui-theme--amber`)**: Warm amber (`#DB9558`), coral interactive states (`#F2765E`), destructive crimson (`#A82020`), and active teal glow focus rings (`#2A6B5C`).
+- **Ocean (`.cui-theme--ocean`)**: Muted slate blue (`#56899d`), terracotta interaction accents (`#ba7154`), and dual focus rings.
+- **Midnight (`.cui-theme--midnight`)**: Midnight navy background (`#24263b`), deep slate (`#1f2235`), vibrant electric coral accent (`#ff4a57`), white typography (`#fefefe`), 12px container radius, and glowing coral focus ring (`0 0 0 3px rgba(255, 74, 87, 0.35)`).
+
+Both **Button** and **Input** components support shapes (`default`, `pill`), variants, accessibility focus rings, and integrated adornments across React, Vue, and Twig without vendor lock-in.
 
 ## Where to look
 

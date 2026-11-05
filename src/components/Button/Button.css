@@ -1,14 +1,33 @@
 /* Button Component - Shared Styles */
 /* This CSS is imported by all framework implementations (React, Vue, Twig) */
-/* Uses CSS custom properties defined in global.cui-css */
+/* Uses CSS custom properties defined in global.css and themes.css */
 
 .cui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cui-spacing-sm);
   font-family: var(--cui-font-family);
   font-weight: var(--cui-font-weight-medium);
+  line-height: var(--cui-line-height-normal);
   border-radius: var(--cui-border-radius-md);
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
   transition: var(--cui-transition-normal);
+}
+
+.cui-btn:focus-visible {
+  outline: var(--cui-focus-ring-width) solid var(--cui-focus-ring-color);
+  outline-offset: var(--cui-focus-ring-offset);
+  box-shadow: var(--cui-focus-ring-shadow);
+}
+
+.cui-btn:active:not(:disabled) {
+  transform: var(--cui-transform-active);
 }
 
 /* ===== SIZES ===== */
@@ -27,62 +46,90 @@
   font-size: var(--cui-font-size-lg);
 }
 
+/* ===== SHAPES ===== */
+.cui-btn--pill {
+  border-radius: var(--cui-border-radius-pill);
+}
+
 /* ===== VARIANTS ===== */
 .cui-btn--primary {
   background-color: var(--cui-color-primary);
   color: var(--cui-color-text-inverse);
+  border-color: var(--cui-color-primary);
 }
 
 .cui-btn--primary:hover:not(:disabled) {
   background-color: var(--cui-color-primary-hover);
+  border-color: var(--cui-color-primary-hover);
 }
 
 .cui-btn--primary:active:not(:disabled) {
   background-color: var(--cui-color-primary-active);
+  border-color: var(--cui-color-primary-active);
 }
 
 .cui-btn--secondary {
   background-color: var(--cui-color-secondary);
   color: var(--cui-color-text);
+  border-color: var(--cui-color-secondary);
 }
 
 .cui-btn--secondary:hover:not(:disabled) {
   background-color: var(--cui-color-secondary-hover);
+  border-color: var(--cui-color-secondary-hover);
 }
 
 .cui-btn--secondary:active:not(:disabled) {
   background-color: var(--cui-color-secondary-active);
+  border-color: var(--cui-color-secondary-active);
 }
 
 .cui-btn--danger {
   background-color: var(--cui-color-danger);
   color: var(--cui-color-text-inverse);
+  border-color: var(--cui-color-danger);
 }
 
 .cui-btn--danger:hover:not(:disabled) {
   background-color: var(--cui-color-danger-hover);
+  border-color: var(--cui-color-danger-hover);
 }
 
 .cui-btn--danger:active:not(:disabled) {
   background-color: var(--cui-color-danger-active);
-}
-
-/* ===== STATES ===== */
-.cui-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ===== UTILITY CLASSES ===== */
-.cui-btn--full-width {
-  width: 100%;
+  border-color: var(--cui-color-danger-active);
 }
 
 .cui-btn--outline {
   background-color: transparent;
-  border: 1px solid var(--cui-color-border);
+  border-color: var(--cui-color-border);
+  color: var(--cui-color-text);
 }
 
+.cui-btn--outline:hover:not(:disabled) {
+  background-color: var(--cui-color-secondary);
+  border-color: var(--cui-color-border-dark);
+}
+
+.cui-btn--outline:active:not(:disabled) {
+  background-color: var(--cui-color-secondary-hover);
+}
+
+.cui-btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--cui-color-text);
+}
+
+.cui-btn--ghost:hover:not(:disabled) {
+  background-color: var(--cui-color-secondary);
+}
+
+.cui-btn--ghost:active:not(:disabled) {
+  background-color: var(--cui-color-secondary-hover);
+}
+
+/* Backward-compatible outline helpers */
 .cui-btn--outline-primary {
   background-color: transparent;
   border: 1px solid var(--cui-color-primary);
@@ -102,4 +149,42 @@
 
 .cui-btn--outline-secondary:hover:not(:disabled) {
   background-color: var(--cui-color-secondary);
+}
+
+/* ===== STATES ===== */
+.cui-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cui-btn--loading {
+  cursor: wait;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* ===== UTILITY & LAYOUT ===== */
+.cui-btn--full-width {
+  width: 100%;
+}
+
+.cui-btn--icon-only {
+  padding: var(--cui-spacing-sm);
+  aspect-ratio: 1;
+}
+
+.cui-btn--icon-only.cui-btn--small {
+  padding: var(--cui-spacing-xs);
+}
+
+.cui-btn--icon-only.cui-btn--large {
+  padding: var(--cui-spacing-md);
+}
+
+.cui-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }

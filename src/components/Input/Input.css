@@ -1,23 +1,44 @@
 /* Input Component - Shared Styles */
 /* This CSS is imported by all framework implementations (React, Vue, Twig) */
-/* Uses CSS custom properties defined in global.cui-css */
+/* Uses CSS custom properties defined in global.css and themes.css */
 
+/* Input Wrapper (supports embedded left/right icons and clear button) */
+.cui-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.cui-input-wrapper--full-width {
+  display: flex;
+  width: 100%;
+}
+
+.cui-input-wrapper .cui-input {
+  width: 100%;
+}
+
+/* Base Input */
 .cui-input {
   padding: var(--cui-spacing-sm) var(--cui-spacing-md);
   border: 1px solid var(--cui-color-border);
   border-radius: var(--cui-border-radius-md);
   font-size: var(--cui-font-size-base);
   font-family: var(--cui-font-family);
+  line-height: var(--cui-line-height-normal);
   transition: var(--cui-transition-normal);
   box-sizing: border-box;
   background-color: var(--cui-color-background);
   color: var(--cui-color-text);
 }
 
+.cui-input:focus-visible,
 .cui-input:focus {
   outline: none;
-  border-color: var(--cui-color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+  border-color: var(--cui-focus-ring-color);
+  box-shadow: var(--cui-focus-ring-shadow);
 }
 
 .cui-input:disabled {
@@ -26,27 +47,13 @@
   background-color: var(--cui-color-background-secondary);
 }
 
+.cui-input:read-only {
+  background-color: var(--cui-color-background-secondary);
+  cursor: default;
+}
+
 .cui-input::placeholder {
   color: var(--cui-color-text-light);
-}
-
-/* ===== VARIANTS ===== */
-.cui-input--error {
-  border-color: var(--cui-color-danger);
-}
-
-.cui-input--error:focus {
-  border-color: var(--cui-color-danger);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
-}
-
-.cui-input--success {
-  border-color: var(--cui-color-success);
-}
-
-.cui-input--success:focus {
-  border-color: var(--cui-color-success);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
 /* ===== SIZES ===== */
@@ -55,16 +62,107 @@
   font-size: var(--cui-font-size-sm);
 }
 
+.cui-input--medium {
+  padding: var(--cui-spacing-sm) var(--cui-spacing-md);
+  font-size: var(--cui-font-size-base);
+}
+
 .cui-input--large {
   padding: var(--cui-spacing-md) var(--cui-spacing-lg);
   font-size: var(--cui-font-size-lg);
 }
 
-/* ===== STYLES ===== */
+/* ===== SHAPES ===== */
+.cui-input--pill {
+  border-radius: var(--cui-border-radius-pill);
+  padding-left: var(--cui-spacing-lg);
+  padding-right: var(--cui-spacing-lg);
+}
+
 .cui-input--rounded {
   border-radius: var(--cui-border-radius-lg);
 }
 
+/* ===== VARIANTS / VALIDATION ===== */
+.cui-input--error {
+  border-color: var(--cui-color-danger);
+}
+
+.cui-input--error:focus-visible,
+.cui-input--error:focus {
+  border-color: var(--cui-color-danger);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+}
+
+.cui-input--success {
+  border-color: var(--cui-color-success);
+}
+
+.cui-input--success:focus-visible,
+.cui-input--success:focus {
+  border-color: var(--cui-color-success);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+/* ===== ADORNMENTS & ICONS ===== */
+.cui-input__icon-left,
+.cui-input__icon-right {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--cui-color-text-light);
+  line-height: 1;
+}
+
+.cui-input__icon-left {
+  left: var(--cui-spacing-md);
+}
+
+.cui-input__icon-right {
+  right: var(--cui-spacing-md);
+}
+
+.cui-input--has-icon-left {
+  padding-left: var(--cui-input-padding-adornment);
+}
+
+.cui-input--has-icon-right {
+  padding-right: var(--cui-input-padding-adornment);
+}
+
+/* Clear button (React Weather App style) */
+.cui-input__clear-btn {
+  position: absolute;
+  right: var(--cui-spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  border-radius: var(--cui-border-radius-full);
+  color: var(--cui-color-text-light);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: var(--cui-transition-fast);
+}
+
+.cui-input__clear-btn:hover {
+  color: var(--cui-color-text);
+  background-color: var(--cui-color-secondary);
+}
+
+.cui-input__clear-btn:focus-visible {
+  outline: var(--cui-focus-ring-width) solid var(--cui-focus-ring-color);
+  outline-offset: 1px;
+}
+
+/* ===== UTILITY CLASSES ===== */
 .cui-input--full-width {
   width: 100%;
 }

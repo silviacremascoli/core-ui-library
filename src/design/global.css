@@ -58,12 +58,26 @@
   --cui-border-radius-sm: 4px;
   --cui-border-radius-md: 6px;
   --cui-border-radius-lg: 8px;
+  --cui-border-radius-pill: 20px;
+  --cui-border-radius-pill-lg: 24px;
   --cui-border-radius-full: 9999px;
 
   /* SHADOWS */
   --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* FOCUS RINGS */
+  --cui-focus-ring-color: var(--cui-color-primary);
+  --cui-focus-ring-width: 2px;
+  --cui-focus-ring-offset: 2px;
+  --cui-focus-ring-shadow: 0 0 0 2px rgba(0, 102, 204, 0.25);
+
+  /* TRANSFORMS & INTERACTION */
+  --cui-transform-active: scale(0.98);
+
+  /* ADORNMENT PADDING */
+  --cui-input-padding-adornment: 2.5rem;
 
   /* TRANSITIONS */
   --cui-transition-fast: all 0.1s ease;

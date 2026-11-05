@@ -1,8 +1,47 @@
+{% set hasWrapper = iconLeft or iconRight or clearable or fullWidth %}
+{% set inputClasses = 'cui-input' %}
+{% if variant and variant != 'default' %}{% set inputClasses = inputClasses ~ ' cui-input--' ~ variant %}{% endif %}
+{% if size and size != 'medium' %}{% set inputClasses = inputClasses ~ ' cui-input--' ~ size %}{% endif %}
+{% if shape == 'pill' %}{% set inputClasses = inputClasses ~ ' cui-input--pill' %}{% endif %}
+{% if fullWidth and not hasWrapper %}{% set inputClasses = inputClasses ~ ' cui-input--full-width' %}{% endif %}
+{% if iconLeft %}{% set inputClasses = inputClasses ~ ' cui-input--has-icon-left' %}{% endif %}
+{% if iconRight or clearable %}{% set inputClasses = inputClasses ~ ' cui-input--has-icon-right' %}{% endif %}
+{% if not hasWrapper and className %}{% set inputClasses = inputClasses ~ ' ' ~ className %}{% endif %}
+
+{% if hasWrapper %}
+<div class="cui-input-wrapper{% if fullWidth %} cui-input-wrapper--full-width{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% if iconLeft %}<span class="cui-input__icon-left">{{ iconLeft|raw }}</span>{% endif %}
+  <input
+    type="{{ type|default('text') }}"
+    class="{{ inputClasses }}"
+    {% if id %}id="{{ id }}"{% endif %}
+    {% if name %}name="{{ name }}"{% endif %}
+    {% if label %}aria-label="{{ label }}"{% endif %}
+    {% if variant == 'error' %}aria-invalid="true"{% endif %}
+    {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+    {% if disabled %}disabled{% endif %}
+    {% if readOnly %}readonly{% endif %}
+    {% if required %}required{% endif %}
+    {% if value %}value="{{ value }}"{% endif %}
+  />
+  {% if clearable %}
+    <button type="button" class="cui-input__clear-btn" aria-label="Clear search input">&#x2715;</button>
+  {% elseif iconRight %}
+    <span class="cui-input__icon-right">{{ iconRight|raw }}</span>
+  {% endif %}
+</div>
+{% else %}
 <input
-  type="{{ type | default('text') }}"
+  type="{{ type|default('text') }}"
+  class="{{ inputClasses }}"
+  {% if id %}id="{{ id }}"{% endif %}
+  {% if name %}name="{{ name }}"{% endif %}
   {% if label %}aria-label="{{ label }}"{% endif %}
+  {% if variant == 'error' %}aria-invalid="true"{% endif %}
   {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
   {% if disabled %}disabled{% endif %}
-  class="input {{ className|default('') }}"
+  {% if readOnly %}readonly{% endif %}
+  {% if required %}required{% endif %}
   {% if value %}value="{{ value }}"{% endif %}
 />
+{% endif %}

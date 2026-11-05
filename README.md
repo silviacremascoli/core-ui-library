@@ -4,25 +4,28 @@
 
 A framework-agnostic component library: each component is implemented once in CSS and TypeScript, then exposed as **React**, **Vue**, and **Twig** — mirroring the multi-framework, CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 environments).
 
-> **Status: work in progress.** Currently 2 components (Button, Input), each available in all three frameworks. See the [Roadmap](#-roadmap) for what's coming next.
+> **Status: work in progress.** Currently, only **Button** and **Input** are live (the remaining components are in local development and have not been committed to Git yet). More components are on the way. See the [Roadmap](#roadmap) for what's coming next.
 
 ## Why this project exists
 
 At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3, WCAG 2.1 AA). This library is my personal take on that architecture — small enough to read in one sitting, but covering the real problems of a design system:
 
 - **One source of truth:** a CSS-first design-token layer (`global.css`, `themes.css`) drives every component — no duplicated styling logic between frameworks
+- **Tonal theming:** reusable, production-ready color tone themes (`.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, `.cui-theme--midnight`) decouple styles from specific client app names while adapting to custom brand palettes
 - **Write once, use everywhere:** a single `.css` + `.types.ts` pair per component, wrapped by thin React/Vue/Twig adapters
 - **Accessibility first:** components are built for keyboard navigation, visible focus states, and ARIA semantics (WCAG 2.1 AA target)
 - **Documented by default:** every component ships with interactive Storybook stories and controls
 
 ## Current components
 
+Currently, **Button** and **Input** are live across all three frameworks with comprehensive variants, shapes, and accessibility states:
 
-| Component | React | Vue | Twig | Stories |
-| --------- | :-----: | :---: | :----: | :-------: |
-| Button    | ✅     | ✅   | ✅    | ✅       |
-| Input     | ✅     | ✅   | ✅    | ✅       |
+| Component | React | Vue | Twig | Stories | Status | Highlights |
+| --------- | :-----: | :---: | :----: | :-------: | :------: | :--------- |
+| **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings |
+| **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow |
 
+*Note: The remaining components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
 ## Architecture
 
@@ -53,9 +56,9 @@ Each adapter exists for a specific consumer — the adapter matches the consumer
 
 - **Twig** — the canonical template implementation. Twig is how these components render in the CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 v13). In this library, the Twig template is the framework-neutral reference: the Storybook docs render through it, and the React and Vue adapters are checked against it. (Twig deliberately does not run in the browser — server-side templating belongs on the server.)
 
-- **Vue** — for componentized sites. Vue adapters power the Vue-based pages in my projects (e.g. the contact form on my portfolio site).
+- **Vue** — for componentized sites. Vue adapters power the Vue-based pages in my projects (e.g. I plan to use them in the contact form on my portfolio site).
 
-- **React** — for React applications. Used by my React projects (weather app, dictionary app).
+- **React** — for React applications. To be used by my React projects (weather app, dictionary app).
 
 The point of the architecture: one visual and behavioral contract, consumed wherever each project needs it.
 
@@ -266,10 +269,10 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [ ] **Phase 1 — Foundation:** Button, Input, Typography
-- [ ] **Phase 2 — Forms:** Label, Select, Checkbox, Radio, Textarea, Form
-- [ ] **Phase 3 — Media:** Image, Icon, Video
-- [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader
+- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Typography (in development)
+- [ ] **Phase 2 — Forms:** Label, Select, Checkbox, Radio, Textarea, Form (in development)
+- [ ] **Phase 3 — Media:** Image, Icon, Video (in development)
+- [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
 
 - **Ongoing — Integration:** use and expand the library in my own projects (starting with my portfolio site)
 

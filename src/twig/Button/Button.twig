@@ -1,7 +1,11 @@
 <button 
   type="{{ type|default('button') }}"
-  class="btn btn--{{ variant|default('primary') }} btn--{{ size|default('medium') }} {{ className|default('') }}"
-  {% if disabled %}disabled{% endif %}
+  class="cui-btn cui-btn--{{ variant|default('primary') }} cui-btn--{{ size|default('medium') }}{% if shape == 'pill' %} cui-btn--pill{% endif %}{% if fullWidth %} cui-btn--full-width{% endif %}{% if iconOnly %} cui-btn--icon-only{% endif %}{% if loading %} cui-btn--loading{% endif %} {{ className|default('') }}"
+  {% if disabled or loading %}disabled{% endif %}
+  {% if ariaLabel or (iconOnly and label) %}aria-label="{{ ariaLabel|default(label) }}"{% endif %}
+  {% if loading %}aria-busy="true"{% endif %}
 >
-  {{ label }}
+  {% if iconLeft %}<span class="cui-btn__icon">{{ iconLeft|raw }}</span>{% endif %}
+  {% if not iconOnly %}{{ label }}{% endif %}
+  {% if iconRight %}<span class="cui-btn__icon">{{ iconRight|raw }}</span>{% endif %}
 </button>
