@@ -1,119 +1,51 @@
-/* CORE UI LIBRARY - Light and Dark mode definitions */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-/* DARK MODE (prefers-color-scheme) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Background colors */
-    --cui-color-background: #111827;
-    --cui-color-background-secondary: #1f2937;
-    
-    /* Text colors */
-    --cui-color-text: #f9fafb;
-    --cui-color-text-light: #d1d5db;
-    --cui-color-text-inverse: #111827;
-    
-    /* Border colors */
-    --cui-color-border: #4b5563;
-    --cui-color-border-light: #374151;
-    --cui-color-border-dark: #6b7280;
-    
-    /* Primary colors - slightly adjusted for dark mode */
-    --cui-color-primary: #3b82f6;
-    --cui-color-primary-hover: #2563eb;
-    --cui-color-primary-active: #1d4ed8;
-    
-    /* Secondary colors - adjusted for dark mode */
-    --cui-color-secondary: #374151;
-    --cui-color-secondary-hover: #4b5563;
-    --cui-color-secondary-active: #6b7280;
-    
-    /* Danger colors - adjusted for dark mode */
-    --cui-color-danger: #ef4444;
-    --cui-color-danger-hover: #dc2626;
-    --cui-color-danger-active: #b91c1c;
-    
-    /* Feedback colors - adjusted for dark mode */
-    --cui-color-success: #10b981;
-    --cui-color-warning: #f59e0b;
-    --cui-color-info: #60a5fa;
-    
-    /* Shadows - darker for dark mode */
-    --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* DARK MODE (.cui-theme--dark class) */
-
-.cui-theme--dark {
-  /* Background colors */
-  --cui-color-background: #111827;
-  --cui-color-background-secondary: #1f2937;
-  
-  /* Text colors */
-  --cui-color-text: #f9fafb;
-  --cui-color-text-light: #d1d5db;
-  --cui-color-text-inverse: #111827;
-  
-  /* Border colors */
-  --cui-color-border: #4b5563;
-  --cui-color-border-light: #374151;
-  --cui-color-border-dark: #6b7280;
-  
-  /* Primary colors */
-  --cui-color-primary: #3b82f6;
-  --cui-color-primary-hover: #2563eb;
-  --cui-color-primary-active: #1d4ed8;
-  
-  /* Secondary colors */
-  --cui-color-secondary: #374151;
-  --cui-color-secondary-hover: #4b5563;
-  --cui-color-secondary-active: #6b7280;
-  
-  /* Danger colors */
-  --cui-color-danger: #ef4444;
-  --cui-color-danger-hover: #dc2626;
-  --cui-color-danger-active: #b91c1c;
-  
-  /* Feedback colors */
-  --cui-color-success: #10b981;
-  --cui-color-warning: #f59e0b;
-  --cui-color-info: #60a5fa;
-  
-  /* Shadows */
-  --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-}
-
-/* FORCED LIGHT MODE */
-
-.cui-theme--light {
-  /* Reset to light mode values (same as :root defaults) */
-  --cui-color-background: #ffffff;
-  --cui-color-background-secondary: #f1f5f9;
-  --cui-color-text: #1e293b;
-  --cui-color-text-light: #64748b;
+/* DEFAULT THEME: warm white surfaces, charcoal text, and jade actions */
+:root,
+.cui-theme--default {
+  color-scheme: light;
+  --cui-color-primary: #226d56;
+  --cui-color-primary-hover: #1f604e;
+  --cui-color-primary-active: #194c3f;
+  --cui-color-primary-text: #226d56;
+  --cui-color-primary-border: #226d56;
+  --cui-color-secondary: #f0f3f1;
+  --cui-color-secondary-hover: #e2e8e4;
+  --cui-color-secondary-active: #d5dfd9;
+  --cui-color-secondary-text: #505b56;
+  --cui-color-danger: #b42318;
+  --cui-color-danger-hover: #912018;
+  --cui-color-danger-active: #761b15;
+  --cui-color-success: #2e7d5b;
+  --cui-color-warning: #9a5e00;
+  --cui-color-info: #336b75;
+  --cui-color-danger-text: #b42318;
+  --cui-color-danger-border: #b42318;
+  --cui-color-danger-control-mark: #ffffff;
+  --cui-color-success-text: #226b4a;
+  --cui-color-success-border: #226b4a;
+  --cui-color-warning-text: #805000;
+  --cui-color-info-text: #245d69;
+  --cui-color-text: #1f2925;
+  --cui-color-text-light: #505b56;
   --cui-color-text-inverse: #ffffff;
-  --cui-color-border: #ccc;
-  --cui-color-border-light: #e2e8f0;
-  --cui-color-border-dark: #94a3b8;
-  --cui-color-primary: #0066cc;
-  --cui-color-primary-hover: #0052a3;
-  --cui-color-primary-active: #004488;
-  --cui-color-secondary: #e2e8f0;
-  --cui-color-secondary-hover: #cbd5e1;
-  --cui-color-secondary-active: #94a3b8;
-  --cui-color-danger: #dc2626;
-  --cui-color-danger-hover: #b91c1c;
-  --cui-color-danger-active: #991b1b;
-  --cui-color-success: #10b981;
-  --cui-color-warning: #f59e0b;
-  --cui-color-info: #3b82f6;
-  --cui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --cui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --cui-color-background: #fafbf9;
+  --cui-color-background-secondary: #f0f3f1;
+  --cui-color-border: #6f7b75;
+  --cui-color-border-light: #d5ded9;
+  --cui-color-border-dark: #59665f;
+  --cui-color-overlay: rgba(31, 41, 37, 0.48);
+  --cui-color-control-mark: #ffffff;
+  --cui-focus-ring-color: #a84f36;
+  --cui-focus-ring-shadow: 0 0 0 3px #a84f36;
+  --cui-control-focus-ring-shadow: 0 0 0 3px #a84f36;
+  --cui-focus-ring-shadow-error: 0 0 0 3px var(--cui-color-danger-text);
+  --cui-focus-ring-shadow-success: 0 0 0 3px var(--cui-color-success-text);
+  --cui-shadow-sm: 0 1px 2px 0 rgba(31, 41, 37, 0.05);
+  --cui-shadow-md: 0 4px 6px -1px rgba(31, 41, 37, 0.08), 0 2px 4px -1px rgba(31, 41, 37, 0.05);
+  --cui-shadow-lg: 0 10px 15px -3px rgba(31, 41, 37, 0.1), 0 4px 6px -2px rgba(31, 41, 37, 0.06);
+  --cui-border-radius-md: 8px;
+  --cui-border-radius-lg: 10px;
 }
 
 /* ==========================================================================
@@ -124,23 +56,64 @@
 /* SAGE THEME: Soft sage green, dark purple text, muted green, and cream */
 .cui-theme--sage {
   --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  --cui-font-family-heading: 'Playfair Display', serif;
+  --cui-button-font-family: 'Poppins', sans-serif;
+  --cui-button-font-weight: 400;
+  --cui-button-line-height: 27px;
+  --cui-button-border-radius: 24px;
+  --cui-button-padding-y: 15px;
+  --cui-button-padding-x: 30px;
+  --cui-button-transition: background-size 400ms ease-in-out, color 400ms ease-in-out, border-color 400ms ease-in-out;
+  --cui-button-primary-color: #272142;
+  --cui-button-primary-border-color: #272142;
+  --cui-button-primary-hover-fill: linear-gradient(#f2f9f1, #f2f9f1);
+  --cui-button-primary-hover-background: transparent;
+  --cui-button-primary-hover-color: #4a5e4d;
+  --cui-button-primary-hover-border-color: #5c715e;
+  --cui-button-primary-focus-background: #f2f9f1;
+  --cui-button-primary-focus-color: #4a5e4d;
+  --cui-button-primary-focus-border-color: #5c715e;
+  --cui-button-primary-active-background: #4a5e4d;
+  --cui-button-primary-active-color: #f2f9f1;
+  --cui-button-primary-active-border-color: #4a5e4d;
+  --cui-button-outline-border-color: #5c715e;
+  --cui-button-outline-color: #4a5e4d;
+  --cui-button-outline-hover-fill: linear-gradient(#4a5e4d, #4a5e4d);
+  --cui-button-outline-hover-background: transparent;
+  --cui-button-outline-hover-border-color: #4a5e4d;
+  --cui-button-outline-hover-color: #f2f9f1;
+  --cui-button-outline-focus-background: transparent;
+  --cui-button-outline-focus-background-size: 100% 100%;
+  --cui-button-outline-focus-border-color: #4a5e4d;
+  --cui-button-outline-focus-color: #f2f9f1;
 
   /* Colors */
   --cui-color-primary: #b6cdbd;
-  --cui-color-primary-hover: #a5c2ac;
-  --cui-color-primary-active: #94b59c;
+  --cui-color-primary-hover: #f2f9f1;
+  --cui-color-primary-active: #5c715e;
 
   --cui-color-secondary: #f2f9f1;
-  --cui-color-secondary-hover: #e3f1e1;
-  --cui-color-secondary-active: #d2e8cf;
+  --cui-color-secondary-hover: #5c715e;
+  --cui-color-secondary-active: #272142;
 
-  --cui-color-danger: #c25450;
-  --cui-color-danger-hover: #a9423f;
-  --cui-color-danger-active: #8f3230;
+  --cui-color-danger: #a33a34;
+  --cui-color-danger-hover: #8f3230;
+  --cui-color-danger-active: #752826;
 
   --cui-color-text: #272142;
-  --cui-color-text-light: #5c715e;
-  --cui-color-text-inverse: #272142;
+  --cui-color-text-light: #4a5e4d;
+  --cui-color-text-inverse: #ffffff;
+  --cui-color-primary-text: #4a5e4d;
+  --cui-color-primary-border: #5c715e;
+  --cui-color-secondary-text: #4a5e4d;
+  --cui-color-danger-text: #a33a34;
+  --cui-color-danger-border: #a33a34;
+  --cui-color-danger-control-mark: #ffffff;
+  --cui-color-success: #17643e;
+  --cui-color-success-text: #17643e;
+  --cui-color-success-border: #17643e;
+  --cui-color-warning-text: #845500;
+  --cui-color-info-text: #0047ab;
 
   --cui-color-background: #fcf9f4;
   --cui-color-background-secondary: #f2f9f1;
@@ -148,59 +121,135 @@
   --cui-color-border: #5c715e;
   --cui-color-border-light: #b6cdbd;
   --cui-color-border-dark: #272142;
+  --cui-color-success: #17643e;
+  --cui-color-warning: #9a6b13;
+  --cui-color-info: #0047ab;
+  --cui-color-surface: rgba(255, 255, 255, 0.76);
+  --cui-color-page-start: #c1dfc4;
+  --cui-color-page-end: #deecdd;
+  --cui-color-overlay: rgba(39, 33, 66, 0.46);
+  --cui-color-control-mark: #272142;
 
   /* Focus ring */
   --cui-focus-ring-color: #272142;
   --cui-focus-ring-width: 3px;
   --cui-focus-ring-offset: 3px;
-  --cui-focus-ring-shadow: 0 0 0 3px rgba(39, 33, 66, 0.25);
+  --cui-focus-ring-shadow: 0 0 0 3px #272142;
+  --cui-control-focus-ring-shadow: 0 0 0 3px #272142;
 
   /* Radius */
+  --cui-border-radius-md: 8px;
   --cui-border-radius-pill: 24px;
+  --cui-shadow-md: 0 2px 8px rgba(44, 64, 48, 0.1);
+  --cui-transition-normal: all 300ms ease-in-out;
 }
 
 /* AMBER THEME: Warm amber/orange, coral interaction, destructive crimson, and teal focus */
 .cui-theme--amber {
+  --cui-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --cui-button-font-family: inherit;
+  --cui-button-font-weight: 500;
+  --cui-button-border-width: 0;
+  --cui-button-border-radius: 20px;
+  --cui-input-border-radius: 20px;
+  --cui-button-padding-y: 10px;
+  --cui-button-padding-x: 16px;
+  --cui-button-transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+  --cui-button-primary-background: #db9558;
+  --cui-button-primary-color: #0f172a;
+  --cui-button-primary-border-color: transparent;
+  --cui-button-primary-hover-background: #f2765e;
+  --cui-button-primary-hover-color: #0f172a;
+  --cui-button-primary-hover-border-color: transparent;
+  --cui-button-primary-focus-background: #db9558;
+  --cui-button-primary-focus-color: #0f172a;
+  --cui-button-primary-focus-border-color: transparent;
+  --cui-color-primary-text: #87501e;
+  --cui-color-primary-border: #80501f;
+  --cui-color-secondary-text: #4b5768;
+  --cui-color-danger-text: #a82020;
+  --cui-color-danger-border: #a82020;
+  --cui-color-danger-control-mark: #ffffff;
+  --cui-color-success-text: #365522;
+  --cui-color-success-border: #365522;
+  --cui-color-warning: #7b4a00;
+  --cui-color-warning-text: #7b4a00;
+  --cui-color-info-text: #3f6b73;
+  --cui-button-outline-border-width: 1px;
+  --cui-button-outline-border-color: var(--cui-color-primary-border);
+
   /* Colors */
-  --cui-color-primary: #DB9558;
-  --cui-color-primary-hover: #F2765E;
+  --cui-color-primary: #db9558;
+  --cui-color-primary-hover: #f2765e;
   --cui-color-primary-active: #e26248;
 
-  --cui-color-secondary: #f1f5f9;
-  --cui-color-secondary-hover: #e2e8f0;
+  --cui-color-secondary: #f8fafc;
+  --cui-color-secondary-hover: #f8fafc;
   --cui-color-secondary-active: #cbd5e1;
 
-  --cui-color-danger: #A82020;
+  --cui-color-danger: #a82020;
   --cui-color-danger-hover: #8f1b1b;
   --cui-color-danger-active: #731414;
+  --cui-color-success: #486c2f;
+  --cui-color-warning: #9a5e00;
+  --cui-color-info: #3f6b73;
 
   --cui-color-text: #0f172a;
-  --cui-color-text-light: #64748b;
+  --cui-color-text-light: #4b5768;
   --cui-color-text-inverse: #ffffff;
 
-  --cui-color-background: #ffffff;
-  --cui-color-background-secondary: #f8fafc;
+  --cui-color-background: #f4f1ea;
+  --cui-color-background-secondary: #ffffff;
 
-  --cui-color-border: #e2e8f0;
-  --cui-color-border-light: #f1f5f9;
-  --cui-color-border-dark: #cbd5e1;
+  --cui-color-border: #707c88;
+  --cui-color-border-light: #d7dfe5;
+  --cui-color-border-dark: #606c78;
+  --cui-color-overlay: rgba(15, 23, 42, 0.48);
+  --cui-color-control-mark: #0f172a;
 
   /* Focus ring: teal ring with glow */
   --cui-focus-ring-color: #2A6B5C;
   --cui-focus-ring-width: 2px;
   --cui-focus-ring-offset: 2px;
-  --cui-focus-ring-shadow: 0 0 0 3px rgba(42, 107, 92, 0.22);
+  --cui-focus-ring-shadow: 0 0 0 3px #2a6b5c;
+  --cui-control-focus-ring-shadow: 0 0 0 3px #2a6b5c;
 
   /* Radius */
+  --cui-border-radius-md: 10px;
   --cui-border-radius-pill: 20px;
+  --cui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --cui-transition-normal: all 0.2s ease-in-out;
+  --cui-transform-active: scale(0.98);
 }
 
 /* OCEAN THEME: Muted slate/ocean blue, terracotta interaction accents, and dual focus ring */
 .cui-theme--ocean {
+  --cui-font-family: Arial, Helvetica, sans-serif;
+  --cui-font-weight-thin: 100;
+  --cui-font-weight-light: 300;
+  --cui-font-weight-semibold: 600;
+  --cui-button-font-family: inherit;
+  --cui-button-font-weight: 400;
+  --cui-button-line-height: 1.5;
+  --cui-button-border-radius: 0.375rem;
+  --cui-button-padding-y: 0.375rem;
+  --cui-button-padding-x: 0.75rem;
+  --cui-button-primary-background: #386477;
+  --cui-button-primary-color: #ffffff;
+  --cui-button-primary-border-color: #386477;
+  --cui-button-primary-hover-background: #305466;
+  --cui-button-primary-hover-color: #ffffff;
+  --cui-button-primary-hover-border-color: #305466;
+  --cui-button-primary-focus-background: #386477;
+  --cui-button-primary-focus-color: #ffffff;
+  --cui-button-primary-focus-border-color: #386477;
+
   /* Colors */
   --cui-color-primary: #56899d;
   --cui-color-primary-hover: #46768a;
   --cui-color-primary-active: #386477;
+  --cui-color-primary-text: #386477;
+  --cui-color-primary-border: #386477;
 
   --cui-color-secondary: #e3f1f7;
   --cui-color-secondary-hover: #cee4ee;
@@ -209,61 +258,132 @@
   --cui-color-danger: #b42318;
   --cui-color-danger-hover: #911c13;
   --cui-color-danger-active: #73140e;
+  --cui-color-danger-text: #b42318;
+  --cui-color-danger-border: #b42318;
+  --cui-color-danger-control-mark: #ffffff;
+  --cui-color-success: #39785a;
+  --cui-color-success-text: #2e704c;
+  --cui-color-success-border: #2e704c;
+  --cui-color-warning: #805000;
+  --cui-color-warning-text: #805000;
+  --cui-color-info: #386477;
+  --cui-color-info-text: #386477;
+  --cui-color-secondary-text: #3f6474;
 
-  --cui-color-text: #1e293b;
+  --cui-color-text: #202124;
   --cui-color-text-light: #4b5055;
   --cui-color-text-inverse: #ffffff;
 
   --cui-color-background: #ffffff;
-  --cui-color-background-secondary: #f0f7fa;
+  --cui-color-background-secondary: #e3f1f7;
 
-  --cui-color-border: #cbd5e1;
-  --cui-color-border-light: #e2e8f0;
-  --cui-color-border-dark: #94a3b8;
+  --cui-color-border: #6d7b83;
+  --cui-color-border-light: #d5e0e4;
+  --cui-color-border-dark: #5c6b73;
+  --cui-color-overlay: rgba(20, 33, 36, 0.48);
+  --cui-color-control-mark: #ffffff;
 
   /* Focus ring: terracotta / dual-ring */
   --cui-focus-ring-color: #ba7154;
   --cui-focus-ring-width: 2px;
   --cui-focus-ring-offset: 2px;
-  --cui-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px rgba(186, 113, 84, 0.35);
+  --cui-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #ba7154;
+  --cui-control-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #ba7154;
 
   /* Radius */
+  --cui-border-radius-md: 6px;
   --cui-border-radius-pill: 9999px;
+}
+
+.cui-theme--ocean[data-cui-mode="light"] {
+  --cui-focus-ring-color: #ba7154;
+  --cui-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #ba7154;
+  --cui-control-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #ba7154;
+}
+
+.cui-theme--ocean[data-cui-mode="dark"] {
+  --cui-focus-ring-color: #56899d;
+  --cui-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #56899d;
+  --cui-control-focus-ring-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #56899d;
 }
 
 /* MIDNIGHT THEME: Dark navy & slate background, vibrant electric coral accent, and glowing focus ring */
 .cui-theme--midnight {
+  color-scheme: dark;
   --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  --cui-font-family-heading: 'Tektur', cursive;
+  --cui-button-font-family: inherit;
+  --cui-button-font-weight: 500;
+  --cui-button-line-height: 27px;
+  --cui-button-border-radius: 12px;
+  --cui-button-padding-y: 10px;
+  --cui-button-padding-x: 20px;
+  --cui-button-transition: all 500ms ease-in-out;
+  --cui-button-primary-background: #c81e30;
+  --cui-button-primary-color: #ffffff;
+  --cui-button-primary-border-color: #c81e30;
+  --cui-button-primary-hover-background: #b7192a;
+  --cui-button-primary-hover-color: #ffffff;
+  --cui-button-primary-hover-border-color: #b7192a;
+  --cui-button-primary-hover-font-weight: 600;
+  --cui-button-primary-hover-shadow: 0 2px 8px rgba(255, 74, 87, 0.22);
+  --cui-button-primary-focus-background: #c81e30;
+  --cui-button-primary-focus-color: #ffffff;
+  --cui-button-primary-focus-border-color: #c81e30;
+  --cui-button-primary-active-background: #c81e30;
+  --cui-button-primary-active-color: #ffffff;
+  --cui-button-primary-active-border-color: #c81e30;
 
   /* Colors */
   --cui-color-primary: #ff4a57;
   --cui-color-primary-hover: #ff3140;
   --cui-color-primary-active: #e62030;
+  --cui-color-primary-text: #ff7280;
+  --cui-color-primary-border: #ff4a57;
 
   --cui-color-secondary: #1f2235;
   --cui-color-secondary-hover: #2a2e47;
   --cui-color-secondary-active: #353a59;
 
-  --cui-color-danger: #ff4a57;
-  --cui-color-danger-hover: #ff3140;
-  --cui-color-danger-active: #e62030;
+  --cui-color-danger: #c81e30;
+  --cui-color-danger-hover: #b7192a;
+  --cui-color-danger-active: #991b2c;
+  --cui-color-danger-text: #ff7280;
+  --cui-color-danger-border: #ff7280;
+  --cui-color-danger-control-mark: #ffffff;
+  --cui-color-success: #53a67a;
+  --cui-color-success-text: #53a67a;
+  --cui-color-success-border: #53a67a;
+  --cui-color-warning: #e1a34b;
+  --cui-color-warning-text: #e1a34b;
+  --cui-color-info: #6aabc2;
+  --cui-color-info-text: #6aabc2;
+  --cui-color-secondary-text: #a6abbd;
 
   --cui-color-text: #fefefe;
   --cui-color-text-light: #a6abbd;
-  --cui-color-text-inverse: #24263b;
+  --cui-color-text-inverse: #ffffff;
 
   --cui-color-background: #24263b;
   --cui-color-background-secondary: #1f2235;
 
-  --cui-color-border: #1f2235;
-  --cui-color-border-light: #2a2e47;
-  --cui-color-border-dark: #353a59;
+  --cui-color-border: #73809a;
+  --cui-color-border-light: #56617d;
+  --cui-color-border-dark: #8b95ad;
+  --cui-color-overlay: rgba(0, 0, 0, 0.6);
+  --cui-color-control-mark: #24263b;
+  --cui-button-outline-border-color: #ff4a57;
+  --cui-button-outline-hover-background: #ff4a57;
+  --cui-button-outline-hover-color: #020b24;
+  --cui-button-outline-hover-border-color: #ff3140;
+  --cui-button-outline-focus-border-color: #ff4a57;
 
   /* Focus ring: electric coral glow */
   --cui-focus-ring-color: #ff4a57;
   --cui-focus-ring-width: 2px;
   --cui-focus-ring-offset: 2px;
-  --cui-focus-ring-shadow: 0 0 0 3px rgba(255, 74, 87, 0.35);
+  --cui-focus-ring-shadow: 0 0 0 3px #ff4a57;
+  --cui-control-focus-ring-shadow: 0 0 0 3px #ff4a57;
 
   /* Radius */
   --cui-border-radius-md: 12px;
