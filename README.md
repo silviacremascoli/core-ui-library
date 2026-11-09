@@ -11,7 +11,7 @@ A framework-agnostic component library: each component is implemented once in CS
 At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3, WCAG 2.1 AA). This library is my personal take on that architecture — small enough to read in one sitting, but covering the real problems of a design system:
 
 - **One source of truth:** a CSS-first design-token layer (`global.css`, `themes.css`) drives every component — no duplicated styling logic between frameworks
-- **Tonal theming:** reusable, production-ready color tone themes (`.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, `.cui-theme--midnight`) decouple styles from specific client app names while adapting to custom brand palettes
+- **Tonal theming:** an intentional default palette plus four reusable, app-agnostic themes (`.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, `.cui-theme--midnight`)
 - **Write once, use everywhere:** a single `.css` + `.types.ts` pair per component, wrapped by thin React/Vue/Twig adapters
 - **Accessibility first:** components are built for keyboard navigation, visible focus states, and ARIA semantics (WCAG 2.1 AA target)
 - **Documented by default:** every component ships with interactive Storybook stories and controls
@@ -82,13 +82,65 @@ npm run build      # build the library
 npm run build-storybook  # static Storybook build (as deployed on Netlify)
 ```
 
+## Using the Library
+
+The package can be installed from GitHub. Pin a release tag or commit for reproducible installs; the GitHub dependency runs the package's `prepare` script and builds `dist`.
+
+```json
+{
+  "dependencies": {
+    "core-ui-library": "github:silviacremascoli/core-ui-library#<tag-or-commit>"
+  }
+}
+```
+
+Import the adapter for your framework and the shared stylesheet once in your app entry point. The stylesheet export includes component styles, design tokens, and theme presets.
+
+```tsx
+import { Button, Input } from "core-ui-library/react";
+import "core-ui-library/styles";
+
+export function ContactForm() {
+  return (
+    <div className="cui-theme--default">
+      <Button variant="primary" shape="rounded">Send message</Button>
+      <Input label="Email" type="email" shape="pill" />
+    </div>
+  );
+}
+```
+
+Use `core-ui-library/vue` for Vue components and `core-ui-library/twig` for Twig templates. Keep the shape independent from the theme: `default` uses the theme's component radius, while `rounded` and `pill` explicitly override it. Available themes are `.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, and `.cui-theme--midnight`.
+
+For Ocean's mode-specific Input focus ring, set `data-cui-mode="light"` or `data-cui-mode="dark"` on the `.cui-theme--ocean` wrapper. Components inherit `.cui-theme--default` from the root palette; add a theme wrapper to select a different palette or scope a nested theme. The React adapter currently requires React and React DOM 19; the Vue adapter requires Vue 3. The package is private, so it can be installed from GitHub or a private registry but cannot be published to the public npm registry as configured.
+
+### Font Awesome Icons
+
+Button and Icon share a curated Font Awesome registry defined in [`src/components/Icon/Icon.registry.ts`](src/components/Icon/Icon.registry.ts). Pass the registered name without the `fa-` prefix. For example, `iconLeft="plus"` renders the solid plus icon, while `icon="github"` renders the GitHub brand icon.
+
+```tsx
+<Button iconLeft="plus">Add item</Button>
+<Button href="https://example.com/profile" iconLeft="github" iconOnly ariaLabel="Visit GitHub profile" />
+<Icon icon="envelope-regular" ariaLabel="Email" />
+```
+
+The registry currently includes these names:
+
+- **Solid:** `certificate`, `chevron-down`, `code`, `code-branch`, `cubes-stacked`, `envelope`, `file`, `gear`, `keyboard`, `laptop-code`, `leaf`, `link`, `pencil`, `phone`, `plus`, `rocket`, `terminal`, `trash-can`, `truck-field`, `wifi`, `xmark`
+- **Regular:** `envelope-regular`, `hand-point-up`
+- **Brands:** `aws`, `bootstrap`, `confluence`, `css3-alt`, `figma`, `github`, `gitlab`, `google`, `html5`, `jira`, `linkedin`, `react`, `sass`, `square-js`, `storybook`, `typescript`, `typo3`, `vuejs`, `windows`, `youtube`
+
+To register another icon, import its definition from the matching installed Font Awesome package and add a name-to-definition entry to `fontAwesomeIcons` in `Icon.registry.ts`. For example, import `faCircleUser` from `@fortawesome/free-solid-svg-icons` and add `'circle-user': faCircleUser`. Add the new name to this list and add or update a Storybook example. The `FontAwesomeIconName` type is inferred from the registry, so it updates automatically.
+
+Only icons in this registry resolve by name. Custom SVG markup and plain text are also supported; React and Vue Button consumers may pass their own icon nodes. For icon-only buttons or links, provide an accessible `ariaLabel` describing the action or destination.
+
 ## Project Structure
 
 ```
 src/
 ├── design/
 │   ├── global.css           # CSS custom properties + utility classes
-│   └── themes.css           # Dark/light mode theme definitions
+│   └── themes.css           # Default and named theme definitions
 ├── components/              # Framework-agnostic core: CSS + types
 │   ├── Button/  (Button.css, Button.types.ts)
 │   └── Input/   (Input.css, Input.types.ts)
