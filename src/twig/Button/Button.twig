@@ -1,11 +1,28 @@
-<button 
+{% set unavailable = disabled or loading %}
+{% set buttonClasses = 'cui-btn cui-btn--' ~ variant|default('primary') ~ ' cui-btn--' ~ size|default('medium') %}
+{% if shape == 'rounded' %}{% set buttonClasses = buttonClasses ~ ' cui-btn--rounded' %}{% elseif shape == 'pill' %}{% set buttonClasses = buttonClasses ~ ' cui-btn--pill' %}{% endif %}
+{% if fullWidth %}{% set buttonClasses = buttonClasses ~ ' cui-btn--full-width' %}{% endif %}
+{% if iconOnly %}{% set buttonClasses = buttonClasses ~ ' cui-btn--icon-only' %}{% endif %}
+{% if href is defined and iconOnly %}{% set buttonClasses = buttonClasses ~ ' cui-btn--icon-only-link' %}{% endif %}
+{% if loading %}{% set buttonClasses = buttonClasses ~ ' cui-btn--loading' %}{% endif %}
+{% if href is defined and unavailable %}{% set buttonClasses = buttonClasses ~ ' cui-btn--disabled' %}{% endif %}
+{% if className %}{% set buttonClasses = buttonClasses ~ ' ' ~ className %}{% endif %}
+
+{% if href is defined %}
+<a
+  {% if not unavailable %}href="{{ href }}"{% endif %}
+  class="{{ buttonClasses }}"
+  {% if unavailable %}aria-disabled="true" tabindex="-1"{% endif %}
+{% else %}
+<button
   type="{{ type|default('button') }}"
-  class="cui-btn cui-btn--{{ variant|default('primary') }} cui-btn--{{ size|default('medium') }}{% if shape == 'pill' %} cui-btn--pill{% endif %}{% if fullWidth %} cui-btn--full-width{% endif %}{% if iconOnly %} cui-btn--icon-only{% endif %}{% if loading %} cui-btn--loading{% endif %} {{ className|default('') }}"
-  {% if disabled or loading %}disabled{% endif %}
+  class="{{ buttonClasses }}"
+  {% if unavailable %}disabled{% endif %}
+{% endif %}
   {% if ariaLabel or (iconOnly and label) %}aria-label="{{ ariaLabel|default(label) }}"{% endif %}
   {% if loading %}aria-busy="true"{% endif %}
 >
   {% if iconLeft %}<span class="cui-btn__icon">{{ iconLeft|raw }}</span>{% endif %}
   {% if not iconOnly %}{{ label }}{% endif %}
   {% if iconRight %}<span class="cui-btn__icon">{{ iconRight|raw }}</span>{% endif %}
-</button>
+{% if href is defined %}</a>{% else %}</button>{% endif %}

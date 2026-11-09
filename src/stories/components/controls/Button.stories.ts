@@ -19,6 +19,14 @@ const meta: Meta<ButtonArgs> = {
       control: "text",
       description: "When provided, renders a link instead of an action button",
     },
+    iconLeft: {
+      control: "text",
+      description: "Registered Font Awesome name, such as plus or github",
+    },
+    iconRight: {
+      control: "text",
+      description: "Registered Font Awesome name, such as arrow-up-right-from-square",
+    },
     variant: {
       control: "select",
       options: ["primary", "danger", "outline", "ghost"],
@@ -125,7 +133,7 @@ export const WithIcon: Story = {
     label: "Add item",
     variant: "primary",
     shape: "pill",
-    iconLeft: `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2z"/></svg>`,
+    iconLeft: "plus",
   },
 };
 
@@ -135,18 +143,18 @@ export const IconOnly: Story = {
     iconOnly: true,
     variant: "primary",
     ariaLabel: "Add transaction item",
-    iconLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>`,
+    iconLeft: "plus",
   },
 };
 
 export const IconOnlyLink: Story = {
   args: {
-    label: "Visit profile",
-    href: "https://example.com/profile",
+    label: "Visit GitHub profile",
+    href: "https://github.com/profile",
     iconOnly: true,
     variant: "outline",
-    ariaLabel: "Visit social profile",
-    iconLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"></path><path d="M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"></path></svg>`,
+    ariaLabel: "Visit GitHub profile",
+    iconLeft: "github",
   },
 };
 

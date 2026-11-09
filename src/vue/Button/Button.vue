@@ -13,14 +13,23 @@
     @click="onClick"
   >
     <span v-if="$slots.iconLeft" class="cui-btn__icon"><slot name="iconLeft" /></span>
+    <span v-else-if="iconLeft" class="cui-btn__icon">
+      <span v-if="iconLeftMarkup" v-html="iconLeftMarkup" />
+      <span v-else>{{ iconLeft }}</span>
+    </span>
     <span v-if="!iconOnly"><slot>{{ label }}</slot></span>
     <span v-if="$slots.iconRight" class="cui-btn__icon"><slot name="iconRight" /></span>
+    <span v-else-if="iconRight" class="cui-btn__icon">
+      <span v-if="iconRightMarkup" v-html="iconRightMarkup" />
+      <span v-else>{{ iconRight }}</span>
+    </span>
   </component>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { ButtonVariant, ButtonShape, ButtonSize, ButtonType } from '../../components/Button/Button.types';
+import { resolveIconMarkup } from '../../components/Icon/Icon.registry';
 
 export default defineComponent({
   name: 'Button',
@@ -42,6 +51,8 @@ export default defineComponent({
       validator: (value: string) => ['small', 'medium', 'large'].includes(value)
     },
     href: { type: String, default: undefined },
+    iconLeft: { type: String, default: '' },
+    iconRight: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
     fullWidth: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
@@ -56,6 +67,12 @@ export default defineComponent({
   computed: {
     unavailable(): boolean {
       return this.disabled || this.loading;
+    },
+    iconLeftMarkup(): string | undefined {
+      return this.iconLeft ? resolveIconMarkup(this.iconLeft) : undefined;
+    },
+    iconRightMarkup(): string | undefined {
+      return this.iconRight ? resolveIconMarkup(this.iconRight) : undefined;
     },
     buttonClasses() {
       return {

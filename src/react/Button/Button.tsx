@@ -1,6 +1,18 @@
 import React from 'react';
 import type { ButtonProps } from '../../components/Button/Button.types';
+import { resolveIconMarkup } from '../../components/Icon/Icon.registry';
 import '../../components/Button/Button.css';
+
+function renderAdornment(icon: React.ReactNode | string) {
+  if (typeof icon === 'string') {
+    const markup = resolveIconMarkup(icon);
+    if (markup) {
+      return <span className="cui-btn__icon" dangerouslySetInnerHTML={{ __html: markup }} />;
+    }
+  }
+
+  return <span className="cui-btn__icon">{icon}</span>;
+}
 
 export function Button({
   label,
@@ -43,9 +55,9 @@ export function Button({
     ariaLabel || (iconOnly && typeof content === 'string' ? content : undefined);
   const buttonContent = (
     <>
-      {iconLeft && <span className="cui-btn__icon">{iconLeft}</span>}
+      {iconLeft && renderAdornment(iconLeft)}
       {!iconOnly && content}
-      {iconRight && <span className="cui-btn__icon">{iconRight}</span>}
+      {iconRight && renderAdornment(iconRight)}
     </>
   );
 

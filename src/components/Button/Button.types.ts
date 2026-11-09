@@ -34,10 +34,10 @@ export interface ButtonProps {
   /** Whether the button is in a loading state */
   loading?: boolean;
 
-  /** Icon displayed to the left of the label */
+  /** Registered Font Awesome name or custom icon displayed to the left */
   iconLeft?: React.ReactNode | string;
 
-  /** Icon displayed to the right of the label */
+  /** Registered Font Awesome name or custom icon displayed to the right */
   iconRight?: React.ReactNode | string;
 
   /** Whether the button contains only an icon without text */
