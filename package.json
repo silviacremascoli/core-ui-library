@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "main": "./dist/core-ui.es.js",
-  "sideEffects": ["**/*.css"],
-  "files": ["dist"],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "prepare": "npm run build",
@@ -35,6 +39,10 @@
     "vue": "^3.5.43"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-regular-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "twig": "^3.0.0"
   },
   "exports": {
