@@ -15,15 +15,19 @@ const meta: Meta<ButtonArgs> = {
       control: "text",
       description: "Accessible label for the button",
     },
+    href: {
+      control: "text",
+      description: "When provided, renders a link instead of an action button",
+    },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "danger", "outline", "ghost"],
+      options: ["primary", "danger", "outline", "ghost"],
       description: "Defines the visual style variant",
     },
     shape: {
       control: "radio",
-      options: ["default", "pill"],
-      description: "Button shape (pill radius matches Portfolio & Finance designs)",
+      options: ["default", "rounded", "pill"],
+      description: "Button shape; default follows the active theme",
     },
     size: {
       control: "radio",
@@ -66,50 +70,59 @@ type Story = StoryObj<ButtonArgs>;
 
 export const Primary: Story = {
   args: {
-    label: "Primary Action",
+    label: "Save changes",
     variant: "primary",
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    label: "Secondary Action",
-    variant: "secondary",
   },
 };
 
 export const Outline: Story = {
   args: {
-    label: "Outline Action",
+    label: "View details",
+    variant: "outline",
+  },
+};
+
+export const Link: Story = {
+  args: {
+    label: "View documentation",
+    href: "/docs",
     variant: "outline",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    label: "Ghost Action",
+    label: "More options",
     variant: "ghost",
   },
 };
 
 export const Danger: Story = {
   args: {
-    label: "Delete Item",
+    label: "Delete item",
     variant: "danger",
   },
 };
 
 export const Pill: Story = {
   args: {
-    label: "Pill Button",
+    label: "Learn more",
     variant: "primary",
     shape: "pill",
   },
 };
 
+export const Rounded: Story = {
+  args: {
+    label: "View more",
+    variant: "primary",
+    shape: "rounded",
+  },
+};
+
 export const WithIcon: Story = {
   args: {
-    label: "Add Task",
+    label: "Add item",
     variant: "primary",
     shape: "pill",
     iconLeft: `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2z"/></svg>`,
@@ -118,11 +131,22 @@ export const WithIcon: Story = {
 
 export const IconOnly: Story = {
   args: {
-    label: "Delete",
+    label: "Add item",
     iconOnly: true,
-    variant: "ghost",
-    ariaLabel: "Delete item",
-    iconLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`,
+    variant: "primary",
+    ariaLabel: "Add transaction item",
+    iconLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>`,
+  },
+};
+
+export const IconOnlyLink: Story = {
+  args: {
+    label: "Visit profile",
+    href: "https://example.com/profile",
+    iconOnly: true,
+    variant: "outline",
+    ariaLabel: "Visit social profile",
+    iconLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"></path><path d="M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"></path></svg>`,
   },
 };
 
@@ -143,14 +167,14 @@ export const Loading: Story = {
 export const SageTheme: Story = {
   render: (args) => `
     <div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Explore Portfolio", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Contact Me", shape: "pill", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Continue", shape: "pill", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Learn more", shape: "pill", variant: "outline" })}
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Sage tonal theme (derived from Portfolio): soft sage primary (`#b6cdbd`), dark purple text (`#272142`), 24px pill radius, and 3px offset focus outline.",
+        story: "Sage theme: Poppins buttons use 15px by 30px padding, a 24px radius, a sage wipe-fill hover, and a 3px plum focus outline.",
       },
     },
   },
@@ -159,15 +183,15 @@ export const SageTheme: Story = {
 export const AmberTheme: Story = {
   render: (args) => `
     <div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Add Transaction", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", shape: "pill", variant: "secondary" })}
-      ${buttonTemplate({ ...args, label: "Delete", shape: "pill", variant: "danger" })}
+      ${buttonTemplate({ ...args, label: "Save changes", shape: "pill", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", shape: "pill", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Delete item", shape: "pill", variant: "danger" })}
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Amber tonal theme (derived from Finance Tracker): warm amber (`#DB9558`), coral hover (`#F2765E`), 20px pill radius, and teal glow focus ring.",
+        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), 20px pill radius, and teal glow focus ring.",
       },
     },
   },
@@ -176,14 +200,14 @@ export const AmberTheme: Story = {
 export const OceanTheme: Story = {
   render: (args) => `
     <div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Search City", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "My Location", shape: "pill", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Primary action", shape: "default", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", shape: "default", variant: "outline" })}
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Ocean tonal theme (derived from Weather App): slate blue (`#56899d`), terracotta interaction accents, and dual focus ring.",
+        story: "Ocean theme: compact light buttons use a 6px radius, warm hover surface, and dual terracotta focus ring.",
       },
     },
   },
@@ -192,15 +216,14 @@ export const OceanTheme: Story = {
 export const MidnightTheme: Story = {
   render: (args) => `
     <div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Get In Touch", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "View Projects", shape: "pill", variant: "secondary" })}
-      ${buttonTemplate({ ...args, label: "Resume", shape: "pill", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Save changes", shape: "default", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", shape: "default", variant: "outline" })}
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Midnight tonal theme (derived from Prototype Portfolio): midnight navy (`#24263b`), deep slate (`#1f2235`), electric coral primary action (`#ff4a57`), and glowing coral focus ring.",
+        story: "Midnight theme: navy (`#24263b`), deep slate (`#1f2235`), electric coral primary (`#ff4a57`), and glowing coral focus ring.",
       },
     },
   },

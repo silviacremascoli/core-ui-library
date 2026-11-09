@@ -27,9 +27,9 @@ const meta: Meta<InputArgs> = {
       options: ["default", "error", "success"],
     },
     shape: {
-      description: "Input shape (pill radius matches Finance and Portfolio designs)",
+      description: "Input shape; default follows the active theme",
       control: { type: "radio" },
-      options: ["default", "pill"],
+      options: ["default", "rounded", "pill"],
     },
     size: {
       description: "Input size",
@@ -41,7 +41,7 @@ const meta: Meta<InputArgs> = {
       control: "boolean",
     },
     clearable: {
-      description: "Shows an embedded clear button (Weather App design)",
+      description: "Shows an embedded button for clearing the current value",
       control: "boolean",
     },
     disabled: {
@@ -77,25 +77,34 @@ export const Text: Story = {
 
 export const Pill: Story = {
   args: {
-    label: "Transaction name",
+    label: "Name",
     type: "text",
-    placeholder: "e.g. Groceries, Rent...",
+    placeholder: "Enter a value...",
     shape: "pill",
   },
   parameters: {
     docs: {
       description: {
-        story: "Pill shape input (20px radius) as seen in the Personal Finance Tracker and To-Do list applications.",
+        story: "Pill shape input (20px radius)",
       },
     },
   },
 };
 
+export const Rounded: Story = {
+  args: {
+    label: "Rounded input",
+    type: "text",
+    placeholder: "Enter text...",
+    shape: "rounded",
+  },
+};
+
 export const SearchWithClear: Story = {
   args: {
-    label: "City search",
+    label: "Search term",
     type: "search",
-    placeholder: "Search for a city...",
+    placeholder: "Search...",
     shape: "pill",
     clearable: true,
     value: "London",
@@ -104,7 +113,7 @@ export const SearchWithClear: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Search input featuring a left search icon and an embedded clear button (matching React Weather App design).",
+        story: "Search input with a left icon and an embedded clear button.",
       },
     },
   },
@@ -133,7 +142,7 @@ export const SuccessState: Story = {
     type: "text",
     placeholder: "Choose username",
     variant: "success",
-    value: "silvia_c",
+    value: "sample_user",
   },
 };
 
@@ -157,13 +166,13 @@ export const SageTheme: Story = {
   render: (args) => `
     <div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
       <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Your Message</label>
-      ${inputTemplate({ ...args, label: "Subject", placeholder: "Portfolio inquiry...", shape: "pill", fullWidth: true })}
+      ${inputTemplate({ ...args, label: "Subject", placeholder: "Enter a subject...", shape: "pill", fullWidth: true })}
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Sage tonal theme (Portfolio): inputs inherit dark purple text (`#272142`), muted green borders (`#5c715e`), and 24px pill radius.",
+        story: "Sage theme: inputs inherit dark purple text (`#272142`), muted green borders (`#5c715e`), and a 24px pill radius.",
       },
     },
   },
@@ -179,7 +188,7 @@ export const AmberTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Amber tonal theme (Finance Tracker): inputs feature 20px pill radius and active teal focus ring (`#2A6B5C`) with subtle glow.",
+        story: "Amber theme: inputs feature a 20px pill radius and teal focus ring (`#2A6B5C`) with a subtle glow.",
       },
     },
   },
@@ -187,23 +196,21 @@ export const AmberTheme: Story = {
 
 export const OceanTheme: Story = {
   render: (args) => `
-    <div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
-      <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Search Location</label>
-      ${inputTemplate({
-        ...args,
-        label: "Search Location",
-        placeholder: "Type a city...",
-        shape: "pill",
-        clearable: true,
-        fullWidth: true,
-        iconLeft: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`,
-      })}
+    <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+      <div class="cui-theme--ocean" data-cui-mode="light" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; flex: 1 1 260px;">
+        <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Light · Terracotta focus</label>
+        ${inputTemplate({ ...args, label: "Light mode", placeholder: "Type something...", shape: "default", clearable: true, fullWidth: true })}
+      </div>
+      <div class="cui-theme--ocean" data-cui-mode="dark" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; flex: 1 1 260px;">
+        <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Dark · Ocean-blue focus</label>
+        ${inputTemplate({ ...args, label: "Dark mode", placeholder: "Type something...", shape: "default", clearable: true, fullWidth: true })}
+      </div>
     </div>
   `,
   parameters: {
     docs: {
       description: {
-        story: "Ocean tonal theme (Weather App): inputs display slate-blue tone with terracotta interaction accents and embedded clear button.",
+        story: "Ocean theme supports light and dark appearance modes. Tab between the fields to see the terracotta light ring and ocean-blue dark ring.",
       },
     },
   },
@@ -225,7 +232,7 @@ export const MidnightTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Midnight tonal theme (Prototype Portfolio): inputs adapt to dark navy background (`#24263b`), white text (`#fefefe`), and glowing electric coral focus ring (`#ff4a57`).",
+        story: "Midnight theme: inputs adapt to a navy background (`#24263b`), white text (`#fefefe`), and glowing electric coral focus ring (`#ff4a57`).",
       },
     },
   },

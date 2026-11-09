@@ -24,7 +24,7 @@
 .cui-input {
   padding: var(--cui-spacing-sm) var(--cui-spacing-md);
   border: 1px solid var(--cui-color-border);
-  border-radius: var(--cui-border-radius-md);
+  border-radius: var(--cui-input-border-radius, var(--cui-border-radius-md));
   font-size: var(--cui-font-size-base);
   font-family: var(--cui-font-family);
   line-height: var(--cui-line-height-normal);
@@ -38,7 +38,7 @@
 .cui-input:focus {
   outline: none;
   border-color: var(--cui-focus-ring-color);
-  box-shadow: var(--cui-focus-ring-shadow);
+  box-shadow: var(--cui-control-focus-ring-shadow, var(--cui-focus-ring-shadow));
 }
 
 .cui-input:disabled {
@@ -85,23 +85,23 @@
 
 /* ===== VARIANTS / VALIDATION ===== */
 .cui-input--error {
-  border-color: var(--cui-color-danger);
+  border-color: var(--cui-color-danger-border, var(--cui-color-danger));
 }
 
 .cui-input--error:focus-visible,
 .cui-input--error:focus {
-  border-color: var(--cui-color-danger);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+  border-color: var(--cui-color-danger-border, var(--cui-color-danger));
+  box-shadow: var(--cui-focus-ring-shadow-error, var(--cui-focus-ring-shadow));
 }
 
 .cui-input--success {
-  border-color: var(--cui-color-success);
+  border-color: var(--cui-color-success-border, var(--cui-color-success));
 }
 
 .cui-input--success:focus-visible,
 .cui-input--success:focus {
-  border-color: var(--cui-color-success);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  border-color: var(--cui-color-success-border, var(--cui-color-success));
+  box-shadow: var(--cui-focus-ring-shadow-success, var(--cui-focus-ring-shadow));
 }
 
 /* ===== ADORNMENTS & ICONS ===== */

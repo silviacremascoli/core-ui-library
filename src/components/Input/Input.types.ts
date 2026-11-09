@@ -3,7 +3,7 @@
 
 export type InputType = 'text' | 'date' | 'time' | 'search' | 'email' | 'password' | 'number' | 'tel' | 'url';
 export type InputVariant = 'default' | 'error' | 'success';
-export type InputShape = 'default' | 'pill';
+export type InputShape = 'default' | 'rounded' | 'pill';
 export type InputSize = 'small' | 'medium' | 'large';
 
 export interface InputProps {
@@ -34,7 +34,7 @@ export interface InputProps {
   /** Validation state variant */
   variant?: InputVariant;
 
-  /** Input shape: default or pill (rounded corners matching Finance and Portfolio designs) */
+  /** Input shape: theme default, rounded, or pill */
   shape?: InputShape;
 
   /** Size of the input */

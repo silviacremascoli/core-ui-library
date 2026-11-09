@@ -2,7 +2,7 @@
 {% set inputClasses = 'cui-input' %}
 {% if variant and variant != 'default' %}{% set inputClasses = inputClasses ~ ' cui-input--' ~ variant %}{% endif %}
 {% if size and size != 'medium' %}{% set inputClasses = inputClasses ~ ' cui-input--' ~ size %}{% endif %}
-{% if shape == 'pill' %}{% set inputClasses = inputClasses ~ ' cui-input--pill' %}{% endif %}
+{% if shape == 'rounded' %}{% set inputClasses = inputClasses ~ ' cui-input--rounded' %}{% elseif shape == 'pill' %}{% set inputClasses = inputClasses ~ ' cui-input--pill' %}{% endif %}
 {% if fullWidth and not hasWrapper %}{% set inputClasses = inputClasses ~ ' cui-input--full-width' %}{% endif %}
 {% if iconLeft %}{% set inputClasses = inputClasses ~ ' cui-input--has-icon-left' %}{% endif %}
 {% if iconRight or clearable %}{% set inputClasses = inputClasses ~ ' cui-input--has-icon-right' %}{% endif %}

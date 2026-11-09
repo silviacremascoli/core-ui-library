@@ -8,6 +8,7 @@ export function Button({
   variant = 'primary',
   shape = 'default',
   size = 'medium',
+  href,
   disabled = false,
   fullWidth = false,
   loading = false,
@@ -24,18 +25,46 @@ export function Button({
     'cui-btn',
     `cui-btn--${variant}`,
     `cui-btn--${size}`,
+    shape === 'rounded' ? 'cui-btn--rounded' : '',
     shape === 'pill' ? 'cui-btn--pill' : '',
     fullWidth ? 'cui-btn--full-width' : '',
     iconOnly ? 'cui-btn--icon-only' : '',
+    href !== undefined && iconOnly ? 'cui-btn--icon-only-link' : '',
     loading ? 'cui-btn--loading' : '',
+    href !== undefined && (disabled || loading) ? 'cui-btn--disabled' : '',
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   const content = children ?? label;
+  const unavailable = disabled || loading;
   const accessibleLabel =
     ariaLabel || (iconOnly && typeof content === 'string' ? content : undefined);
+  const buttonContent = (
+    <>
+      {iconLeft && <span className="cui-btn__icon">{iconLeft}</span>}
+      {!iconOnly && content}
+      {iconRight && <span className="cui-btn__icon">{iconRight}</span>}
+    </>
+  );
+
+  if (href !== undefined) {
+    return (
+      <a
+        {...props}
+        href={unavailable ? undefined : href}
+        className={classNames}
+        aria-label={accessibleLabel}
+        aria-busy={loading || undefined}
+        aria-disabled={unavailable || undefined}
+        tabIndex={unavailable ? -1 : props.tabIndex}
+        onClick={unavailable ? undefined : onClick}
+      >
+        {buttonContent}
+      </a>
+    );
+  }
 
   return (
     <button
@@ -47,9 +76,7 @@ export function Button({
       onClick={onClick}
       {...props}
     >
-      {iconLeft && <span className="cui-btn__icon">{iconLeft}</span>}
-      {!iconOnly && content}
-      {iconRight && <span className="cui-btn__icon">{iconRight}</span>}
+      {buttonContent}
     </button>
   );
 }

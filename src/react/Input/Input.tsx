@@ -35,6 +35,7 @@ export function Input({
     'cui-input',
     variant !== 'default' ? `cui-input--${variant}` : '',
     size !== 'medium' ? `cui-input--${size}` : '',
+    shape === 'rounded' ? 'cui-input--rounded' : '',
     shape === 'pill' ? 'cui-input--pill' : '',
     fullWidth && !hasWrapper ? 'cui-input--full-width' : '',
     iconLeft ? 'cui-input--has-icon-left' : '',

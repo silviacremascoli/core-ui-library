@@ -71,7 +71,7 @@ export default defineComponent({
     shape: {
       type: String as PropType<InputShape>,
       default: 'default',
-      validator: (value: string) => ['default', 'pill'].includes(value)
+      validator: (value: string) => ['default', 'rounded', 'pill'].includes(value)
     },
     size: {
       type: String as PropType<InputSize>,
@@ -91,6 +91,7 @@ export default defineComponent({
         'cui-input': true,
         [`cui-input--${this.variant}`]: this.variant !== 'default',
         [`cui-input--${this.size}`]: this.size !== 'medium',
+        'cui-input--rounded': this.shape === 'rounded',
         'cui-input--pill': this.shape === 'pill',
         'cui-input--full-width': this.fullWidth && !this.hasWrapper,
         'cui-input--has-icon-left': Boolean(this.$slots.iconLeft),

@@ -1,8 +1,8 @@
 // Button Component - Shared TypeScript Types
 // Used by all framework implementations (React, Vue, Twig)
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
-export type ButtonShape = 'default' | 'pill';
+export type ButtonVariant = 'primary' | 'danger' | 'outline' | 'ghost';
+export type ButtonShape = 'default' | 'rounded' | 'pill';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -16,7 +16,7 @@ export interface ButtonProps {
   /** Visual style variant of the button */
   variant?: ButtonVariant;
 
-  /** Button shape: default or pill (rounded corners matching portfolio & finance tracker designs) */
+  /** Button shape: theme default, rounded, or pill */
   shape?: ButtonShape;
 
   /** Size of the button */
@@ -24,6 +24,9 @@ export interface ButtonProps {
 
   /** Whether the button is disabled */
   disabled?: boolean;
+
+  /** Destination URL; renders an anchor instead of a button when provided */
+  href?: string;
 
   /** Whether the button takes 100% width of its parent */
   fullWidth?: boolean;
@@ -55,6 +58,7 @@ export interface ButtonProps {
 
 export interface ButtonArgs {
   label?: string;
+  href?: string;
   variant?: ButtonVariant;
   shape?: ButtonShape;
   size?: ButtonSize;
