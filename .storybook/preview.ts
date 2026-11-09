@@ -41,6 +41,9 @@ const customViewports = {
 };
 
 const preview: Preview = {
+  decorators: [
+    (story) => `<div class="cui-theme--default">${story()}</div>`,
+  ],
   parameters: {
     layout: 'padded',
     options: {
