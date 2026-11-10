@@ -1,0 +1,13 @@
+{# Typography Component - Twig Template #}
+{% if tag is defined and tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'blockquote', 'small', 'strong', 'em'] %}
+  {% set elementTag = tag %}
+{% elseif variant|default('body1') in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] %}
+  {% set elementTag = variant %}
+{% elseif variant|default('body1') in ['body1', 'body2', 'subtitle1', 'subtitle2'] %}
+  {% set elementTag = 'p' %}
+{% else %}
+  {% set elementTag = 'span' %}
+{% endif %}
+<{{ elementTag }}{% if id %} id="{{ id|escape('html') }}"{% endif %}{% if lang %} lang="{{ lang|escape('html') }}"{% endif %}{% if dir in ['ltr', 'rtl', 'auto'] %} dir="{{ dir }}"{% endif %}{% if ariaLabel %} aria-label="{{ ariaLabel|escape('html') }}"{% endif %}{% if ariaDescribedby %} aria-describedby="{{ ariaDescribedby|escape('html') }}"{% endif %} class="cui-typography cui-typography--{{ variant|default('body1')|escape('html') }}{% if align %} cui-typography--align-{{ align|escape('html') }}{% endif %}{% if weight %} cui-typography--weight-{{ weight|escape('html') }}{% endif %}{% if color %} cui-typography--color-{{ color|escape('html') }}{% endif %}{% if truncate %} cui-typography--truncate{% endif %}{% if noWrap %} cui-typography--no-wrap{% endif %}{% if className %} {{ className|escape('html') }}{% endif %}">
+  {{ content|default('')|escape('html') }}
+</{{ elementTag }}>

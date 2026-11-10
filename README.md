@@ -4,7 +4,7 @@
 
 A framework-agnostic component library: each component is implemented once in CSS and TypeScript, then exposed as **React**, **Vue**, and **Twig** — mirroring the multi-framework, CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 environments).
 
-> **Status: work in progress.** **Button**, **Input**, and **Label** are live across React, Vue, and Twig. The remaining components are in local development and have not been committed to Git yet. More components are on the way. See the [Roadmap](#roadmap) for what's coming next.
+> **Status: work in progress.** **Button**, **Input**, **Label**, and **Typography** are live in the library across React, Vue, and Twig. The remaining components are in local development. See the [Roadmap](#roadmap) for what's coming next.
 
 ## Why this project exists
 
@@ -18,13 +18,14 @@ At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3
 
 ## Current components
 
-Currently, **Button**, **Input**, and **Label** are live across all three frameworks and documented in Storybook:
+Currently, **Button**, **Input**, **Label**, and **Typography** are live across all three framework adapters and have Storybook stories:
 
 | Component | React | Vue | Twig | Stories | Status | Highlights |
 | --------- | :-----: | :---: | :----: | :-------: | :------: | :--------- |
 | **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings |
 | **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow |
 | **Label**  | ✅ | ✅ | ✅ | ✅ | **Live** | Associated form labels, size/weight/color options, required and disabled states, visually hidden accessibility mode |
+| **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Semantic headings and paragraphs, independent visual variants, text styles and truncation |
 
 *Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
@@ -98,12 +99,14 @@ The package can be installed from GitHub. Pin a release tag or commit for reprod
 Import the adapter for your framework and the shared stylesheet once in your app entry point. The stylesheet export includes component styles, design tokens, and theme presets.
 
 ```tsx
-import { Button, Input, Label } from "core-ui-library/react";
+import { Button, Input, Label, Typography } from "core-ui-library/react";
 import "core-ui-library/styles";
 
 export function ContactForm() {
   return (
     <div className="cui-theme--default">
+      <Typography variant="h1">Contact us</Typography>
+      <Typography>Send us a message.</Typography>
       <Button variant="primary" shape="rounded">Send message</Button>
       <Label htmlFor="email">Email</Label>
       <Input id="email" type="email" shape="pill" />
@@ -115,6 +118,18 @@ export function ContactForm() {
 Use `core-ui-library/vue` for Vue components and `core-ui-library/twig` for Twig templates. Keep the shape independent from the theme: `default` uses the theme's component radius, while `rounded` and `pill` explicitly override it. Available themes are `.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, and `.cui-theme--midnight`.
 
 For Ocean's mode-specific Input focus ring, set `data-cui-mode="light"` or `data-cui-mode="dark"` on the `.cui-theme--ocean` wrapper. Components inherit `.cui-theme--default` from the root palette; add a theme wrapper to select a different palette or scope a nested theme. The React adapter currently requires React and React DOM 19; the Vue adapter requires Vue 3. The package is private, so it can be installed from GitHub or a private registry but cannot be published to the public npm registry as configured.
+
+### Typography
+
+Import `Typography` from the React, Vue, or Twig adapter. The root entry also exports `ReactTypography`, `VueTypography`, and `TwigTypography`; the Twig adapter exports `typographyTemplate`. React accepts children and Vue accepts a default slot; Twig accepts plain text through `content` and escapes it as HTML. Twig also accepts `id`, `lang`, `dir`, `ariaLabel`, and `ariaDescribedby`; React and Vue pass standard HTML and ARIA attributes to the element.
+
+Heading variants `h1` through `h6` render matching headings, `body1`, `body2`, `subtitle1`, and `subtitle2` render paragraphs, and `caption` and `overline` render spans. Use `tag` to choose a different semantic element without changing the visual `variant`, for example `<Typography variant="h1" tag="h2">Section</Typography>`. Choose heading levels according to the surrounding document, and use an inline tag when nesting text inside a paragraph. Available tags are `h1`-`h6`, `p`, `span`, `div`, `blockquote`, `small`, `strong`, and `em`.
+
+Use `align`, `weight`, and `color` for text styling, and `noWrap` or `truncate` when needed. Truncation requires a constrained width and keeps the full text in the DOM, but hides overflow visually; avoid it when users need to read the entire text without another way to reveal it. Check color contrast against the actual background, especially for `inverse` and custom themes; color alone should not convey meaning.
+
+Poppins is the default `--cui-font-family` for library components across all themes. The shared stylesheet loads weights 400, 500, 600, and 700 from Google Fonts, with system fonts as fallbacks if the request is blocked or unavailable. Projects can override the token themselves. The library does not globally restyle host-page paragraphs: to use the same font for ordinary page text, apply `font-family: var(--cui-font-family)` to the application's body or container after importing the stylesheet.
+
+The build currently exports JavaScript and CSS but does not emit TypeScript declaration files. Source types are available in the repository; packaged TypeScript declarations are still pending.
 
 ### Font Awesome Icons
 
@@ -325,7 +340,7 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 ## Roadmap
 
 - [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live)
-- [ ] **Phase 2 — Forms:**  Typography (in development), Select, Checkbox, Radio, Textarea, Form (in development)
+- [ ] **Phase 2 — Forms:** Typography (✅ live), Select, Checkbox, Radio, Textarea, Form (in development)
 - [ ] **Phase 3 — Media:** Image, Icon, Video (in development)
 - [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
 

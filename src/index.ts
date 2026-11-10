@@ -26,14 +26,17 @@ export {
 	Button as ReactButton,
 	Input as ReactInput,
 	Label as ReactLabel,
+	Typography as ReactTypography,
 } from './react';
 export {
 	Button as VueButton,
 	Input as VueInput,
 	Label as VueLabel,
+	Typography as VueTypography,
 } from './vue';
 export {
 	Button as TwigButton,
 	Input as TwigInput,
 	Label as TwigLabel,
+	Typography as TwigTypography,
 } from './twig';

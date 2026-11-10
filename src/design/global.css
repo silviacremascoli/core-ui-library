@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 /* CORE UI LIBRARY - GLOBAL STYLESHEET */
 
 :root {
@@ -10,7 +12,7 @@
   --cui-spacing-2xl: 32px;
 
   /* TYPOGRAPHY */
-  --cui-font-family: system-ui, -apple-system, sans-serif;
+  --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   --cui-font-weight-normal: 400;
   --cui-font-weight-medium: 500;
   --cui-font-weight-bold: 600;
