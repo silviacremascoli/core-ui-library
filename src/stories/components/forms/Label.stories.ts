@@ -19,16 +19,19 @@ const meta: Meta<LabelArgs> = {
   tags: ['autodocs'],
   render: (args) => labelTemplate(args),
   argTypes: {
-    htmlFor: { control: 'text', description: 'HTML id of associated form element' },
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
-    weight: { control: 'select', options: ['normal', 'medium', 'bold', 'strong'] },
+    content: { control: 'text', description: 'Text displayed by the label' },
+    htmlFor: { control: 'text', description: 'HTML id of the associated form element' },
+    size: { control: 'select', options: ['small', 'medium', 'large'], description: 'Label text size' },
+    weight: { control: 'select', options: ['normal', 'medium', 'bold', 'strong'], description: 'Label text weight' },
     color: { 
       control: 'select', 
-      options: ['primary', 'secondary', 'danger', 'success', 'warning', 'info', 'text', 'text-light', 'inverse'] 
+      options: ['primary', 'secondary', 'danger', 'success', 'warning', 'info', 'text', 'text-light', 'inverse'],
+      description: 'Label text color',
     },
-    required: { control: 'boolean', description: 'Shows required asterisk' },
-    disabled: { control: 'boolean' },
+    required: { control: 'boolean', description: 'Shows a required-field asterisk' },
+    disabled: { control: 'boolean', description: 'Styles the label as disabled' },
     visuallyHidden: { control: 'boolean', description: 'Hides label visually (screen-reader only)' },
+    className: { control: 'text', description: 'Additional CSS classes for the label' },
   },
   args: {
     content: 'Label',
