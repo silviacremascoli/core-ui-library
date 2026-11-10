@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "vite",
     "prepare": "npm run build",
-    "build": "vite build",
+    "build": "vite build && vue-tsc -p tsconfig.build.json && node scripts/bundle-declarations.mjs",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -32,11 +32,15 @@
     "playwright": "^1.62.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "rollup": "^4.68.2",
+    "rollup-plugin-dts": "^6.5.1",
     "storybook": "^10.6.1",
+    "typescript": "~5.9.3",
     "vite": "^8.3.3",
     "vite-plugin-twig-drupal": "^1.6.2",
     "vitest": "^4.1.10",
-    "vue": "^3.5.43"
+    "vue": "^3.5.43",
+    "vue-tsc": "^3.3.14"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
@@ -47,18 +51,25 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/types-bundled/index.d.ts",
       "import": "./dist/core-ui.es.js"
     },
     "./react": {
+      "types": "./dist/types-bundled/react/index.d.ts",
       "import": "./dist/react/index.es.js"
     },
     "./vue": {
+      "types": "./dist/types-bundled/vue/index.d.ts",
       "import": "./dist/vue/index.es.js"
     },
     "./twig": {
+      "types": "./dist/types-bundled/twig/index.d.ts",
       "import": "./dist/twig/index.es.js"
     },
-    "./styles": "./dist/core-ui.css"
+    "./styles": {
+      "types": "./dist/types-bundled/styles.d.ts",
+      "default": "./dist/core-ui.css"
+    }
   },
   "peerDependencies": {
     "react": "^19.0.0",

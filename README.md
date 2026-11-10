@@ -39,7 +39,7 @@ Currently, **Button**, **Input**, **Label**, and **Typography** are live across 
                       ↓
 ┌─────────────────────────────────────────────┐
 │          Component Styles (CSS)             │
-│      Button.css, Input.css, Card.css…      │
+│   Button.css, Input.css, Typography.css…   │
 └─────────────────────────────────────────────┘
                       ↓
 ┌─────────────┐  ┌─────────────┐  ┌───────────┐
@@ -48,7 +48,7 @@ Currently, **Button**, **Input**, **Label**, and **Typography** are live across 
 └─────────────┘  └─────────────┘  └───────────┘
 ```
 
-To add a component, you write the CSS and the TypeScript types once — then thin adapters make it usable from React, Vue, and Twig. The [Adding New Components](#adding-new-components) section shows the full walkthrough using a Card as the example.
+To add a component, you write the CSS and the TypeScript types once — then thin adapters make it usable from React, Vue, and Twig. The [Adding New Components](#adding-new-components) section provides an implementation example.
 
 As new components are added to the library, I will implement each one in its corresponding React, Vue, and Twig projects.
 
@@ -56,7 +56,7 @@ As new components are added to the library, I will implement each one in its cor
 
 Each adapter exists for a specific consumer — the adapter matches the consumer, never the other way around:
 
-- **Twig** — the canonical template implementation. Twig is how these components render in the CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 v13). In this library, the Twig template is the framework-neutral reference: the Storybook docs render through it, and the React and Vue adapters are checked against it. (Twig deliberately does not run in the browser — server-side templating belongs on the server.)
+- **Twig** — the canonical template implementation. Twig is how these components render in the CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 v13). In this library, the Twig template is the framework-neutral reference: Storybook renders it using Twig.js in the browser, while TYPO3 renders Twig templates server-side. The React and Vue adapters follow the same component contract.
 
 - **Vue** — for componentized sites. Vue adapters power the Vue-based pages in my projects (e.g. I plan to use them in the contact form on my portfolio site).
 
@@ -74,7 +74,7 @@ The point of the architecture: one visual and behavioral contract, consumed wher
 
 ## Development
 
-Requires Node.js v18+.
+Requires Node.js 20.19 or later in the 20.x series, or 22.12 or later.
 
 ```bash
 npm install        # install dependencies
@@ -97,6 +97,8 @@ The package can be installed from GitHub. Pin a release tag or commit for reprod
 ```
 
 Import the adapter for your framework and the shared stylesheet once in your app entry point. The stylesheet export includes component styles, design tokens, and theme presets.
+
+The build includes TypeScript declarations for the root and framework entry points, as well as the stylesheet import.
 
 ```tsx
 import { Button, Input, Label, Typography } from "core-ui-library/react";
@@ -129,16 +131,13 @@ Use `align`, `weight`, and `color` for text styling, and `noWrap` or `truncate` 
 
 Poppins is the default `--cui-font-family` for library components across all themes. The shared stylesheet loads weights 400, 500, 600, and 700 from Google Fonts, with system fonts as fallbacks if the request is blocked or unavailable. Projects can override the token themselves. The library does not globally restyle host-page paragraphs: to use the same font for ordinary page text, apply `font-family: var(--cui-font-family)` to the application's body or container after importing the stylesheet.
 
-The build currently exports JavaScript and CSS but does not emit TypeScript declaration files. Source types are available in the repository; packaged TypeScript declarations are still pending.
-
 ### Font Awesome Icons
 
-Button and Icon share a curated Font Awesome registry defined in [`src/components/Icon/Icon.registry.ts`](src/components/Icon/Icon.registry.ts). Pass the registered name without the `fa-` prefix. For example, `iconLeft="plus"` renders the solid plus icon, while `icon="github"` renders the GitHub brand icon.
+Components can use a curated Font Awesome registry defined in [`src/components/Icon/Icon.registry.ts`](src/components/Icon/Icon.registry.ts). Pass the registered name without the `fa-` prefix. For example, `iconLeft="plus"` renders the solid plus icon, while `iconLeft="github"` renders the GitHub brand icon.
 
 ```tsx
 <Button iconLeft="plus">Add item</Button>
 <Button href="https://example.com/profile" iconLeft="github" iconOnly ariaLabel="Visit GitHub profile" />
-<Icon icon="envelope-regular" ariaLabel="Email" />
 ```
 
 The registry currently includes these names:
@@ -149,7 +148,9 @@ The registry currently includes these names:
 
 To register another icon, import its definition from the matching installed Font Awesome package and add a name-to-definition entry to `fontAwesomeIcons` in `Icon.registry.ts`. For example, import `faCircleUser` from `@fortawesome/free-solid-svg-icons` and add `'circle-user': faCircleUser`. Add the new name to this list and add or update a Storybook example. The `FontAwesomeIconName` type is inferred from the registry, so it updates automatically.
 
-Only icons in this registry resolve by name. Custom SVG markup and plain text are also supported; React and Vue Button consumers may pass their own icon nodes. For icon-only buttons or links, provide an accessible `ariaLabel` describing the action or destination.
+Only icons in this registry resolve by name. Button also supports plain text icons and trusted custom SVG markup; React and Vue consumers may pass their own icon nodes. Raw SVG markup is not sanitized, so never pass untrusted input. In the Twig Button adapter, use `iconLeftTrustedHtml` or `iconRightTrustedHtml` for trusted markup; `iconLeft` and `iconRight` accept registry names or plain text and escape unrecognized markup. For icon-only buttons or links, provide an accessible `ariaLabel` describing the action or destination.
+
+Twig Button accepts `className` and an `attributes` map for `id`, `title`, `target`, `rel`, `download`, `name`, `value`, `form`, `lang`, `dir`, `role`, `tabindex`, and `aria-*` or `data-*` attributes. Attribute values must be strings or numbers. Component-controlled attributes such as `href`, `type`, and disabled states cannot be overridden through this map. Supply only trusted, validated URLs for `href`.
 
 ## Project Structure
 
@@ -161,7 +162,8 @@ src/
 ├── components/              # Framework-agnostic core: CSS + types
 │   ├── Button/  (Button.css, Button.types.ts)
 │   ├── Input/   (Input.css, Input.types.ts)
-│   └── Label/   (Label.css, Label.types.ts)
+│   ├── Label/   (Label.css, Label.types.ts)
+│   └── Typography/ (Typography.css, Typography.types.ts)
 ├── react/                  # React adapters + exports
 ├── vue/                    # Vue adapters + exports
 ├── twig/                   # Twig templates + exports
@@ -191,6 +193,13 @@ export interface CardProps {
   children?: string;
   className?: string;
 }
+
+export interface CardArgs {
+  size?: CardSize;
+  variant?: CardVariant;
+  content?: string;
+  className?: string;
+}
 ```
 
 ### 3. Create the component styles
@@ -198,19 +207,19 @@ export interface CardProps {
 ```css
 /* src/components/Card/Card.css */
 .card {
-  background-color: var(--color-background);
-  border-radius: var(--border-radius-md);
+  background-color: var(--cui-color-background);
+  border-radius: var(--cui-border-radius-md);
   box-sizing: border-box;
 }
 
-.card--small  { padding: var(--spacing-sm); }
-.card--medium { padding: var(--spacing-md); }
-.card--large  { padding: var(--spacing-lg); }
+.card--small  { padding: var(--cui-spacing-sm); }
+.card--medium { padding: var(--cui-spacing-md); }
+.card--large  { padding: var(--cui-spacing-lg); }
 
-.card--bordered { border: 1px solid var(--color-border); }
+.card--bordered { border: 1px solid var(--cui-color-border); }
 .card--elevated {
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border-light);
+  box-shadow: var(--cui-shadow-md);
+  border: 1px solid var(--cui-color-border-light);
 }
 ```
 
@@ -268,8 +277,8 @@ export default defineComponent({
 
 ```twig
 {# src/twig/Card/Card.twig #}
-<div class="card card--{{ size|default('medium') }} card--{{ variant|default('default') }} {{ className|default('') }}">
-  {{ content|raw }}
+<div class="card card--{{ size|default('medium')|escape('html') }} card--{{ variant|default('default')|escape('html') }} {{ className|default('')|escape('html') }}">
+  {{ content|default('')|escape('html') }}
 </div>
 ```
 
@@ -294,10 +303,10 @@ export type { CardArgs } from '../../components/Card/Card.types';
 export { Card } from './Card';
 
 // src/vue/index.ts
-export { default as Card } from './Card.vue';
+export { default as Card } from './Card/Card.vue';
 
 // src/twig/index.ts
-export { Card, cardTemplate } from './Card';
+export { default as Card, cardTemplate } from './Card';
 ```
 
 ### 6. Create Storybook stories
@@ -339,8 +348,8 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live)
-- [ ] **Phase 2 — Forms:** Typography (✅ live), Select, Checkbox, Radio, Textarea, Form (in development)
+- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live), Typography (✅ live)
+- [ ] **Phase 2 — Forms:** Select, Checkbox, Radio, Textarea, Form (in development)
 - [ ] **Phase 3 — Media:** Image, Icon, Video (in development)
 - [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
 
