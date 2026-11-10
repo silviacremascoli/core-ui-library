@@ -70,4 +70,8 @@ export interface ButtonArgs {
   iconOnly?: boolean;
   ariaLabel?: string;
   type?: ButtonType;
+  className?: string;
+  attributes?: Record<string, string | number | null | undefined>;
+  iconLeftTrustedHtml?: string;
+  iconRightTrustedHtml?: string;
 }

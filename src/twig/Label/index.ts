@@ -1,5 +1,9 @@
-import labelTemplate from './Label.twig';
+import renderLabelTemplate from './Label.twig';
 import type { LabelArgs } from '../../components/Label/Label.types';
+
+function labelTemplate(args?: LabelArgs): string {
+  return renderLabelTemplate(args);
+}
 
 function Label(args: LabelArgs): string {
   return labelTemplate(args);

@@ -1,15 +1,13 @@
 <template>
-  <component
-    :is="href !== undefined ? 'a' : 'button'"
-    :type="href === undefined ? type : undefined"
-    :href="href !== undefined && !unavailable ? href : undefined"
-    :class="buttonClasses"
-    :disabled="href === undefined ? unavailable : undefined"
-    :aria-label="ariaLabel || (iconOnly ? label : undefined)"
-    :aria-busy="loading || undefined"
-    :aria-disabled="href !== undefined && unavailable ? true : undefined"
-    :tabindex="href !== undefined && unavailable ? -1 : undefined"
+  <a
+    v-if="href !== undefined"
     v-bind="$attrs"
+    :href="!unavailable ? href : undefined"
+    :class="buttonClasses"
+    :aria-label="accessibleLabel"
+    :aria-busy="busyState"
+    :aria-disabled="disabledState"
+    :tabindex="linkTabindex"
     @click="onClick"
   >
     <span v-if="$slots.iconLeft" class="cui-btn__icon"><slot name="iconLeft" /></span>
@@ -23,7 +21,29 @@
       <span v-if="iconRightMarkup" v-html="iconRightMarkup" />
       <span v-else>{{ iconRight }}</span>
     </span>
-  </component>
+  </a>
+  <button
+    v-else
+    v-bind="$attrs"
+    :type="type"
+    :class="buttonClasses"
+    :disabled="unavailable"
+    :aria-label="accessibleLabel"
+    :aria-busy="busyState"
+    @click="onClick"
+  >
+    <span v-if="$slots.iconLeft" class="cui-btn__icon"><slot name="iconLeft" /></span>
+    <span v-else-if="iconLeft" class="cui-btn__icon">
+      <span v-if="iconLeftMarkup" v-html="iconLeftMarkup" />
+      <span v-else>{{ iconLeft }}</span>
+    </span>
+    <span v-if="!iconOnly"><slot>{{ label }}</slot></span>
+    <span v-if="$slots.iconRight" class="cui-btn__icon"><slot name="iconRight" /></span>
+    <span v-else-if="iconRight" class="cui-btn__icon">
+      <span v-if="iconRightMarkup" v-html="iconRightMarkup" />
+      <span v-else>{{ iconRight }}</span>
+    </span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -33,6 +53,8 @@ import { resolveIconMarkup } from '../../components/Icon/Icon.registry';
 
 export default defineComponent({
   name: 'Button',
+  inheritAttrs: false,
+  emits: ['click'],
   props: {
     label: { type: String, default: '' },
     variant: {
@@ -67,6 +89,22 @@ export default defineComponent({
   computed: {
     unavailable(): boolean {
       return this.disabled || this.loading;
+    },
+    accessibleLabel(): string | undefined {
+      const label = this.$attrs['aria-label'];
+      return this.ariaLabel || (typeof label === 'string' ? label : undefined) || (this.iconOnly ? this.label : undefined);
+    },
+    busyState(): boolean | 'true' | 'false' | undefined {
+      const value = this.$attrs['aria-busy'];
+      return this.loading ? true : value === true || value === false || value === 'true' || value === 'false' ? value : undefined;
+    },
+    disabledState(): boolean | 'true' | 'false' | undefined {
+      const value = this.$attrs['aria-disabled'];
+      return this.unavailable ? true : value === true || value === false || value === 'true' || value === 'false' ? value : undefined;
+    },
+    linkTabindex(): string | number | undefined {
+      const value = this.$attrs.tabindex ?? this.$attrs.tabIndex;
+      return this.unavailable ? -1 : typeof value === 'string' || typeof value === 'number' ? value : undefined;
     },
     iconLeftMarkup(): string | undefined {
       return this.iconLeft ? resolveIconMarkup(this.iconLeft) : undefined;

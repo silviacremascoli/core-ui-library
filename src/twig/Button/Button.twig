@@ -7,22 +7,33 @@
 {% if loading %}{% set buttonClasses = buttonClasses ~ ' cui-btn--loading' %}{% endif %}
 {% if href is defined and unavailable %}{% set buttonClasses = buttonClasses ~ ' cui-btn--disabled' %}{% endif %}
 {% if className %}{% set buttonClasses = buttonClasses ~ ' ' ~ className %}{% endif %}
+{% set attributes = attributes|default({}) %}
+{% set accessibleLabel = ariaLabel|default(attributes['aria-label']|default(iconOnly ? label : '')) %}
 
 {% if href is defined %}
 <a
-  {% if not unavailable %}href="{{ href }}"{% endif %}
-  class="{{ buttonClasses }}"
+  {% if not unavailable %}href="{{ href|escape('html') }}"{% endif %}
+  class="{{ buttonClasses|escape('html') }}"
   {% if unavailable %}aria-disabled="true" tabindex="-1"{% endif %}
 {% else %}
 <button
-  type="{{ type|default('button') }}"
-  class="{{ buttonClasses }}"
+  type="{{ type|default('button')|escape('html') }}"
+  class="{{ buttonClasses|escape('html') }}"
   {% if unavailable %}disabled{% endif %}
 {% endif %}
-  {% if ariaLabel or (iconOnly and label) %}aria-label="{{ ariaLabel|default(label) }}"{% endif %}
-  {% if loading %}aria-busy="true"{% endif %}
+  {% if accessibleLabel %}aria-label="{{ accessibleLabel|escape('html') }}"{% endif %}
+  {% if loading %}aria-busy="true"{% elseif attributes['aria-busy'] is defined %}aria-busy="{{ attributes['aria-busy']|escape('html') }}"{% endif %}
+  {% if not (href is defined and unavailable) %}
+    {% if attributes['aria-disabled'] is defined %}aria-disabled="{{ attributes['aria-disabled']|escape('html') }}"{% endif %}
+    {% if attributes.tabindex is defined %}tabindex="{{ attributes.tabindex|escape('html') }}"{% endif %}
+  {% endif %}
+  {% for name, value in attributes %}
+    {% if value is not null and name not in ['aria-label', 'aria-busy', 'aria-disabled', 'tabindex'] and (name in ['id', 'title', 'target', 'rel', 'download', 'name', 'value', 'form', 'lang', 'dir', 'role'] or name matches '/^(aria|data)-[a-z0-9_.-]+$/') %}
+      {{ name }}="{{ value|escape('html') }}"
+    {% endif %}
+  {% endfor %}
 >
-  {% if iconLeft %}<span class="cui-btn__icon">{{ iconLeft|raw }}</span>{% endif %}
-  {% if not iconOnly %}{{ label }}{% endif %}
-  {% if iconRight %}<span class="cui-btn__icon">{{ iconRight|raw }}</span>{% endif %}
+  {% if iconLeftTrustedHtml or iconLeft %}<span class="cui-btn__icon">{% if iconLeftTrustedHtml %}{{ iconLeftTrustedHtml|raw }}{% else %}{{ iconLeft|escape('html') }}{% endif %}</span>{% endif %}
+  {% if not iconOnly %}{{ label|default('')|escape('html') }}{% endif %}
+  {% if iconRightTrustedHtml or iconRight %}<span class="cui-btn__icon">{% if iconRightTrustedHtml %}{{ iconRightTrustedHtml|raw }}{% else %}{{ iconRight|escape('html') }}{% endif %}</span>{% endif %}
 {% if href is defined %}</a>{% else %}</button>{% endif %}

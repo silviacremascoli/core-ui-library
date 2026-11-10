@@ -85,7 +85,11 @@ export interface InputArgs {
   type?: InputType;
   placeholder?: string;
   disabled?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
   value?: string;
+  id?: string;
+  name?: string;
   variant?: InputVariant;
   shape?: InputShape;
   size?: InputSize;
