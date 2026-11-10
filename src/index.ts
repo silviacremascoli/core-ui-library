@@ -25,12 +25,15 @@ export type * from './components/Textarea/Textarea.types';
 export {
 	Button as ReactButton,
 	Input as ReactInput,
+	Label as ReactLabel,
 } from './react';
 export {
 	Button as VueButton,
 	Input as VueInput,
+	Label as VueLabel,
 } from './vue';
 export {
 	Button as TwigButton,
 	Input as TwigInput,
+	Label as TwigLabel,
 } from './twig';

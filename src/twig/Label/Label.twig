@@ -1,0 +1,5 @@
+{# Label Component - Twig Template #}
+<label for="{{ htmlFor|default('') }}" class="cui-label cui-label--{{ size|default('medium') }}{% if weight is defined %} cui-label--weight-{{ weight }}{% endif %}{% if color is defined %} cui-label--color-{{ color }}{% endif %}{% if required %} cui-label--required{% endif %}{% if disabled %} cui-label--disabled{% endif %}{% if visuallyHidden %} cui-label--visually-hidden{% endif %}{% if className is defined %} {{ className|raw }}{% endif %}">
+  {{ content|raw }}
+{% if required and content is not empty and not ('*' in content) %}<span aria-hidden="true">*</span>{% endif %}
+</label>

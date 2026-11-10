@@ -4,7 +4,7 @@
 
 A framework-agnostic component library: each component is implemented once in CSS and TypeScript, then exposed as **React**, **Vue**, and **Twig** — mirroring the multi-framework, CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 environments).
 
-> **Status: work in progress.** Currently, only **Button** and **Input** are live (the remaining components are in local development and have not been committed to Git yet). More components are on the way. See the [Roadmap](#roadmap) for what's coming next.
+> **Status: work in progress.** **Button**, **Input**, and **Label** are live across React, Vue, and Twig. The remaining components are in local development and have not been committed to Git yet. More components are on the way. See the [Roadmap](#roadmap) for what's coming next.
 
 ## Why this project exists
 
@@ -18,14 +18,15 @@ At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3
 
 ## Current components
 
-Currently, **Button** and **Input** are live across all three frameworks with comprehensive variants, shapes, and accessibility states:
+Currently, **Button**, **Input**, and **Label** are live across all three frameworks and documented in Storybook:
 
 | Component | React | Vue | Twig | Stories | Status | Highlights |
 | --------- | :-----: | :---: | :----: | :-------: | :------: | :--------- |
 | **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings |
 | **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow |
+| **Label**  | ✅ | ✅ | ✅ | ✅ | **Live** | Associated form labels, size/weight/color options, required and disabled states, visually hidden accessibility mode |
 
-*Note: The remaining components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
+*Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
 ## Architecture
 
@@ -97,14 +98,15 @@ The package can be installed from GitHub. Pin a release tag or commit for reprod
 Import the adapter for your framework and the shared stylesheet once in your app entry point. The stylesheet export includes component styles, design tokens, and theme presets.
 
 ```tsx
-import { Button, Input } from "core-ui-library/react";
+import { Button, Input, Label } from "core-ui-library/react";
 import "core-ui-library/styles";
 
 export function ContactForm() {
   return (
     <div className="cui-theme--default">
       <Button variant="primary" shape="rounded">Send message</Button>
-      <Input label="Email" type="email" shape="pill" />
+      <Label htmlFor="email">Email</Label>
+      <Input id="email" type="email" shape="pill" />
     </div>
   );
 }
@@ -143,7 +145,8 @@ src/
 │   └── themes.css           # Default and named theme definitions
 ├── components/              # Framework-agnostic core: CSS + types
 │   ├── Button/  (Button.css, Button.types.ts)
-│   └── Input/   (Input.css, Input.types.ts)
+│   ├── Input/   (Input.css, Input.types.ts)
+│   └── Label/   (Label.css, Label.types.ts)
 ├── react/                  # React adapters + exports
 ├── vue/                    # Vue adapters + exports
 ├── twig/                   # Twig templates + exports
@@ -321,8 +324,8 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Typography (in development)
-- [ ] **Phase 2 — Forms:** Label, Select, Checkbox, Radio, Textarea, Form (in development)
+- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live)
+- [ ] **Phase 2 — Forms:**  Typography (in development), Select, Checkbox, Radio, Textarea, Form (in development)
 - [ ] **Phase 3 — Media:** Image, Icon, Video (in development)
 - [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
 
