@@ -4,3 +4,4 @@ import '../design/global.css';
 
 export { default as Button, buttonTemplate } from './Button';
 export { default as Input, inputTemplate } from './Input';
+export { default as Label, labelTemplate } from './Label';
