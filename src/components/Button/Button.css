@@ -201,3 +201,25 @@
   justify-content: center;
   line-height: 1;
 }
+
+/* ===== SAGE THEME ===== */
+
+.cui-theme--sage {
+  .cui-btn.cui-btn--medium.cui-btn--pill.cui-btn--icon-only-link {
+    flex: 0 0 48px;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    font-size: 1.125rem;
+    color: #5c715e;
+    background-color: #f2f9f1;
+    background-image: linear-gradient(#b6cdbd, #b6cdbd);
+    border: 1px solid #5c715e;
+
+    &:hover:not(.cui-btn--disabled) {
+      background-size: 100% 100%;
+      color: #272142;
+    }
+  }
+}
