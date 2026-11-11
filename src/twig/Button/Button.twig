@@ -22,9 +22,9 @@
   {% if unavailable %}disabled{% endif %}
 {% endif %}
   {% if accessibleLabel %}aria-label="{{ accessibleLabel|escape('html') }}"{% endif %}
-  {% if loading %}aria-busy="true"{% elseif attributes['aria-busy'] is defined %}aria-busy="{{ attributes['aria-busy']|escape('html') }}"{% endif %}
+  {% if loading %}aria-busy="true"{% elseif attributes['aria-busy'] is defined and attributes['aria-busy'] is same as(true) %}aria-busy="true"{% elseif attributes['aria-busy'] is defined and attributes['aria-busy'] is not same as(false) and attributes['aria-busy'] is not empty %}aria-busy="{{ attributes['aria-busy']|escape('html') }}"{% endif %}
   {% if not (href is defined and unavailable) %}
-    {% if attributes['aria-disabled'] is defined %}aria-disabled="{{ attributes['aria-disabled']|escape('html') }}"{% endif %}
+    {% if attributes['aria-disabled'] is defined and attributes['aria-disabled'] is same as(true) %}aria-disabled="true"{% elseif attributes['aria-disabled'] is defined and attributes['aria-disabled'] is not same as(false) and attributes['aria-disabled'] is not empty %}aria-disabled="{{ attributes['aria-disabled']|escape('html') }}"{% endif %}
     {% if attributes.tabindex is defined %}tabindex="{{ attributes.tabindex|escape('html') }}"{% endif %}
   {% endif %}
   {% for name, value in attributes %}
