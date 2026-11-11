@@ -3,10 +3,15 @@ import { typographyTemplate } from '../../../twig/Typography';
 import type { TypographyArgs } from '../../../components/Typography/Typography.types';
 import '../../../components/Typography/Typography.css';
 
-const meta: Meta<TypographyArgs> = {
+type TypographyStoryArgs = TypographyArgs & { customFontFamily?: string };
+
+const meta: Meta<TypographyStoryArgs> = {
   title: 'Components/Typography',
   tags: ['autodocs'],
-  render: (args) => typographyTemplate(args),
+  render: ({ customFontFamily, fontFamily, ...args }) => typographyTemplate({
+    ...args,
+    fontFamily: fontFamily === 'custom' ? customFontFamily : fontFamily,
+  }),
   argTypes: {
     content: {
       description: 'Plain text to display. Twig escapes HTML in this value.',
@@ -31,6 +36,23 @@ const meta: Meta<TypographyArgs> = {
       description: 'Overrides the variant\'s font weight using the shared normal, medium, bold, or strong token.',
       control: 'select',
       options: ['normal', 'medium', 'bold', 'strong'],
+    },
+    fontFamily: {
+      description: 'Choose a font available in the active theme or select Custom to enter a CSS font-family stack.',
+      control: {
+        type: 'select',
+        labels: {
+          text: 'Poppins (text)',
+          heading: 'Poppins (heading)',
+          custom: 'Custom',
+        },
+      },
+      options: ['text', 'heading', 'custom'],
+    },
+    customFontFamily: {
+      description: 'Custom CSS font-family value, such as Georgia, serif.',
+      control: 'text',
+      if: { arg: 'fontFamily', eq: 'custom' },
     },
     color: { 
       description: 'Applies a theme text color. When omitted, color is inherited; check contrast against the background.',
@@ -76,6 +98,7 @@ const meta: Meta<TypographyArgs> = {
     variant: 'body1',
     align: 'left',
     color: 'text',
+    customFontFamily: '',
     truncate: false,
     noWrap: false,
   },
@@ -83,7 +106,7 @@ const meta: Meta<TypographyArgs> = {
 
 export default meta;
 
-type Story = StoryObj<TypographyArgs>;
+type Story = StoryObj<TypographyStoryArgs>;
 
 export const Heading1: Story = { args: { content: 'Heading 1', variant: 'h1' } };
 export const Heading2: Story = { args: { content: 'Heading 2', variant: 'h2' } };
@@ -95,6 +118,48 @@ export const Caption: Story = { args: { content: 'This is a caption', variant: '
 export const PrimaryColor: Story = { args: { content: 'Primary colored text', color: 'primary' } };
 export const Centered: Story = { args: { content: 'Centered text', align: 'center' } };
 export const BoldText: Story = { args: { content: 'Bold text', weight: 'bold' } };
+export const HeadingFont: Story = { args: { content: 'Text using the theme heading font', fontFamily: 'heading' } };
+export const CustomFont: Story = { args: { content: 'Text using a custom font stack', fontFamily: 'custom', customFontFamily: 'Georgia, serif' } };
+export const SageTheme: Story = {
+  args: { content: 'Sage theme heading font', variant: 'h2', fontFamily: 'heading' },
+  argTypes: {
+    fontFamily: {
+      control: { type: 'select', labels: { text: 'Poppins', heading: 'Playfair Display', custom: 'Custom' } },
+      options: ['text', 'heading', 'custom'],
+    },
+  },
+  decorators: [(story) => `<div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
+};
+export const AmberTheme: Story = {
+  args: { content: 'Amber theme heading font', variant: 'h2', fontFamily: 'heading' },
+  argTypes: {
+    fontFamily: {
+      control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
+      options: ['heading', 'custom'],
+    },
+  },
+  decorators: [(story) => `<div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
+};
+export const OceanTheme: Story = {
+  args: { content: 'Ocean theme heading font', variant: 'h2', fontFamily: 'heading' },
+  argTypes: {
+    fontFamily: {
+      control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
+      options: ['heading', 'custom'],
+    },
+  },
+  decorators: [(story) => `<div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
+};
+export const MidnightTheme: Story = {
+  args: { content: 'Midnight theme heading font', variant: 'h2', fontFamily: 'heading' },
+  argTypes: {
+    fontFamily: {
+      control: { type: 'select', labels: { text: 'Poppins', heading: 'Tektur', custom: 'Custom' } },
+      options: ['heading', 'custom'],
+    },
+  },
+  decorators: [(story) => `<div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
+};
 export const Truncated: Story = { 
   args: { 
     content: 'This is a very long text that should be truncated with ellipsis when it overflows its container.', 

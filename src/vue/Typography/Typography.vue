@@ -2,6 +2,7 @@
   <component
     :is="computedTag"
     :class="classNames"
+    :style="fontFamilyStyle"
     v-bind="$attrs"
   >
     <slot>{{ content }}</slot>
@@ -10,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
-import type { TypographyVariant, TypographyAlign, TypographyWeight, TypographyColor, TypographyTag } from '../../components/Typography/Typography.types';
+import type { TypographyVariant, TypographyAlign, TypographyWeight, TypographyFontFamily, TypographyColor, TypographyTag } from '../../components/Typography/Typography.types';
 
 export default defineComponent({
   name: 'Typography',
@@ -20,6 +21,7 @@ export default defineComponent({
     variant: { type: String as PropType<TypographyVariant>, default: 'body1' },
     align: { type: String as PropType<TypographyAlign>, default: '' },
     weight: { type: String as PropType<TypographyWeight>, default: '' },
+    fontFamily: { type: String as PropType<TypographyFontFamily>, default: '' },
     color: { type: String as PropType<TypographyColor>, default: '' },
     truncate: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
@@ -28,6 +30,13 @@ export default defineComponent({
   setup(props) {
     const computedTag = computed(() => {
       return props.tag || getTagFromVariant(props.variant);
+    });
+
+    const fontFamilyStyle = computed(() => {
+      if (!props.fontFamily) return undefined;
+      if (props.fontFamily === 'text') return { fontFamily: 'var(--cui-font-family)' };
+      if (props.fontFamily === 'heading') return { fontFamily: 'var(--cui-font-family-heading, var(--cui-font-family))' };
+      return { fontFamily: props.fontFamily };
     });
 
     const classNames = computed(() => {
@@ -43,7 +52,7 @@ export default defineComponent({
       ].filter(Boolean).join(' ');
     });
 
-    return { computedTag, classNames };
+    return { computedTag, classNames, fontFamilyStyle };
   }
 });
 

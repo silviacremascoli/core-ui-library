@@ -10,13 +10,20 @@ export function Typography({
   variant = 'body1',
   align,
   weight,
+  fontFamily,
   color,
   truncate = false,
   noWrap = false,
   className = '',
+  style,
   ...props
 }: ReactTypographyProps) {
   const Tag = tag || getTagFromVariant(variant);
+  const resolvedFontFamily = fontFamily === 'text'
+    ? 'var(--cui-font-family)'
+    : fontFamily === 'heading'
+      ? 'var(--cui-font-family-heading, var(--cui-font-family))'
+      : fontFamily;
 
   const classNames = [
     'cui-typography',
@@ -30,7 +37,7 @@ export function Typography({
   ].filter(Boolean).join(' ');
 
   return (
-    <Tag className={classNames} {...props}>
+    <Tag className={classNames} style={resolvedFontFamily ? { ...style, fontFamily: resolvedFontFamily } : style} {...props}>
       {children}
     </Tag>
   );

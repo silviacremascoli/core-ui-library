@@ -9,6 +9,7 @@ export type TypographyVariant =
 
 export type TypographyAlign = 'left' | 'center' | 'right' | 'justify';
 export type TypographyWeight = 'normal' | 'medium' | 'bold' | 'strong';
+export type TypographyFontFamily = 'text' | 'heading' | (string & {});
 export type TypographyTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'blockquote' | 'small' | 'strong' | 'em';
 export type TypographyColor = 
   | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' 
@@ -29,6 +30,9 @@ export interface TypographyProps {
   
   /** Font weight */
   weight?: TypographyWeight;
+
+  /** Theme text or heading font, or a custom CSS font-family value */
+  fontFamily?: TypographyFontFamily;
   
   /** Text color */
   color?: TypographyColor;
@@ -49,6 +53,7 @@ export interface TypographyArgs {
   variant?: TypographyVariant;
   align?: TypographyAlign;
   weight?: TypographyWeight;
+  fontFamily?: TypographyFontFamily;
   color?: TypographyColor;
   truncate?: boolean;
   noWrap?: boolean;

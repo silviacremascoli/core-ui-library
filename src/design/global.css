@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Tektur:wght@400;500;600;700&display=swap");
 
 /* CORE UI LIBRARY - GLOBAL STYLESHEET */
 
@@ -13,6 +13,7 @@
 
   /* TYPOGRAPHY */
   --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  --cui-font-family-heading: var(--cui-font-family);
   --cui-font-weight-normal: 400;
   --cui-font-weight-medium: 500;
   --cui-font-weight-bold: 600;
