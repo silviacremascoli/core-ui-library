@@ -135,7 +135,7 @@ export const AmberTheme: Story = {
   argTypes: {
     fontFamily: {
       control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
-      options: ['heading', 'custom'],
+      options: ['text', 'heading', 'custom'],
     },
   },
   decorators: [(story) => `<div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
@@ -145,7 +145,7 @@ export const OceanTheme: Story = {
   argTypes: {
     fontFamily: {
       control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
-      options: ['heading', 'custom'],
+      options: ['text', 'heading', 'custom'],
     },
   },
   decorators: [(story) => `<div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
@@ -155,7 +155,7 @@ export const MidnightTheme: Story = {
   argTypes: {
     fontFamily: {
       control: { type: 'select', labels: { text: 'Poppins', heading: 'Tektur', custom: 'Custom' } },
-      options: ['heading', 'custom'],
+      options: ['text', 'heading', 'custom'],
     },
   },
   decorators: [(story) => `<div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
