@@ -1,6 +1,6 @@
 // Twig Button component wrapper for TypeScript
 // This allows importing the Twig template with type safety
-import twigButtonTemplate from './Button.twig';
+import renderButtonTemplate from './Button.twig';
 import type { ButtonArgs } from '../../components/Button/Button.types';
 import { fontAwesomeIcons, resolveIconMarkup } from '../../components/Icon/Icon.registry';
 
@@ -9,7 +9,7 @@ function resolveIcon(icon?: string): string | undefined {
 }
 
 function buttonTemplate(args: ButtonArgs): string {
-  return twigButtonTemplate({
+  return renderButtonTemplate({
     ...args,
     iconLeftTrustedHtml: args.iconLeftTrustedHtml ?? resolveIcon(args.iconLeft),
     iconRightTrustedHtml: args.iconRightTrustedHtml ?? resolveIcon(args.iconRight),
