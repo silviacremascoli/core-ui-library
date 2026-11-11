@@ -212,14 +212,14 @@
     height: 3rem;
     padding: 0;
     font-size: 1.125rem;
-    color: #5c715e;
-    background-color: #f2f9f1;
-    background-image: linear-gradient(#b6cdbd, #b6cdbd);
-    border: 1px solid #5c715e;
+    color: var(--cui-color-primary-border);
+    background-color: var(--cui-color-secondary);
+    background-image: linear-gradient(var(--cui-color-primary), var(--cui-color-primary));
+    border: 1px solid var(--cui-color-primary-border);
 
     &:hover:not(.cui-btn--disabled) {
       background-size: 100% 100%;
-      color: #272142;
+      color: var(--cui-color-text);
     }
   }
 }
