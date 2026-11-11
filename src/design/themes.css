@@ -53,8 +53,9 @@
 
 /* SAGE THEME: Soft sage green, dark purple text, muted green, and cream */
 .cui-theme--sage {
+  --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   --cui-font-family-heading: 'Playfair Display', serif;
-  --cui-button-font-family: var(--cui-font-family);
+    --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 400;
   --cui-button-line-height: 27px;
   --cui-button-border-radius: 24px;
@@ -139,6 +140,10 @@
   --cui-border-radius-pill: 24px;
   --cui-shadow-md: 0 2px 8px rgba(44, 64, 48, 0.1);
   --cui-transition-normal: all 300ms ease-in-out;
+
+  .cui-btn--medium.cui-btn--pill {
+  padding: 10px 20px;
+}
 }
 
 /* AMBER THEME: Warm amber/orange, coral interaction, destructive crimson, and teal focus */
@@ -305,8 +310,9 @@
 /* MIDNIGHT THEME: Dark navy & slate background, vibrant electric coral accent, and glowing focus ring */
 .cui-theme--midnight {
   color-scheme: dark;
+  --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   --cui-font-family-heading: 'Tektur', cursive;
-  --cui-button-font-family: var(--cui-font-family);
+    --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 500;
   --cui-button-line-height: 27px;
   --cui-button-border-radius: 12px;

@@ -187,10 +187,6 @@
   aspect-ratio: 1;
 }
 
-.cui-btn--icon-only-link {
-  border-radius: var(--cui-border-radius-full);
-}
-
 .cui-btn--icon-only.cui-btn--small {
   padding: var(--cui-spacing-xs);
 }

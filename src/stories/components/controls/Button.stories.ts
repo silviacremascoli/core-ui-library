@@ -153,6 +153,7 @@ export const IconOnlyLink: Story = {
     href: "https://github.com/profile",
     iconOnly: true,
     variant: "outline",
+    shape: "pill",
     ariaLabel: "Visit GitHub profile",
     iconLeft: "github",
   },
@@ -173,10 +174,11 @@ export const Loading: Story = {
 };
 
 export const SageTheme: Story = {
+  args: { shape: "pill" },
   render: (args) => `
     <div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Continue", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Learn more", shape: "pill", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Continue", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Learn more", variant: "outline" })}
     </div>
   `,
   parameters: {
@@ -189,11 +191,12 @@ export const SageTheme: Story = {
 };
 
 export const AmberTheme: Story = {
+  args: { shape: "pill" },
   render: (args) => `
     <div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Save changes", shape: "pill", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", shape: "pill", variant: "outline" })}
-      ${buttonTemplate({ ...args, label: "Delete item", shape: "pill", variant: "danger" })}
+      ${buttonTemplate({ ...args, label: "Save changes", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Delete item", variant: "danger" })}
     </div>
   `,
   parameters: {
@@ -208,8 +211,8 @@ export const AmberTheme: Story = {
 export const OceanTheme: Story = {
   render: (args) => `
     <div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Primary action", shape: "default", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", shape: "default", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Primary action", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
     </div>
   `,
   parameters: {
@@ -224,8 +227,8 @@ export const OceanTheme: Story = {
 export const MidnightTheme: Story = {
   render: (args) => `
     <div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Save changes", shape: "default", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", shape: "default", variant: "outline" })}
+      ${buttonTemplate({ ...args, label: "Save changes", variant: "primary" })}
+      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
     </div>
   `,
   parameters: {
