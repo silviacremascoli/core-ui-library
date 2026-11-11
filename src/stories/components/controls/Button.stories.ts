@@ -182,7 +182,7 @@ export const SageTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Sage theme: Poppins buttons use 15px by 30px padding, a 24px radius, a sage wipe-fill hover, and a 3px plum focus outline.",
+        story: "Sage theme: Poppins buttons use 15px by 30px padding, a fully rounded pill shape, a sage wipe-fill hover, and a 3px plum focus outline.",
       },
     },
   },
@@ -199,7 +199,7 @@ export const AmberTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), 20px pill radius, and teal glow focus ring.",
+        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), fully rounded pill shape, and teal glow focus ring.",
       },
     },
   },

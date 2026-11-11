@@ -52,7 +52,7 @@
 }
 
 .cui-btn--pill {
-  border-radius: var(--cui-border-radius-pill);
+  border-radius: var(--cui-border-radius-full);
 }
 
 /* ===== VARIANTS ===== */
