@@ -16,8 +16,9 @@ const removeStyleImports = {
     if (!id.endsWith('.d.ts')) return null;
     const source = ts.createSourceFile(id, code, ts.ScriptTarget.Latest, true);
     const imports = source.statements.filter((statement) =>
-      ts.isImportDeclaration(statement) && !statement.importClause &&
-      ts.isStringLiteral(statement.moduleSpecifier) && statement.moduleSpecifier.text.endsWith('.css')
+      ts.isImportDeclaration(statement) &&
+      ts.isStringLiteral(statement.moduleSpecifier) &&
+      (statement.moduleSpecifier.text.endsWith('.css') || statement.moduleSpecifier.text.endsWith('.twig'))
     );
     if (!imports.length) return null;
     for (const statement of imports.reverse()) {
