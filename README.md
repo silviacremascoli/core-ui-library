@@ -58,7 +58,7 @@ Each adapter exists for a specific consumer — the adapter matches the consumer
 
 - **Twig** — the canonical template implementation. Twig is how these components render in the CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 v13). In this library, the Twig template is the framework-neutral reference: Storybook renders it using Twig.js in the browser, while TYPO3 renders Twig templates server-side. The React and Vue adapters follow the same component contract.
 
-- **Vue** — for componentized sites. Vue adapters power the Vue-based pages in my projects (e.g. I plan to use them in the contact form on my portfolio site).
+- **Vue** — for componentized sites. My portfolio website based on Astro.js uses these components.
 
 - **React** — for React applications. To be used by my React projects (weather app, dictionary app).
 
@@ -84,6 +84,8 @@ npm run build      # build the library
 npm run build-storybook  # static Storybook build (as deployed on Netlify)
 ```
 
+Use the Storybook toolbar's Theme selector to preview components in each theme.
+
 ## Using the Library
 
 The package can be installed from GitHub. Pin a release tag or commit for reproducible installs; the GitHub dependency runs the package's `prepare` script and builds `dist`.
@@ -95,6 +97,8 @@ The package can be installed from GitHub. Pin a release tag or commit for reprod
   }
 }
 ```
+
+Use `core-ui-library/vue` for Vue components, `core-ui-library/react` for React components and `core-ui-library/twig` for Twig templates. The React adapter currently requires React and React DOM 19; the Vue adapter requires Vue 3.
 
 Import the adapter for your framework and the shared stylesheet once in your app entry point. The stylesheet export includes component styles, design tokens, and theme presets.
 
@@ -117,17 +121,27 @@ export function ContactForm() {
 }
 ```
 
-Use `core-ui-library/vue` for Vue components and `core-ui-library/twig` for Twig templates. Keep the shape independent from the theme: `default` uses the theme's component radius, while `rounded` and `pill` explicitly override it. Available themes are `.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, and `.cui-theme--midnight`.
+### Themes
 
-For Ocean's mode-specific Input focus ring, set `data-cui-mode="light"` or `data-cui-mode="dark"` on the `.cui-theme--ocean` wrapper. Components inherit `.cui-theme--default` from the root palette; add a theme wrapper to select a different palette or scope a nested theme. The React adapter currently requires React and React DOM 19; the Vue adapter requires Vue 3. The package is private, so it can be installed from GitHub or a private registry but cannot be published to the public npm registry as configured.
+Available themes are `.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, and `.cui-theme--midnight`. Components inherit `.cui-theme--default` from the root palette; add a theme wrapper to select a different palette or scope a nested theme.
+
+For Ocean's mode-specific Input focus ring, set `data-cui-mode="light"` or `data-cui-mode="dark"` on the `.cui-theme--ocean` wrapper. A dedicated story clearly shows these focus styles.
+
+### Buttons
+
+Button shapes have consistent radii across themes: `default` is 8px, `rounded` is 10px, and `pill` is fully rounded.
+
+Button padding depends on size, not shape. Icon-only buttons use equal padding on all sides.
 
 ### Typography
 
-Import `Typography` from the React, Vue, or Twig adapter. The root entry also exports `ReactTypography`, `VueTypography`, and `TwigTypography`; the Twig adapter exports `typographyTemplate`. React accepts children and Vue accepts a default slot; Twig accepts plain text through `content` and escapes it as HTML. Twig also accepts `id`, `lang`, `dir`, `ariaLabel`, and `ariaDescribedby`; React and Vue pass standard HTML and ARIA attributes to the element.
+Twig accepts plain text through `content` and escapes it as HTML. Twig also accepts `id`, `lang`, `dir`, `ariaLabel`, and `ariaDescribedby`; React and Vue pass standard HTML and ARIA attributes to the element.
 
 Heading variants `h1` through `h6` render matching headings, `body1`, `body2`, `subtitle1`, and `subtitle2` render paragraphs, and `caption` and `overline` render spans. Use `tag` to choose a different semantic element without changing the visual `variant`, for example `<Typography variant="h1" tag="h2">Section</Typography>`. Choose heading levels according to the surrounding document, and use an inline tag when nesting text inside a paragraph. Available tags are `h1`-`h6`, `p`, `span`, `div`, `blockquote`, `small`, `strong`, and `em`.
 
 Use `align`, `weight`, and `color` for text styling, and `noWrap` or `truncate` when needed. Truncation requires a constrained width and keeps the full text in the DOM, but hides overflow visually; avoid it when users need to read the entire text without another way to reveal it. Check color contrast against the actual background, especially for `inverse` and custom themes; color alone should not convey meaning.
+
+#### Font family
 
 Poppins is the default `--cui-font-family` for library components across all themes. The shared stylesheet loads weights 400, 500, 600, and 700 from Google Fonts, with system fonts as fallbacks if the request is blocked or unavailable. Projects can override the token themselves. The library does not globally restyle host-page paragraphs: to use the same font for ordinary page text, apply `font-family: var(--cui-font-family)` to the application's body or container after importing the stylesheet.
 
