@@ -41,8 +41,32 @@ const customViewports = {
 };
 
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: 'Theme applied to component stories',
+      toolbar: {
+        title: 'Theme',
+        icon: 'paintbrush',
+        dynamicTitle: true,
+        items: [
+          { value: 'default', title: 'Default' },
+          { value: 'sage', title: 'Sage' },
+          { value: 'amber', title: 'Amber' },
+          { value: 'ocean', title: 'Ocean' },
+          { value: 'midnight', title: 'Midnight' },
+        ],
+      },
+    },
+  },
+  initialGlobals: {
+    theme: 'default',
+  },
   decorators: [
-    (story) => `<div class="cui-theme--default">${story()}</div>`,
+    (story, context) => {
+      const themes = ['default', 'sage', 'amber', 'ocean', 'midnight'];
+      const theme = themes.includes(context.globals.theme) ? context.globals.theme : 'default';
+      return `<div class="cui-theme--${theme}" style="background: var(--cui-color-background); color: var(--cui-color-text); padding: 16px;">${story()}</div>`;
+    },
   ],
   parameters: {
     layout: 'padded',
