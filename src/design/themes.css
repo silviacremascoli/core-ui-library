@@ -55,35 +55,35 @@
 .cui-theme--sage {
   --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   --cui-font-family-heading: 'Playfair Display', serif;
-    --cui-button-font-family: var(--cui-font-family);
+  --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 400;
   --cui-button-line-height: 27px;
   --cui-button-border-radius: 24px;
   --cui-button-padding-y: 15px;
   --cui-button-padding-x: 30px;
   --cui-button-transition: background-size 400ms ease-in-out, color 400ms ease-in-out, border-color 400ms ease-in-out;
-  --cui-button-primary-color: #272142;
-  --cui-button-primary-border-color: #272142;
-  --cui-button-primary-hover-fill: linear-gradient(#f2f9f1, #f2f9f1);
+  --cui-button-primary-color: var(--cui-color-text);
+  --cui-button-primary-border-color: var(--cui-color-text);
+  --cui-button-primary-hover-fill: linear-gradient(var(--cui-color-secondary), var(--cui-color-secondary));
   --cui-button-primary-hover-background: transparent;
-  --cui-button-primary-hover-color: #4a5e4d;
-  --cui-button-primary-hover-border-color: #5c715e;
-  --cui-button-primary-focus-background: #f2f9f1;
-  --cui-button-primary-focus-color: #4a5e4d;
-  --cui-button-primary-focus-border-color: #5c715e;
-  --cui-button-primary-active-background: #4a5e4d;
-  --cui-button-primary-active-color: #f2f9f1;
-  --cui-button-primary-active-border-color: #4a5e4d;
-  --cui-button-outline-border-color: #5c715e;
-  --cui-button-outline-color: #4a5e4d;
-  --cui-button-outline-hover-fill: linear-gradient(#4a5e4d, #4a5e4d);
+  --cui-button-primary-hover-color: var(--cui-color-text-light);
+  --cui-button-primary-hover-border-color: var(--cui-color-primary-border);
+  --cui-button-primary-focus-background: var(--cui-color-secondary);
+  --cui-button-primary-focus-color: var(--cui-color-text-light);
+  --cui-button-primary-focus-border-color: var(--cui-color-primary-border);
+  --cui-button-primary-active-background: var(--cui-color-text-light);
+  --cui-button-primary-active-color: var(--cui-color-secondary);
+  --cui-button-primary-active-border-color: var(--cui-color-text-light);
+  --cui-button-outline-border-color: var(--cui-color-primary-border);
+  --cui-button-outline-color: var(--cui-color-text-light);
+  --cui-button-outline-hover-fill: linear-gradient(var(--cui-color-text-light), var(--cui-color-text-light));
   --cui-button-outline-hover-background: transparent;
-  --cui-button-outline-hover-border-color: #4a5e4d;
-  --cui-button-outline-hover-color: #f2f9f1;
+  --cui-button-outline-hover-border-color: var(--cui-color-text-light);
+  --cui-button-outline-hover-color: var(--cui-color-secondary);
   --cui-button-outline-focus-background: transparent;
   --cui-button-outline-focus-background-size: 100% 100%;
-  --cui-button-outline-focus-border-color: #4a5e4d;
-  --cui-button-outline-focus-color: #f2f9f1;
+  --cui-button-outline-focus-border-color: var(--cui-color-text-light);
+  --cui-button-outline-focus-color: var(--cui-color-secondary);
 
   /* Colors */
   --cui-color-primary: #b6cdbd;
@@ -129,10 +129,10 @@
   --cui-color-control-mark: #272142;
 
   /* Focus ring */
-  --cui-focus-ring-color: #272142;
-  --cui-focus-ring-width: 3px;
+  --cui-focus-ring-color: var(--cui-color-primary-active);
+  --cui-focus-ring-width: 2px;
   --cui-focus-ring-offset: 3px;
-  --cui-focus-ring-shadow: 0 0 0 3px #272142;
+  --cui-focus-ring-shadow: none;
   --cui-control-focus-ring-shadow: 0 0 0 3px #272142;
 
   /* Radius */
@@ -156,14 +156,14 @@
   --cui-button-padding-y: 10px;
   --cui-button-padding-x: 16px;
   --cui-button-transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
-  --cui-button-primary-background: #db9558;
-  --cui-button-primary-color: #0f172a;
+  --cui-button-primary-background: var(--cui-color-primary);
+  --cui-button-primary-color: var(--cui-color-text);
   --cui-button-primary-border-color: transparent;
-  --cui-button-primary-hover-background: #f2765e;
-  --cui-button-primary-hover-color: #0f172a;
+  --cui-button-primary-hover-background: var(--cui-color-primary-hover);
+  --cui-button-primary-hover-color: var(--cui-color-text);
   --cui-button-primary-hover-border-color: transparent;
-  --cui-button-primary-focus-background: #db9558;
-  --cui-button-primary-focus-color: #0f172a;
+  --cui-button-primary-focus-background: var(--cui-color-primary);
+  --cui-button-primary-focus-color: var(--cui-color-text);
   --cui-button-primary-focus-border-color: transparent;
   --cui-color-primary-text: #87501e;
   --cui-color-primary-border: #80501f;
@@ -235,13 +235,13 @@
   --cui-button-padding-y: 0.375rem;
   --cui-button-padding-x: 0.75rem;
   --cui-button-primary-background: #386477;
-  --cui-button-primary-color: #ffffff;
+  --cui-button-primary-color: var(--cui-color-text-inverse);
   --cui-button-primary-border-color: #386477;
   --cui-button-primary-hover-background: #305466;
-  --cui-button-primary-hover-color: #ffffff;
+  --cui-button-primary-hover-color: var(--cui-color-text-inverse);
   --cui-button-primary-hover-border-color: #305466;
   --cui-button-primary-focus-background: #386477;
-  --cui-button-primary-focus-color: #ffffff;
+  --cui-button-primary-focus-color: var(--cui-color-text-inverse);
   --cui-button-primary-focus-border-color: #386477;
 
   /* Colors */
@@ -320,18 +320,18 @@
   --cui-button-padding-x: 20px;
   --cui-button-transition: all 500ms ease-in-out;
   --cui-button-primary-background: #c81e30;
-  --cui-button-primary-color: #ffffff;
+  --cui-button-primary-color: var(--cui-color-text-inverse);
   --cui-button-primary-border-color: #c81e30;
   --cui-button-primary-hover-background: #b7192a;
-  --cui-button-primary-hover-color: #ffffff;
+  --cui-button-primary-hover-color: var(--cui-color-text-inverse);
   --cui-button-primary-hover-border-color: #b7192a;
   --cui-button-primary-hover-font-weight: 600;
   --cui-button-primary-hover-shadow: 0 2px 8px rgba(255, 74, 87, 0.22);
   --cui-button-primary-focus-background: #c81e30;
-  --cui-button-primary-focus-color: #ffffff;
+  --cui-button-primary-focus-color: var(--cui-color-text-inverse);
   --cui-button-primary-focus-border-color: #c81e30;
   --cui-button-primary-active-background: #c81e30;
-  --cui-button-primary-active-color: #ffffff;
+  --cui-button-primary-active-color: var(--cui-color-text-inverse);
   --cui-button-primary-active-border-color: #c81e30;
 
   /* Colors */
@@ -372,11 +372,11 @@
   --cui-color-border-dark: #8b95ad;
   --cui-color-overlay: rgba(0, 0, 0, 0.6);
   --cui-color-control-mark: #24263b;
-  --cui-button-outline-border-color: #ff4a57;
-  --cui-button-outline-hover-background: #ff4a57;
+  --cui-button-outline-border-color: var(--cui-color-primary-border);
+  --cui-button-outline-hover-background: var(--cui-color-primary);
   --cui-button-outline-hover-color: #020b24;
-  --cui-button-outline-hover-border-color: #ff3140;
-  --cui-button-outline-focus-border-color: #ff4a57;
+  --cui-button-outline-hover-border-color: var(--cui-color-primary-hover);
+  --cui-button-outline-focus-border-color: var(--cui-color-primary-border);
 
   /* Focus ring: electric coral glow */
   --cui-focus-ring-color: #ff4a57;

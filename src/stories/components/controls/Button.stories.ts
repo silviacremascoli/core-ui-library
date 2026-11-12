@@ -184,7 +184,7 @@ export const SageTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Sage theme: Poppins buttons use 15px by 30px padding, a fully rounded pill shape, a sage wipe-fill hover, and a 3px plum focus outline.",
+        story: "Sage theme: Poppins buttons use a fully rounded pill shape, a sage wipe-fill hover, and a green focus outline.",
       },
     },
   },
@@ -202,7 +202,7 @@ export const AmberTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), fully rounded pill shape, and teal glow focus ring.",
+        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), fully rounded pill shape, and a variant-colored focus outline.",
       },
     },
   },
@@ -218,7 +218,7 @@ export const OceanTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ocean theme: compact light buttons use a 6px radius, warm hover surface, and dual terracotta focus ring.",
+        story: "Ocean theme: compact light buttons use a 6px radius, warm hover surface, and a variant-colored focus outline.",
       },
     },
   },
@@ -234,7 +234,7 @@ export const MidnightTheme: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Midnight theme: navy (`#24263b`), deep slate (`#1f2235`), electric coral primary (`#ff4a57`), and glowing coral focus ring.",
+        story: "Midnight theme: navy (`#24263b`), deep slate (`#1f2235`), electric coral primary (`#ff4a57`), and a variant-colored focus outline.",
       },
     },
   },
@@ -245,7 +245,7 @@ export const Accessibility: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Keyboard navigation: press Tab to focus the button — a visible focus ring appears respecting the active theme offset and width (WCAG 2.4.7 Focus Visible). Buttons use native `<button>` semantics with Enter and Space activation (WCAG 4.1.2 Name, Role, Value).",
+        story: "Keyboard navigation: press Tab to focus the button — a visible 2px outline appears with a 3px offset and a color matching the active theme and variant (WCAG 2.4.7 Focus Visible). Buttons use native `<button>` semantics with Enter and Space activation (WCAG 4.1.2 Name, Role, Value).",
       },
     },
   },

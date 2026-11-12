@@ -21,9 +21,17 @@
 }
 
 .cui-btn:focus-visible {
-  outline: var(--cui-focus-ring-width) solid var(--cui-focus-ring-color);
-  outline-offset: var(--cui-focus-ring-offset);
-  box-shadow: var(--cui-focus-ring-shadow);
+  outline: 2px solid var(--cui-button-focus-color, var(--cui-color-primary-border, var(--cui-focus-ring-color)));
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.cui-btn--danger:focus-visible {
+  outline-color: var(--cui-button-danger-focus-color, var(--cui-color-danger-text, var(--cui-color-danger)));
+}
+
+.cui-btn--ghost:focus-visible {
+  outline-color: var(--cui-button-ghost-focus-color, var(--cui-color-text));
 }
 
 .cui-btn:active:not(:disabled):not(.cui-btn--disabled) {
