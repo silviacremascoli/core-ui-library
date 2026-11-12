@@ -31,8 +31,6 @@ Core UI Library uses a default palette and four reusable tonal themes defined in
 
 Use the Storybook toolbar's Theme selector to preview component stories in each palette. The Ocean Input story remains fixed to Ocean to compare its `data-cui-mode="light"` and `data-cui-mode="dark"` focus rings.
 
-Button shapes are consistent across themes: `default` uses an 8px radius, `rounded` uses 10px, and `pill` is fully rounded. Padding depends on size rather than shape and uses shared spacing tokens. Icon-only buttons use equal padding on all sides. Keyboard-focused buttons use a 2px outline with a 3px offset, colored for the theme and variant.
-
 Button and Input support variants, focus styles, and icon adornments across React, Vue, and Twig. Button can also render as a link and supports disabled and loading states.
 
 Input supports validation states and clearable fields. Label provides required, disabled, and visually hidden options. Typography separates semantic tags from visual variants and supports theme text, heading, and custom font families.
