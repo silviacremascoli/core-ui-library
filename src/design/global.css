@@ -4,8 +4,11 @@
 
 :root {
   /* SPACING */
+  --cui-spacing-2xs: 2px;
   --cui-spacing-xs: 4px;
+  --cui-spacing-xs-sm: 6px;
   --cui-spacing-sm: 8px;
+  --cui-spacing-sm-md: 10px;
   --cui-spacing-md: 12px;
   --cui-spacing-lg: 16px;
   --cui-spacing-xl: 24px;

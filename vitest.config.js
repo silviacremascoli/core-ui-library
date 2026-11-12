@@ -1,10 +1,8 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-
 import { defineConfig } from 'vitest/config';
-
+import vue from '@vitejs/plugin-vue';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-
 import { playwright } from '@vitest/browser-playwright';
 
 const dirname =
@@ -12,21 +10,9 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  plugins: [vue()],
   test: {
     projects: [
-      {
-        extends: true,
-        test: {
-          name: 'components',
-          include: ['tests/**/*.test.ts'],
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: playwright({}),
-            instances: [{ browser: 'chromium' }],
-          },
-        },
-      },
       {
         extends: true,
         plugins: [

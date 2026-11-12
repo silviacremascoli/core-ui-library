@@ -58,9 +58,6 @@
   --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 400;
   --cui-button-line-height: 27px;
-  --cui-button-border-radius: 24px;
-  --cui-button-padding-y: 15px;
-  --cui-button-padding-x: 30px;
   --cui-button-transition: background-size 400ms ease-in-out, color 400ms ease-in-out, border-color 400ms ease-in-out;
   --cui-button-primary-color: var(--cui-color-text);
   --cui-button-primary-border-color: var(--cui-color-text);
@@ -141,9 +138,6 @@
   --cui-shadow-md: 0 2px 8px rgba(44, 64, 48, 0.1);
   --cui-transition-normal: all 300ms ease-in-out;
 
-  .cui-btn--medium.cui-btn--pill {
-  padding: 10px 20px;
-}
 }
 
 /* AMBER THEME: Warm amber/orange, coral interaction, destructive crimson, and teal focus */
@@ -151,10 +145,7 @@
   --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 500;
   --cui-button-border-width: 0;
-  --cui-button-border-radius: 20px;
   --cui-input-border-radius: 20px;
-  --cui-button-padding-y: 10px;
-  --cui-button-padding-x: 16px;
   --cui-button-transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
   --cui-button-primary-background: var(--cui-color-primary);
   --cui-button-primary-color: var(--cui-color-text);
@@ -231,9 +222,6 @@
   --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 400;
   --cui-button-line-height: 1.5;
-  --cui-button-border-radius: 0.375rem;
-  --cui-button-padding-y: 0.375rem;
-  --cui-button-padding-x: 0.75rem;
   --cui-button-primary-background: #386477;
   --cui-button-primary-color: var(--cui-color-text-inverse);
   --cui-button-primary-border-color: #386477;
@@ -315,9 +303,6 @@
     --cui-button-font-family: var(--cui-font-family);
   --cui-button-font-weight: 500;
   --cui-button-line-height: 27px;
-  --cui-button-border-radius: 12px;
-  --cui-button-padding-y: 10px;
-  --cui-button-padding-x: 20px;
   --cui-button-transition: all 500ms ease-in-out;
   --cui-button-primary-background: #c81e30;
   --cui-button-primary-color: var(--cui-color-text-inverse);

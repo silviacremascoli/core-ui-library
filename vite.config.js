@@ -14,7 +14,7 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
       '@components': resolve(__dirname, 'src/components'),
       '@react': resolve(__dirname, 'src/react'),
-      '@vue': resolve(__dirname, 'src/vue'),
+      '@cui-vue': resolve(__dirname, 'src/vue'),
       '@twig': resolve(__dirname, 'src/twig'),
       '@design': resolve(__dirname, 'src/design'),
     },

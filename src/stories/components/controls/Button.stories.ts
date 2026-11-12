@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/html";
+import { testButtonAdapters } from "./Button.adapters.interactions";
+import { testButtonKeyboard, testButtonLink, testButtonShapes, testIconOnlyButton, testUnavailableButton } from "./Button.interactions";
 import { buttonTemplate } from "../../../twig/Button";
 import type { ButtonArgs } from "../../../components/Button/Button.types";
 import "../../../components/Button/Button.css";
@@ -35,7 +37,7 @@ const meta: Meta<ButtonArgs> = {
     shape: {
       control: "radio",
       options: ["default", "rounded", "pill"],
-      description: "Button shape; default follows the active theme",
+      description: "Button shape, consistent across themes",
     },
     size: {
       control: "radio",
@@ -81,6 +83,10 @@ export const Primary: Story = {
     label: "Save changes",
     variant: "primary",
   },
+  play: async ({ step }) => {
+    await step("Button shapes", testButtonShapes);
+    await step("React and Vue adapters", testButtonAdapters);
+  },
 };
 
 export const Outline: Story = {
@@ -96,6 +102,7 @@ export const Link: Story = {
     href: "/docs",
     variant: "outline",
   },
+  play: ({ canvasElement }) => testButtonLink(canvasElement),
 };
 
 export const Ghost: Story = {
@@ -145,6 +152,7 @@ export const IconOnly: Story = {
     ariaLabel: "Add transaction item",
     iconLeft: "plus",
   },
+  play: ({ canvasElement }) => testIconOnlyButton(canvasElement),
 };
 
 export const IconOnlyLink: Story = {
@@ -164,6 +172,7 @@ export const Disabled: Story = {
     label: "Unavailable",
     disabled: true,
   },
+  play: ({ canvasElement }) => testUnavailableButton(canvasElement, false),
 };
 
 export const Loading: Story = {
@@ -171,77 +180,12 @@ export const Loading: Story = {
     label: "Submitting...",
     loading: true,
   },
-};
-
-export const SageTheme: Story = {
-  args: { shape: "pill" },
-  render: (args) => `
-    <div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Continue", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Learn more", variant: "outline" })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Sage theme: Poppins buttons use a fully rounded pill shape, a sage wipe-fill hover, and a green focus outline.",
-      },
-    },
-  },
-};
-
-export const AmberTheme: Story = {
-  args: { shape: "pill" },
-  render: (args) => `
-    <div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Save changes", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
-      ${buttonTemplate({ ...args, label: "Delete item", variant: "danger" })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Amber theme: warm orange (`#DB9558`), coral hover (`#F2765E`), fully rounded pill shape, and a variant-colored focus outline.",
-      },
-    },
-  },
-};
-
-export const OceanTheme: Story = {
-  render: (args) => `
-    <div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Primary action", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Ocean theme: compact light buttons use a 6px radius, warm hover surface, and a variant-colored focus outline.",
-      },
-    },
-  },
-};
-
-export const MidnightTheme: Story = {
-  render: (args) => `
-    <div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;">
-      ${buttonTemplate({ ...args, label: "Save changes", variant: "primary" })}
-      ${buttonTemplate({ ...args, label: "Cancel", variant: "outline" })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Midnight theme: navy (`#24263b`), deep slate (`#1f2235`), electric coral primary (`#ff4a57`), and a variant-colored focus outline.",
-      },
-    },
-  },
+  play: ({ canvasElement }) => testUnavailableButton(canvasElement, true),
 };
 
 export const Accessibility: Story = {
   args: { label: "Submit Form" },
+  play: ({ canvasElement }) => testButtonKeyboard(canvasElement),
   parameters: {
     docs: {
       description: {
