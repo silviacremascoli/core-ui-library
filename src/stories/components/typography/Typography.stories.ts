@@ -120,46 +120,6 @@ export const Centered: Story = { args: { content: 'Centered text', align: 'cente
 export const BoldText: Story = { args: { content: 'Bold text', weight: 'bold' } };
 export const HeadingFont: Story = { args: { content: 'Text using the theme heading font', fontFamily: 'heading' } };
 export const CustomFont: Story = { args: { content: 'Text using a custom font stack', fontFamily: 'custom', customFontFamily: 'Georgia, serif' } };
-export const SageTheme: Story = {
-  args: { content: 'Sage theme heading font', variant: 'h2', fontFamily: 'heading' },
-  argTypes: {
-    fontFamily: {
-      control: { type: 'select', labels: { text: 'Poppins', heading: 'Playfair Display', custom: 'Custom' } },
-      options: ['text', 'heading', 'custom'],
-    },
-  },
-  decorators: [(story) => `<div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
-};
-export const AmberTheme: Story = {
-  args: { content: 'Amber theme heading font', variant: 'h2', fontFamily: 'heading' },
-  argTypes: {
-    fontFamily: {
-      control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
-      options: ['text', 'heading', 'custom'],
-    },
-  },
-  decorators: [(story) => `<div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
-};
-export const OceanTheme: Story = {
-  args: { content: 'Ocean theme heading font', variant: 'h2', fontFamily: 'heading' },
-  argTypes: {
-    fontFamily: {
-      control: { type: 'select', labels: { text: 'Poppins', heading: 'Poppins', custom: 'Custom' } },
-      options: ['text', 'heading', 'custom'],
-    },
-  },
-  decorators: [(story) => `<div class="cui-theme--ocean" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
-};
-export const MidnightTheme: Story = {
-  args: { content: 'Midnight theme heading font', variant: 'h2', fontFamily: 'heading' },
-  argTypes: {
-    fontFamily: {
-      control: { type: 'select', labels: { text: 'Poppins', heading: 'Tektur', custom: 'Custom' } },
-      options: ['text', 'heading', 'custom'],
-    },
-  },
-  decorators: [(story) => `<div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background);">${story()}</div>`],
-};
 export const Truncated: Story = { 
   args: { 
     content: 'This is a very long text that should be truncated with ellipsis when it overflows its container.', 

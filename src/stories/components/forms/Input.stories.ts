@@ -162,39 +162,8 @@ export const Time: Story = {
   },
 };
 
-export const SageTheme: Story = {
-  render: (args) => `
-    <div class="cui-theme--sage" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
-      <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Your Message</label>
-      ${inputTemplate({ ...args, label: "Subject", placeholder: "Enter a subject...", shape: "pill", fullWidth: true })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Sage theme: inputs inherit dark purple text (`#272142`), muted green borders (`#5c715e`), and a 24px pill radius.",
-      },
-    },
-  },
-};
-
-export const AmberTheme: Story = {
-  render: (args) => `
-    <div class="cui-theme--amber" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
-      <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Add Amount (€)</label>
-      ${inputTemplate({ ...args, label: "Amount", placeholder: "0.00", shape: "pill", fullWidth: true })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Amber theme: inputs feature a 20px pill radius and teal focus ring (`#2A6B5C`) with a subtle glow.",
-      },
-    },
-  },
-};
-
 export const OceanTheme: Story = {
+  globals: { theme: "ocean" },
   render: (args) => `
     <div style="display: flex; flex-wrap: wrap; gap: 16px;">
       <div class="cui-theme--ocean" data-cui-mode="light" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; flex: 1 1 260px;">
@@ -211,28 +180,6 @@ export const OceanTheme: Story = {
     docs: {
       description: {
         story: "Ocean theme supports light and dark appearance modes. Tab between the fields to see the terracotta light ring and ocean-blue dark ring.",
-      },
-    },
-  },
-};
-
-export const MidnightTheme: Story = {
-  render: (args) => `
-    <div class="cui-theme--midnight" style="padding: 24px; background: var(--cui-color-background); border-radius: 12px; display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
-      <label style="font-family: var(--cui-font-family); font-size: 0.875rem; color: var(--cui-color-text); font-weight: 500;">Your Message</label>
-      ${inputTemplate({
-        ...args,
-        label: "Your Message",
-        placeholder: "Write a message...",
-        shape: "pill",
-        fullWidth: true,
-      })}
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: "Midnight theme: inputs adapt to a navy background (`#24263b`), white text (`#fefefe`), and glowing electric coral focus ring (`#ff4a57`).",
       },
     },
   },
