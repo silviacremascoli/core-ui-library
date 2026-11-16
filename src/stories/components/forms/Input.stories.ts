@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/html";
 import { inputTemplate } from "../../../twig/Input";
 import type { InputArgs } from "../../../components/Input/Input.types";
+import { fontAwesomeIconNames } from "../../../components/Icon/Icon.registry";
 import "../../../components/Input/Input.css";
 
 const meta: Meta<InputArgs> = {
@@ -48,6 +49,16 @@ const meta: Meta<InputArgs> = {
       description: "Disables input interactions",
       control: "boolean",
     },
+    iconLeft: {
+      control: "select",
+      options: fontAwesomeIconNames,
+      description: "Registered Font Awesome icon name displayed on the left",
+    },
+    iconRight: {
+      control: "select",
+      options: fontAwesomeIconNames,
+      description: "Registered Font Awesome icon name displayed on the right",
+    },
   },
 
   args: {
@@ -73,6 +84,13 @@ export const Text: Story = {
     type: "text",
     placeholder: "Enter text...",
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Standard text input for single-line text entry. The most common input type for names, titles, and general text.',
+      },
+    },
+  },
 };
 
 export const Pill: Story = {
@@ -85,7 +103,7 @@ export const Pill: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Pill shape input (20px radius)",
+        story: 'Pill-shaped input with fully rounded ends (20px radius). Creates a modern, friendly appearance suitable for search fields and form inputs.',
       },
     },
   },
@@ -98,6 +116,13 @@ export const Rounded: Story = {
     placeholder: "Enter text...",
     shape: "rounded",
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Rounded input with slightly rounded corners (10px radius). A balanced, modern alternative to sharp corners.',
+      },
+    },
+  },
 };
 
 export const SearchWithClear: Story = {
@@ -108,12 +133,12 @@ export const SearchWithClear: Story = {
     shape: "pill",
     clearable: true,
     value: "London",
-    iconLeft: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`,
+    iconLeft: "magnifying-glass",
   },
   parameters: {
     docs: {
       description: {
-        story: "Search input with a left icon and an embedded clear button.",
+        story: 'Search input with a left magnifying glass icon and an embedded clear (X) button. The clear button appears when there is text to remove and provides one-click clearing.',
       },
     },
   },
@@ -130,7 +155,7 @@ export const ErrorState: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Validation error state (`variant: 'error'`), applying danger border and focus glow with `aria-invalid='true'`.",
+        story: 'Validation error state (`variant: "error"`), applying danger border and focus glow with `aria-invalid="true"`. Use to indicate invalid user input that needs correction.',
       },
     },
   },
@@ -144,6 +169,13 @@ export const SuccessState: Story = {
     variant: "success",
     value: "sample_user",
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Success validation state (`variant: "success"`), applying success border and focus glow. Use to confirm valid input or successful validation.',
+      },
+    },
+  },
 };
 
 export const Date: Story = {
@@ -152,6 +184,13 @@ export const Date: Story = {
     type: "date",
     placeholder: "Select a date",
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date picker input that opens a native browser date picker. Displays in a localized date format and validates input automatically.',
+      },
+    },
+  },
 };
 
 export const Time: Story = {
@@ -159,6 +198,13 @@ export const Time: Story = {
     label: "Time input",
     type: "time",
     placeholder: "Select a time",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time picker input that opens a native browser time picker. Allows users to select hours and minutes in a localized format.',
+      },
+    },
   },
 };
 

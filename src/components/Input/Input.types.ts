@@ -43,11 +43,11 @@ export interface InputProps {
   /** Whether the input spans full width of its parent */
   fullWidth?: boolean;
 
-  /** Icon displayed on the left inside the input field */
-  iconLeft?: React.ReactNode | string;
+  /** Registered Font Awesome name for icon displayed on the left inside the input field */
+  iconLeft?: import('../Icon/Icon.types').FontAwesomeIconName;
 
-  /** Icon displayed on the right inside the input field */
-  iconRight?: React.ReactNode | string;
+  /** Registered Font Awesome name for icon displayed on the right inside the input field */
+  iconRight?: import('../Icon/Icon.types').FontAwesomeIconName;
 
   /** Whether to show an embedded clear button when text is present (Weather App design) */
   clearable?: boolean;
