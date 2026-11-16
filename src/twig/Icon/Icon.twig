@@ -1,0 +1,24 @@
+{# Icon Component - Twig Template #}
+{# Note: SVG strings must be trusted. Never pass untrusted user input. #}
+{% set iconClass = 'cui-icon cui-icon--' ~ (size|default('md')) %}
+{% if color is defined %}
+  {% set iconClass = iconClass ~ ' cui-icon--color-' ~ color %}
+{% endif %}
+{% if asLink %}
+  {% set iconClass = iconClass ~ ' cui-icon--link' %}
+{% endif %}
+{% if className is defined %}
+  {% set iconClass = iconClass ~ ' ' ~ className %}
+{% endif %}
+
+{% if asLink %}
+<a class="{{ iconClass }}" href="{{ href|default('#')|escape('html') }}" target="{{ target|default('_blank')|escape('html') }}" rel="{{ rel|default('noopener noreferrer')|escape('html') }}"{% if ariaLabel is defined %} aria-label="{{ ariaLabel|escape('html') }}"{% endif %}{% if ariaHidden is defined and ariaHidden %} aria-hidden="true"{% endif %}{% if asLink and not ariaLabel %} role="img"{% endif %}>
+{% else %}
+<span class="{{ iconClass }}"{% if ariaLabel is defined %} aria-label="{{ ariaLabel|escape('html') }}"{% endif %}{% if ariaHidden is defined and ariaHidden %} aria-hidden="true"{% endif %}>
+{% endif %}
+  {% if icon is defined and icon starts with('<svg') %}
+    {{ icon|raw }}
+  {% elseif icon is defined %}
+    {{ icon|escape('html') }}
+  {% endif %}
+{% if asLink %}</a>{% else %}</span>{% endif %}
