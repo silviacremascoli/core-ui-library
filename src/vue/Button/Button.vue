@@ -10,17 +10,23 @@
     :tabindex="linkTabindex"
     @click="onClick"
   >
-    <span v-if="$slots.iconLeft" class="cui-btn__icon"><slot name="iconLeft" /></span>
-    <span v-else-if="iconLeft" class="cui-btn__icon">
-      <span v-if="iconLeftMarkup" v-html="iconLeftMarkup" />
-      <span v-else>{{ iconLeft }}</span>
-    </span>
+    <Icon
+      v-if="iconLeft && !$slots.iconLeft"
+      :icon="iconLeft"
+      :size="iconSize"
+      ariaHidden
+      class="cui-btn--icon"
+    />
+    <span v-if="$slots.iconLeft" class="cui-btn--icon"><slot name="iconLeft" /></span>
     <span v-if="!iconOnly"><slot>{{ label }}</slot></span>
-    <span v-if="$slots.iconRight" class="cui-btn__icon"><slot name="iconRight" /></span>
-    <span v-else-if="iconRight" class="cui-btn__icon">
-      <span v-if="iconRightMarkup" v-html="iconRightMarkup" />
-      <span v-else>{{ iconRight }}</span>
-    </span>
+    <Icon
+      v-if="iconRight && !$slots.iconRight"
+      :icon="iconRight"
+      :size="iconSize"
+      ariaHidden
+      class="cui-btn--icon"
+    />
+    <span v-if="$slots.iconRight" class="cui-btn--icon"><slot name="iconRight" /></span>
   </a>
   <button
     v-else
@@ -32,24 +38,38 @@
     :aria-busy="busyState"
     @click="onClick"
   >
-    <span v-if="$slots.iconLeft" class="cui-btn__icon"><slot name="iconLeft" /></span>
-    <span v-else-if="iconLeft" class="cui-btn__icon">
-      <span v-if="iconLeftMarkup" v-html="iconLeftMarkup" />
-      <span v-else>{{ iconLeft }}</span>
-    </span>
+    <Icon
+      v-if="iconLeft && !$slots.iconLeft"
+      :icon="iconLeft"
+      :size="iconSize"
+      ariaHidden
+      class="cui-btn--icon"
+    />
+    <span v-if="$slots.iconLeft" class="cui-btn--icon"><slot name="iconLeft" /></span>
     <span v-if="!iconOnly"><slot>{{ label }}</slot></span>
-    <span v-if="$slots.iconRight" class="cui-btn__icon"><slot name="iconRight" /></span>
-    <span v-else-if="iconRight" class="cui-btn__icon">
-      <span v-if="iconRightMarkup" v-html="iconRightMarkup" />
-      <span v-else>{{ iconRight }}</span>
-    </span>
+    <Icon
+      v-if="iconRight && !$slots.iconRight"
+      :icon="iconRight"
+      :size="iconSize"
+      ariaHidden
+      class="cui-btn--icon"
+    />
+    <span v-if="$slots.iconRight" class="cui-btn--icon"><slot name="iconRight" /></span>
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { ButtonVariant, ButtonShape, ButtonSize, ButtonType } from '../../components/Button/Button.types';
-import { resolveIconMarkup } from '../../components/Icon/Icon.registry';
+import Icon from '../Icon/Icon.vue';
+import type { IconSize, FontAwesomeIconName } from '../../components/Icon/Icon.types';
+
+// Map Button sizes to Icon sizes
+const buttonSizeToIconSize: Record<ButtonSize, IconSize> = {
+  small: 'xs',
+  medium: 'sm',
+  large: 'md',
+};
 
 export default defineComponent({
   name: 'Button',
@@ -72,6 +92,11 @@ export default defineComponent({
       default: 'medium',
       validator: (value: string) => ['small', 'medium', 'large'].includes(value)
     },
+    iconSize: {
+      type: String as PropType<IconSize>,
+      default: undefined,
+      validator: (value: string) => ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].includes(value)
+    },
     href: { type: String, default: undefined },
     iconLeft: { type: String, default: '' },
     iconRight: { type: String, default: '' },
@@ -91,26 +116,23 @@ export default defineComponent({
       return this.disabled || this.loading;
     },
     accessibleLabel(): string | undefined {
-      const label = this.$attrs['aria-label'];
-      return this.ariaLabel || (typeof label === 'string' ? label : undefined) || (this.iconOnly ? this.label : undefined);
+      const label = this.$attrs['aria-label'] as string | undefined;
+      return this.ariaLabel || label || (this.iconOnly ? this.label : undefined);
     },
     busyState(): boolean | 'true' | 'false' | undefined {
-      const value = this.$attrs['aria-busy'];
+      const value = this.$attrs['aria-busy'] as boolean | string | undefined;
       return this.loading ? true : value === true || value === false || value === 'true' || value === 'false' ? value : undefined;
     },
     disabledState(): boolean | 'true' | 'false' | undefined {
-      const value = this.$attrs['aria-disabled'];
+      const value = this.$attrs['aria-disabled'] as boolean | string | undefined;
       return this.unavailable ? true : value === true || value === false || value === 'true' || value === 'false' ? value : undefined;
     },
     linkTabindex(): string | number | undefined {
-      const value = this.$attrs.tabindex ?? this.$attrs.tabIndex;
+      const value = (this.$attrs.tabindex ?? this.$attrs.tabIndex) as string | number | undefined;
       return this.unavailable ? -1 : typeof value === 'string' || typeof value === 'number' ? value : undefined;
     },
-    iconLeftMarkup(): string | undefined {
-      return this.iconLeft ? resolveIconMarkup(this.iconLeft) : undefined;
-    },
-    iconRightMarkup(): string | undefined {
-      return this.iconRight ? resolveIconMarkup(this.iconRight) : undefined;
+    iconSize(): IconSize {
+      return this.iconSize || buttonSizeToIconSize[this.size] || 'md';
     },
     buttonClasses() {
       return {

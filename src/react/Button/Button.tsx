@@ -1,34 +1,48 @@
 import React from 'react';
 import type { ButtonProps } from '../../components/Button/Button.types';
-import { resolveIconMarkup } from '../../components/Icon/Icon.registry';
+import { Icon } from '../Icon/Icon';
+import type { IconSize, FontAwesomeIconName } from '../../components/Icon/Icon.types';
 import '../../components/Button/Button.css';
 
-type CommonProps = Omit<ButtonProps, 'href' | 'onClick' | 'type'>;
+// Map Button sizes to Icon sizes
+const buttonSizeToIconSize: Record<string, IconSize> = {
+  small: 'xs',
+  medium: 'sm',
+  large: 'md',
+};
 
-type ReactButtonProps =
-  | (CommonProps & { href: string; type?: never } &
-      Omit<React.ComponentPropsWithoutRef<'a'>, keyof CommonProps | 'href' | 'type'>)
-  | (CommonProps & { href?: undefined } &
-      Omit<React.ComponentPropsWithoutRef<'button'>, keyof CommonProps | 'href'>);
-
-function renderAdornment(icon: React.ReactNode | string) {
-  if (typeof icon === 'string') {
-    const markup = resolveIconMarkup(icon);
-    if (markup) {
-      return <span className="cui-btn__icon" dangerouslySetInnerHTML={{ __html: markup }} />;
-    }
-  }
-
-  return <span className="cui-btn__icon">{icon}</span>;
+function renderAdornment(icon: FontAwesomeIconName, size: string, iconSize?: IconSize) {
+  return (
+    <Icon 
+      icon={icon} 
+      size={iconSize || buttonSizeToIconSize[size] || 'md'}
+      ariaHidden={true}
+      className="cui-btn--icon"
+    />
+  );
 }
 
-export function Button(props: ReactButtonProps) {
+export function Button(props: ButtonProps) {
   const {
-    label, children, variant = 'primary', shape = 'default',
-    size = 'medium', href, disabled = false, fullWidth = false,
-    loading = false, iconLeft, iconRight, iconOnly = false,
-    ariaLabel, className = '',
-  } = props;
+    label,
+    children,
+    variant = 'primary',
+    shape = 'default',
+    size = 'medium',
+    href,
+    disabled = false,
+    fullWidth = false,
+    loading = false,
+    iconLeft,
+    iconRight,
+    iconOnly = false,
+    ariaLabel,
+    className = '',
+    iconSize,
+    onClick,
+    type = 'button',
+    ...restProps
+  }: ButtonProps & React.HTMLAttributes<HTMLElement> = props as ButtonProps & React.HTMLAttributes<HTMLElement>;
 
   const classNames = [
     'cui-btn',
@@ -47,31 +61,28 @@ export function Button(props: ReactButtonProps) {
   const content = children ?? label;
   const unavailable = disabled || loading;
   const accessibleLabel =
-    ariaLabel || props['aria-label'] || (iconOnly && typeof content === 'string' ? content : undefined);
+    ariaLabel || (restProps as Record<string, unknown>)['aria-label'] as string | undefined || (iconOnly && typeof content === 'string' ? content : undefined);
+
   const buttonContent = (
     <>
-      {iconLeft && renderAdornment(iconLeft)}
+      {iconLeft && renderAdornment(iconLeft, size, iconSize)}
       {!iconOnly && content}
-      {iconRight && renderAdornment(iconRight)}
+      {iconRight && renderAdornment(iconRight, size, iconSize)}
     </>
   );
 
-  if (props.href !== undefined) {
-    const {
-      label, children, variant, shape, size, href, disabled, fullWidth,
-      loading, iconLeft, iconRight, iconOnly, ariaLabel, className,
-      type, onClick, ...anchorProps
-    } = props;
-
+  if (href !== undefined) {
+    const anchorRestProps = restProps as React.HTMLAttributes<HTMLAnchorElement>;
+    
     return (
       <a
-        {...anchorProps}
+        {...anchorRestProps}
         href={unavailable ? undefined : href}
         className={classNames}
         aria-label={accessibleLabel}
-        aria-busy={loading || anchorProps['aria-busy']}
-        aria-disabled={unavailable || anchorProps['aria-disabled']}
-        tabIndex={unavailable ? -1 : anchorProps.tabIndex}
+        aria-busy={loading || anchorRestProps['aria-busy']}
+        aria-disabled={unavailable || anchorRestProps['aria-disabled']}
+        tabIndex={unavailable ? -1 : anchorRestProps.tabIndex}
         onClick={unavailable ? undefined : onClick}
       >
         {buttonContent}
@@ -79,22 +90,16 @@ export function Button(props: ReactButtonProps) {
     );
   }
 
-  const {
-    label: _label, children: _children, variant: _variant, shape: _shape,
-    size: _size, href: _href, disabled: _disabled, fullWidth: _fullWidth,
-    loading: _loading, iconLeft: _iconLeft, iconRight: _iconRight,
-    iconOnly: _iconOnly, ariaLabel: _ariaLabel, className: _className,
-    type = 'button', onClick, ...buttonProps
-  } = props;
-
+  const buttonRestProps = restProps as React.HTMLAttributes<HTMLButtonElement>;
+  
   return (
     <button
-      {...buttonProps}
+      {...buttonRestProps}
       type={type}
       className={classNames}
-      disabled={disabled || loading}
+      disabled={unavailable}
       aria-label={accessibleLabel}
-      aria-busy={loading || buttonProps['aria-busy']}
+      aria-busy={loading || buttonRestProps['aria-busy']}
       onClick={onClick}
     >
       {buttonContent}

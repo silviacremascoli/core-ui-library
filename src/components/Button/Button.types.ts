@@ -5,6 +5,7 @@ export type ButtonVariant = 'primary' | 'danger' | 'outline' | 'ghost';
 export type ButtonShape = 'default' | 'rounded' | 'pill';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
+export type ButtonIconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export interface ButtonProps {
   /** The text label displayed on the button */
@@ -34,11 +35,14 @@ export interface ButtonProps {
   /** Whether the button is in a loading state */
   loading?: boolean;
 
-  /** Registered Font Awesome name or custom icon displayed to the left */
-  iconLeft?: React.ReactNode | string;
+  /** Registered Font Awesome name for icon displayed to the left */
+  iconLeft?: import('../Icon/Icon.types').FontAwesomeIconName;
 
-  /** Registered Font Awesome name or custom icon displayed to the right */
-  iconRight?: React.ReactNode | string;
+  /** Registered Font Awesome name for icon displayed to the right */
+  iconRight?: import('../Icon/Icon.types').FontAwesomeIconName;
+
+  /** Size of the icon (defaults to button size mapping) */
+  iconSize?: ButtonIconSize;
 
   /** Whether the button contains only an icon without text */
   iconOnly?: boolean;
@@ -67,6 +71,7 @@ export interface ButtonArgs {
   loading?: boolean;
   iconLeft?: string;
   iconRight?: string;
+  iconSize?: ButtonIconSize;
   iconOnly?: boolean;
   ariaLabel?: string;
   type?: ButtonType;

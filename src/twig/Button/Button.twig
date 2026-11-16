@@ -33,7 +33,9 @@
     {% endif %}
   {% endfor %}
 >
-  {% if iconLeftTrustedHtml or iconLeft %}<span class="cui-btn__icon">{% if iconLeftTrustedHtml %}{{ iconLeftTrustedHtml|raw }}{% else %}{{ iconLeft|escape('html') }}{% endif %}</span>{% endif %}
+  {% if iconLeftHtml %}{{ iconLeftHtml|raw }}{% endif %}
+  {% if iconLeftTrustedHtml and not iconLeftHtml %}<span class="cui-btn--icon">{% if iconLeftTrustedHtml %}{{ iconLeftTrustedHtml|raw }}{% else %}{{ iconLeft|escape('html') }}{% endif %}</span>{% endif %}
   {% if not iconOnly %}{{ label|default('')|escape('html') }}{% endif %}
-  {% if iconRightTrustedHtml or iconRight %}<span class="cui-btn__icon">{% if iconRightTrustedHtml %}{{ iconRightTrustedHtml|raw }}{% else %}{{ iconRight|escape('html') }}{% endif %}</span>{% endif %}
+  {% if iconRightHtml %}{{ iconRightHtml|raw }}{% endif %}
+  {% if iconRightTrustedHtml and not iconRightHtml %}<span class="cui-btn--icon">{% if iconRightTrustedHtml %}{{ iconRightTrustedHtml|raw }}{% else %}{{ iconRight|escape('html') }}{% endif %}</span>{% endif %}
 {% if href is defined %}</a>{% else %}</button>{% endif %}

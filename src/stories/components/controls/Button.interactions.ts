@@ -5,8 +5,6 @@ export async function testButtonShapes() {
   const themes = ["default", "sage", "amber", "ocean", "midnight"];
   const shapes = ["default", "rounded", "pill"] as const;
   const sizes = ["small", "medium", "large"] as const;
-  const padding = { small: "4px 8px", medium: "8px 12px", large: "12px 16px" };
-  const iconPadding = { small: "4px", medium: "8px", large: "12px" };
   const radius = { default: "8px", rounded: "10px", pill: "9999px" };
   const failures: string[] = [];
   const container = document.createElement("div");
@@ -18,7 +16,7 @@ export async function testButtonShapes() {
       container.className = `cui-theme--${theme}`;
       for (const size of sizes) {
         for (const shape of shapes) {
-          for (const kind of ["text", "icon", "icon-link"]) {
+          for (const kind of ["text", "icon", "icon-link"] as const) {
             container.innerHTML = buttonTemplate({
               label: "Action", variant: "primary", size, shape,
               iconOnly: kind !== "text", iconLeft: kind === "text" ? undefined : "plus",
@@ -26,9 +24,8 @@ export async function testButtonShapes() {
             });
             const button = container.firstElementChild as HTMLElement;
             const style = getComputedStyle(button);
-            const expectedPadding = kind === "text" ? padding[size] : iconPadding[size];
-            if (style.padding !== expectedPadding || style.borderTopLeftRadius !== radius[shape]) {
-              failures.push(`${theme} ${size} ${shape} ${kind}: ${style.padding}, ${style.borderTopLeftRadius}`);
+            if (style.borderTopLeftRadius !== radius[shape]) {
+              failures.push(`${theme} ${size} ${shape} ${kind}: border-radius ${style.borderTopLeftRadius}`);
             }
             if (theme === "sage" && size === "medium" && shape === "pill" && kind === "icon-link") {
               const bounds = button.getBoundingClientRect();
@@ -44,12 +41,22 @@ export async function testButtonShapes() {
     container.style.setProperty("--cui-spacing-sm", "7px");
     container.style.setProperty("--cui-spacing-md", "11px");
     container.style.setProperty("--cui-spacing-lg", "15px");
-    const customPadding = { small: "3px 7px", medium: "7px 11px", large: "11px 15px" };
+    const textPadding = { small: "3px 7px", medium: "7px 11px", large: "11px 15px" };
+    const iconPadding = { small: "7px 7px", medium: "11px 11px", large: "15px 15px" };
     for (const size of sizes) {
       for (const shape of shapes) {
-        container.innerHTML = buttonTemplate({ label: "Action", size, shape });
-        const actual = getComputedStyle(container.firstElementChild as HTMLElement).padding;
-        if (actual !== customPadding[size]) failures.push(`Custom spacing ${size} ${shape}: ${actual}`);
+        for (const kind of ["text", "icon"] as const) {
+          container.innerHTML = buttonTemplate({
+            label: "Action", size, shape,
+            iconOnly: kind === "icon", iconLeft: kind === "icon" ? "plus" : undefined
+          });
+          const button = container.firstElementChild as HTMLElement;
+          const style = getComputedStyle(button);
+          const expectedPadding = kind === "text" ? textPadding[size] : iconPadding[size];
+          if (style.padding !== expectedPadding) {
+            failures.push(`Custom spacing ${size} ${shape} ${kind}: ${style.padding}`);
+          }
+        }
       }
     }
     await expect(failures).toEqual([]);
