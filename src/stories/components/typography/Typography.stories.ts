@@ -108,22 +108,149 @@ export default meta;
 
 type Story = StoryObj<TypographyStoryArgs>;
 
-export const Heading1: Story = { args: { content: 'Heading 1', variant: 'h1' } };
-export const Heading2: Story = { args: { content: 'Heading 2', variant: 'h2' } };
-export const Heading3: Story = { args: { content: 'Heading 3', variant: 'h3' } };
-export const SemanticHeading: Story = { args: { content: 'A second-level heading styled as a first-level heading', variant: 'h1', tag: 'h2' } };
-export const BodyText: Story = { args: { content: 'This is a paragraph of body text using the body1 variant.', variant: 'body1' } };
-export const Subtitle: Story = { args: { content: 'This is a subtitle', variant: 'subtitle1' } };
-export const Caption: Story = { args: { content: 'This is a caption', variant: 'caption' } };
-export const PrimaryColor: Story = { args: { content: 'Primary colored text', color: 'primary' } };
-export const Centered: Story = { args: { content: 'Centered text', align: 'center' } };
-export const BoldText: Story = { args: { content: 'Bold text', weight: 'bold' } };
-export const HeadingFont: Story = { args: { content: 'Text using the theme heading font', fontFamily: 'heading' } };
-export const CustomFont: Story = { args: { content: 'Text using a custom font stack', fontFamily: 'custom', customFontFamily: 'Georgia, serif' } };
+export const Heading1: Story = {
+  args: { content: 'Heading 1', variant: 'h1' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Largest heading (h1 variant). Use for the main title of a page or section. Typically the most prominent text on the page.',
+      },
+    },
+  },
+};
+
+export const Heading2: Story = {
+  args: { content: 'Heading 2', variant: 'h2' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Second-level heading (h2 variant). Use for section titles or major content divisions within a page.',
+      },
+    },
+  },
+};
+
+export const Heading3: Story = {
+  args: { content: 'Heading 3', variant: 'h3' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Third-level heading (h3 variant). Use for subsection titles or to introduce groups of related content.',
+      },
+    },
+  },
+};
+
+export const SemanticHeading: Story = {
+  args: { content: 'A second-level heading styled as a first-level heading', variant: 'h1', tag: 'h2' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Semantic HTML element (h2) with visual styling of h1. Use when you need the visual weight of h1 but the semantic meaning of h2 for proper document structure.',
+      },
+    },
+  },
+};
+
+export const BodyText: Story = {
+  args: { content: 'This is a paragraph of body text using the body1 variant.', variant: 'body1' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Primary body text (body1 variant). The standard text style for paragraphs, descriptions, and general content.',
+      },
+    },
+  },
+};
+
+export const Subtitle: Story = {
+  args: { content: 'This is a subtitle', variant: 'subtitle1' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Subtitle text (subtitle1 variant). Slightly larger than body text but less prominent than headings. Use for section introductions or supporting information.',
+      },
+    },
+  },
+};
+
+export const Caption: Story = {
+  args: { content: 'This is a caption', variant: 'caption' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Caption text for images, figures, or small helper text. The smallest text variant, ideal for annotations and metadata.',
+      },
+    },
+  },
+};
+
+export const PrimaryColor: Story = {
+  args: { content: 'Primary colored text', color: 'primary' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text with primary theme color. Use for important links, call-to-action text, or to draw attention to specific content.',
+      },
+    },
+  },
+};
+
+export const Centered: Story = {
+  args: { content: 'Centered text', align: 'center' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Center-aligned text. Use for headings, captions, or any text that should be visually centered within its container.',
+      },
+    },
+  },
+};
+
+export const BoldText: Story = {
+  args: { content: 'Bold text', weight: 'bold' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Bold text weight. Use for emphasis, keywords, or to highlight important words within a paragraph.',
+      },
+    },
+  },
+};
+
+export const HeadingFont: Story = {
+  args: { content: 'Text using the theme heading font', fontFamily: 'heading' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text using the theme heading font family. Use for headings when you want to differentiate them from body text typography.',
+      },
+    },
+  },
+};
+
+export const CustomFont: Story = {
+  args: { content: 'Text using a custom font stack', fontFamily: 'custom', customFontFamily: 'Georgia, serif' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text with a custom font stack. Enter any valid CSS font-family value to use a font not included in the theme.',
+      },
+    },
+  },
+};
+
 export const Truncated: Story = { 
   args: { 
     content: 'This is a very long text that should be truncated with ellipsis when it overflows its container.', 
     truncate: true,
   },
   decorators: [(story) => `<div style="max-width: 16rem">${story()}</div>`],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text that truncates with an ellipsis when it overflows its container. The full text remains in the DOM for accessibility and copy-paste.',
+      },
+    },
+  },
 };

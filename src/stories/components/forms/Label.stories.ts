@@ -50,12 +50,101 @@ export default meta;
 
 type Story = StoryObj<LabelArgs>;
 
-export const Default: Story = { args: { content: 'Default Label' } };
-export const Small: Story = { args: { content: 'Small Label', size: 'small' } };
-export const Large: Story = { args: { content: 'Large Label', size: 'large' } };
-export const Required: Story = { args: { content: 'Required Field', required: true } };
-export const PrimaryColor: Story = { args: { content: 'Primary Color', color: 'primary' } };
-export const DangerColor: Story = { args: { content: 'Error Label', color: 'danger' } };
-export const Bold: Story = { args: { content: 'Bold Label', weight: 'bold' } };
-export const Disabled: Story = { args: { content: 'Disabled Label', disabled: true } };
-export const VisuallyHidden: Story = { args: { content: 'Screen-reader only', visuallyHidden: true } };
+export const Default: Story = {
+  args: { content: 'Default Label' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default label with medium size, normal weight, and text color. The standard label for most form fields.',
+      },
+    },
+  },
+};
+
+export const Small: Story = {
+  args: { content: 'Small Label', size: 'small' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Small label for compact forms or secondary information. Use when space is limited or for less important field labels.',
+      },
+    },
+  },
+};
+
+export const Large: Story = {
+  args: { content: 'Large Label', size: 'large' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Large label for prominent form sections or important fields that need more visual weight.',
+      },
+    },
+  },
+};
+
+export const Required: Story = {
+  args: { content: 'Required Field', required: true },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Label with a required field indicator (asterisk). Automatically sets aria-required="true" on the associated input and visually indicates the field is mandatory.',
+      },
+    },
+  },
+};
+
+export const PrimaryColor: Story = {
+  args: { content: 'Primary Color', color: 'primary' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Label with primary theme color. Use for important fields, section headers, or to draw attention to specific form elements.',
+      },
+    },
+  },
+};
+
+export const DangerColor: Story = {
+  args: { content: 'Error Label', color: 'danger' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Label with danger color for error states or critical fields. Often used alongside error validation messages.',
+      },
+    },
+  },
+};
+
+export const Bold: Story = {
+  args: { content: 'Bold Label', weight: 'bold' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Label with bold weight for emphasis. Use for section headers, important field names, or when the label needs to stand out.',
+      },
+    },
+  },
+};
+
+export const Disabled: Story = {
+  args: { content: 'Disabled Label', disabled: true },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled label with reduced opacity. Use alongside disabled inputs to indicate the associated field is not currently editable.',
+      },
+    },
+  },
+};
+
+export const VisuallyHidden: Story = {
+  args: { content: 'Screen-reader only', visuallyHidden: true },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Visually hidden label that remains accessible to screen readers. Use for form fields that need an accessible label but where visual display would be redundant or clutter the UI.',
+      },
+    },
+  },
+};
