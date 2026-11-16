@@ -4,7 +4,7 @@
 
 A framework-agnostic component library: each component is implemented once in CSS and TypeScript, then exposed as **React**, **Vue**, and **Twig** — mirroring the multi-framework, CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 environments).
 
-> **Status: work in progress.** **Button**, **Input**, **Label**, and **Typography** are live in the library across React, Vue, and Twig. The remaining components are in local development. See the [Roadmap](#roadmap) for what's coming next.
+> **Status: work in progress.** **Button**, **Input**, **Label**, **Typography**, and **Icon** are live in the library across React, Vue, and Twig. The remaining components are in local development. See the [Roadmap](#roadmap) for what's coming next.
 
 ## Why this project exists
 
@@ -14,18 +14,21 @@ At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3
 - **Tonal theming:** an intentional default palette plus four reusable, app-agnostic themes (`.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, `.cui-theme--midnight`)
 - **Write once, use everywhere:** a single `.css` + `.types.ts` pair per component, wrapped by thin React/Vue/Twig adapters
 - **Accessibility first:** components are built for keyboard navigation, visible focus states, and ARIA semantics (WCAG 2.1 AA target)
-- **Documented by default:** every component ships with interactive Storybook stories and controls
+- **Documented by default:** every component ships with interactive Storybook stories, controls, and **comprehensive usage documentation** for each variant
 
 ## Current components
 
-Currently, **Button**, **Input**, **Label**, and **Typography** are live across all three framework adapters and have Storybook stories:
+Currently, **Button**, **Input**, **Label**, **Typography**, and **Icon** are live across all three framework adapters and have **fully documented Storybook stories** with usage guidance and best practices.
 
 | Component | React | Vue | Twig | Stories | Status | Highlights |
 | --------- | :-----: | :---: | :----: | :-------: | :------: | :--------- |
-| **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings |
-| **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow |
+| **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings, loading & disabled states |
+| **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow, all input types |
 | **Label**  | ✅ | ✅ | ✅ | ✅ | **Live** | Associated form labels, size/weight/color options, required and disabled states, visually hidden accessibility mode |
-| **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Semantic headings and paragraphs, independent visual variants, text styles and truncation |
+| **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Semantic headings (h1-h6), body text variants, subtitles, captions, text alignment, weights, colors, truncation, custom fonts |
+| **Icon** | ✅ | ✅ | ✅ | ✅ | **Live** | 2,100+ Font Awesome Free icons (solid, regular, brands), all sizes (xs-2xl), all colors, link support, accessibility features. Regular icons use `-regular` suffix (e.g., `envelope-regular`) |
+
+*Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
 *Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
@@ -105,7 +108,7 @@ Import the adapter for your framework and the shared stylesheet once in your app
 The build includes TypeScript declarations for the root and framework entry points, as well as the stylesheet import.
 
 ```tsx
-import { Button, Input, Label, Typography } from "core-ui-library/react";
+import { Button, Icon, Input, Label, Typography } from "core-ui-library/react";
 import "core-ui-library/styles";
 
 export function ContactForm() {
@@ -113,7 +116,9 @@ export function ContactForm() {
     <div className="cui-theme--default">
       <Typography variant="h1">Contact us</Typography>
       <Typography>Send us a message.</Typography>
-      <Button variant="primary" shape="rounded">Send message</Button>
+      <Button variant="primary" shape="rounded">
+        <Icon icon="plus" ariaLabel="Add" /> Send message
+      </Button>
       <Label htmlFor="email">Email</Label>
       <Input id="email" type="email" shape="pill" />
     </div>
@@ -137,32 +142,51 @@ Button padding depends on size, not shape. Icon-only buttons use equal padding o
 
 Twig accepts plain text through `content` and escapes it as HTML. Twig also accepts `id`, `lang`, `dir`, `ariaLabel`, and `ariaDescribedby`; React and Vue pass standard HTML and ARIA attributes to the element.
 
-Heading variants `h1` through `h6` render matching headings, `body1`, `body2`, `subtitle1`, and `subtitle2` render paragraphs, and `caption` and `overline` render spans. Use `tag` to choose a different semantic element without changing the visual `variant`, for example `<Typography variant="h1" tag="h2">Section</Typography>`. Choose heading levels according to the surrounding document, and use an inline tag when nesting text inside a paragraph. Available tags are `h1`-`h6`, `p`, `span`, `div`, `blockquote`, `small`, `strong`, and `em`.
+- Heading variants `h1` through `h6` render matching semantic headings, while `subtitle1`, `subtitle2`, `body1`, `body2` render paragraphs, and `caption` and `overline` render spans.
+- Use `tag` to choose a different semantic element without changing the visual `variant`, for example `<Typography variant="h1" tag="h2">Section</Typography>`.
+- Choose heading levels according to the document structure, and use an inline tag when nesting text inside a paragraph. Available tags are `h1`-`h6`, `p`, `span`, `div`, `blockquote`, `small`, `strong`, and `em`.
+- Use `align` for text alignment, `weight` for font weight, and `color` for theme-based text colors.
+- Use `noWrap` to prevent line breaks or `truncate` to display an ellipsis for overflow text. Truncation requires a constrained width and keeps the full text in the DOM, but hides overflow visually; avoid it when users need to read the entire text without another way to reveal it.
+- Check color contrast against the actual background, especially for `inverse` and custom themes; color alone should not convey meaning.
 
-Use `align`, `weight`, and `color` for text styling, and `noWrap` or `truncate` when needed. Truncation requires a constrained width and keeps the full text in the DOM, but hides overflow visually; avoid it when users need to read the entire text without another way to reveal it. Check color contrast against the actual background, especially for `inverse` and custom themes; color alone should not convey meaning.
+**Custom Fonts:** Use `fontFamily` to select between the theme's text and heading font families, or choose "Custom" to provide your own CSS `font-family` stack via `customFontFamily`.
 
 #### Font family
 
 Poppins is the default `--cui-font-family` for library components across all themes. The shared stylesheet loads weights 400, 500, 600, and 700 from Google Fonts, with system fonts as fallbacks if the request is blocked or unavailable. Projects can override the token themselves. The library does not globally restyle host-page paragraphs: to use the same font for ordinary page text, apply `font-family: var(--cui-font-family)` to the application's body or container after importing the stylesheet.
 
+### Icons
+
+The Icon component renders icons from the Font Awesome registry with full theming support. The library now includes **all FontAwesome Free icons** (~2,100+ icons across solid, regular, and brand styles).
+
+```tsx
+<Icon icon="github" size="lg" color="primary" ariaLabel="GitHub" />
+<Icon icon="envelope-regular" size="md" ariaLabel="Message" />
+<Icon icon="plus" asLink href="/add" ariaLabel="Add item" />
+```
+
+**Accessibility:** The Icon component includes `ariaLabel` for screen readers, `ariaHidden` for decorative icons, and automatically adds `role="img"` for icon-only links. Font Awesome icons include `aria-hidden="true"` and `focusable="false"` attributes.
+
+**Security:** ⚠️ Icon names are validated against the registry. Only registered Font Awesome icon names are accepted.
+
 ### Font Awesome Icons
 
-Components can use a curated Font Awesome registry defined in [`src/components/Icon/Icon.registry.ts`](src/components/Icon/Icon.registry.ts). Pass the registered name without the `fa-` prefix. For example, `iconLeft="plus"` renders the solid plus icon, while `iconLeft="github"` renders the GitHub brand icon.
+Components can use any icon from the **complete FontAwesome Free** catalog defined in [`src/components/Icon/Icon.registry.ts`](src/components/Icon/Icon.registry.ts). Pass the registered name without the `fa-` prefix. For example, `icon="plus"` renders the solid plus icon, `icon="github"` renders the GitHub brand icon, and `icon="heart-regular"` renders the outline heart icon.
 
 ```tsx
 <Button iconLeft="plus">Add item</Button>
 <Button href="https://example.com/profile" iconLeft="github" iconOnly ariaLabel="Visit GitHub profile" />
+<Button iconLeft="heart-regular" variant="ghost">Like</Button>
 ```
 
-The registry currently includes these names:
+**Icon Styles:**
+- **Solid icons:** Default style, no suffix (e.g., `plus`, `check`, `xmark`)
+- **Regular icons:** Outline style with `-regular` suffix (e.g., `heart-regular`, `envelope-regular`, `user-regular`)
+- **Brand icons:** Unique brand logos (e.g., `github`, `twitter`, `facebook`)
 
-- **Solid:** `certificate`, `chevron-down`, `code`, `code-branch`, `cubes-stacked`, `envelope`, `file`, `gear`, `keyboard`, `laptop-code`, `leaf`, `link`, `pencil`, `phone`, `plus`, `rocket`, `terminal`, `trash-can`, `truck-field`, `wifi`, `xmark`
-- **Regular:** `envelope-regular`, `hand-point-up`
-- **Brands:** `aws`, `bootstrap`, `confluence`, `css3-alt`, `figma`, `github`, `gitlab`, `google`, `html5`, `jira`, `linkedin`, `react`, `sass`, `square-js`, `storybook`, `typescript`, `typo3`, `vuejs`, `windows`, `youtube`
+The registry automatically imports all icons from `@fortawesome/free-solid-svg-icons`, `@fortawesome/free-regular-svg-icons`, and `@fortawesome/free-brands-svg-icons`. Regular icons are given the `-regular` suffix to avoid naming conflicts with solid variants. The `FontAwesomeIconName` type is inferred from the registry, so it always stays in sync.
 
-To register another icon, import its definition from the matching installed Font Awesome package and add a name-to-definition entry to `fontAwesomeIcons` in `Icon.registry.ts`. For example, import `faCircleUser` from `@fortawesome/free-solid-svg-icons` and add `'circle-user': faCircleUser`. Add the new name to this list and add or update a Storybook example. The `FontAwesomeIconName` type is inferred from the registry, so it updates automatically.
-
-Only icons in this registry resolve by name. Button also supports plain text icons and trusted custom SVG markup; React and Vue consumers may pass their own icon nodes. Raw SVG markup is not sanitized, so never pass untrusted input. In the Twig Button adapter, use `iconLeftTrustedHtml` or `iconRightTrustedHtml` for trusted markup; `iconLeft` and `iconRight` accept registry names or plain text and escape unrecognized markup. For icon-only buttons or links, provide an accessible `ariaLabel` describing the action or destination.
+Only registered icon names resolve in the Icon component and Storybook controls. For icon-only buttons or links, always provide an accessible `ariaLabel` describing the action or destination.
 
 Twig Button accepts `className` and an `attributes` map for `id`, `title`, `target`, `rel`, `download`, `name`, `value`, `form`, `lang`, `dir`, `role`, `tabindex`, and `aria-*` or `data-*` attributes. Attribute values must be strings or numbers. Component-controlled attributes such as `href`, `type`, and disabled states cannot be overridden through this map. Supply only trusted, validated URLs for `href`.
 
@@ -175,13 +199,14 @@ src/
 │   └── themes.css           # Default and named theme definitions
 ├── components/              # Framework-agnostic core: CSS + types
 │   ├── Button/  (Button.css, Button.types.ts)
+│   ├── Icon/    (Icon.css, Icon.types.ts, Icon.registry.ts)
 │   ├── Input/   (Input.css, Input.types.ts)
 │   ├── Label/   (Label.css, Label.types.ts)
 │   └── Typography/ (Typography.css, Typography.types.ts)
 ├── react/                  # React adapters + exports
 ├── vue/                    # Vue adapters + exports
 ├── twig/                   # Twig templates + exports
-├── stories/components/     # Storybook stories (controls/, forms/)
+├── stories/components/     # Storybook stories (controls/, display/, forms/)
 └── index.ts                # Library entry point (imports global.css)
 ```
 
@@ -362,9 +387,9 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [ ] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live), Typography (✅ live)
+- [x] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live), Typography (✅ live), Icon (✅ live)
 - [ ] **Phase 2 — Forms:** Select, Checkbox, Radio, Textarea, Form (in development)
-- [ ] **Phase 3 — Media:** Image, Icon, Video (in development)
+- [ ] **Phase 3 — Media:** Image, Video (in development)
 - [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
 
 - **Ongoing — Integration:** use and expand the library in my own projects (starting with my portfolio site)
