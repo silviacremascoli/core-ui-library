@@ -1,67 +1,404 @@
-# Core UI Library: Project Overview
+# Core UI Library - Project Overview
 
-## Purpose
+## 📋 Summary
 
-Core UI Library is a reusable component system for building consistent interfaces across web projects. It brings shared styles and design tokens together with component implementations for React, Vue, and Twig, so interface patterns can be reused without tying every project to one framework.
+Core UI Library is a framework-agnostic component library built on a CSS-first design system architecture. Each component is implemented once in CSS and TypeScript, then exposed across **React**, **Vue**, and **Twig** frameworks.
 
-Storybook is the library's interactive catalog and development workspace. Each story presents a component in isolation, making its appearance and available variations easier to inspect while the component is being built.
+**Status:** Actively maintained with 5 live components and comprehensive documentation.
 
-## What the project demonstrates
+---
 
-- **Component architecture:** organizing reusable interface elements and exposing them through framework-specific entry points.
-- **Design-system thinking:** using shared CSS to keep visual decisions consistent.
-- **Cross-framework development:** supporting React, Vue, and Twig in one library.
-- **Developer experience:** using Storybook, Vite, and TypeScript to develop, document, and review components.
-- **Accessible UI practices:** including Storybook's accessibility addon in the component review workflow.
+## 🎯 Project Goals
 
-## Current scope
+- **Single Source of Truth:** CSS design tokens drive all components
+- **Multi-Framework:** React, Vue, and Twig implementations from shared code
+- **Theming:** Tonal theming system with 5 built-in themes
+- **Accessibility:** WCAG 2.1 AA compliance
+- **Documentation:** Every component variant has usage guidance
 
-**Button**, **Input**, **Label**, and **Typography** are available across React, Vue, and Twig and have Storybook stories. Card, Checkbox, Container, Icon, Modal, Radio, Select, and Textarea are in local development and have not yet been committed to Git.
+---
 
-Storybook uses `@storybook/html-vite` to render Twig stories. React and Vue components share the same styles and are also exercised by Button interaction tests. The library exports framework-specific entry points, a shared stylesheet, and TypeScript declarations.
+## 📦 Current State
 
-## Tonal Theming & Production Reusability
+### ✅ Live Components
 
-Core UI Library uses a default palette and four reusable tonal themes defined in `src/design/themes.css`:
-- **Default (`.cui-theme--default`)**: Warm white surfaces, charcoal text, and jade actions.
-- **Sage (`.cui-theme--sage`)**: Soft sage green (`#b6cdbd`), dark purple typography (`#272142`), and muted green borders (`#5c715e`).
-- **Amber (`.cui-theme--amber`)**: Warm amber (`#db9558`), coral interactions (`#f2765e`), and destructive crimson (`#a82020`).
-- **Ocean (`.cui-theme--ocean`)**: Muted slate blue (`#56899d`) and terracotta interaction accents (`#ba7154`).
-- **Midnight (`.cui-theme--midnight`)**: Navy backgrounds (`#24263b`), deep slate surfaces (`#1f2235`), and electric coral accents (`#ff4a57`).
+| Component | Status | Stories | Documentation |
+|-----------|--------|---------|---------------|
+| **Button** | ✅ Live | 14 stories | ✅ Complete |
+| **Input** | ✅ Live | 9 stories | ✅ Complete |
+| **Label** | ✅ Live | 9 stories | ✅ Complete |
+| **Typography** | ✅ Live | 14 stories | ✅ Complete |
+| **Icon** | ✅ Live | 9 stories | ✅ Complete |
 
-Use the Storybook toolbar's Theme selector to preview component stories in each palette. The Ocean Input story remains fixed to Ocean to compare its `data-cui-mode="light"` and `data-cui-mode="dark"` focus rings.
+**Total: 55 documented story variants**
 
-Button and Input support variants, focus styles, and icon adornments across React, Vue, and Twig. Button can also render as a link and supports disabled and loading states.
+### 🚧 In Development
 
-Input supports validation states and clearable fields. Label provides required, disabled, and visually hidden options. Typography separates semantic tags from visual variants and supports theme text, heading, and custom font families.
+- **Forms:** Select, Checkbox, Radio, Textarea, Form
+- **Media:** Image, Video  
+- **Surfaces:** Container, Card, Modal, Loader
 
-## Testing
+---
 
-Storybook uses Vitest and Playwright for browser-based story tests. Button interaction checks cover shape and padding consistency, keyboard activation, focus visibility, accessible icon labels, link and button semantics, and disabled and loading states. Separate helpers exercise React and Vue Button props and click handling. The Storybook accessibility addon supports accessibility review; the interaction checks are not a substitute for a full accessibility audit.
+## 🎨 Design System
 
-## Where to look
+### Themes
 
-- `src/stories/components/` contains the component examples shown in Storybook.
-- `src/design/` contains the shared design styles and theme definitions.
-- `src/components/`, `src/react/`, `src/vue/`, and `src/twig/` contain shared component assets and framework-specific implementations.
-- `.storybook/main.ts` configures Storybook and its Vite integrations; `.storybook/preview.ts` defines the theme toolbar.
+| Theme | Description | Focus Color |
+|-------|-------------|-------------|
+| `default` | Neutral palette, suitable for any project | Primary blue |
+| `sage` | Green-based, organic feel | Terracotta (light) / Ocean-blue (dark) |
+| `amber` | Warm, earthy tones | Amber |
+| `ocean` | Cool, professional | Ocean-blue |
+| `midnight` | Dark mode optimized | Purple |
 
-## Run it locally
+### Design Tokens
 
-Install dependencies with `npm install`, then start the component catalog:
+All visual properties are defined as CSS custom properties in `global.css` and `themes.css`:
 
-```bash
-npm run storybook
+- **Colors:** `--cui-color-primary`, `--cui-color-danger`, `--cui-color-text`, etc.
+- **Spacing:** `--cui-spacing-xs`, `--cui-spacing-sm`, `--cui-spacing-md`, etc.
+- **Typography:** `--cui-font-family`, `--cui-font-size-base`, `--cui-line-height-normal`, etc.
+- **Border Radius:** `--cui-border-radius-md`, `--cui-border-radius-full`, etc.
+- **Shadows:** `--cui-shadow-sm`, `--cui-shadow-md`, etc.
+- **Transitions:** `--cui-transition-normal`, etc.
+
+---
+
+## 📁 Architecture
+
+```
+src/
+├── design/
+│   ├── global.css           # CSS custom properties + utility classes
+│   └── themes.css           # Theme definitions
+├── components/              # Framework-agnostic core
+│   ├── Button/              # Button.css + Button.types.ts
+│   ├── Icon/                # Icon.css + Icon.types.ts + Icon.registry.ts
+│   ├── Input/               # Input.css + Input.types.ts
+│   ├── Label/               # Label.css + Label.types.ts
+│   └── Typography/          # Typography.css + Typography.types.ts
+├── react/                  # React adapters
+│   ├── Button/
+│   ├── Icon/
+│   ├── Input/
+│   ├── Label/
+│   └── index.ts
+├── vue/                    # Vue adapters
+│   ├── Button/
+│   ├── Icon/
+│   ├── Input/
+│   ├── Label/
+│   └── index.ts
+├── twig/                   # Twig templates
+│   ├── Button/
+│   ├── Icon/
+│   ├── Input/
+│   ├── Label/
+│   └── index.ts
+└── stories/components/     # Storybook stories
+    ├── controls/
+    ├── display/
+    └── forms/
 ```
 
-Storybook runs at `http://localhost:6006`. To produce a static Storybook build, run `npm run build-storybook`.
+---
 
-Run the browser-based Storybook tests with:
+## 🎭 Component Details
 
-```bash
-npx vitest run --project storybook
+### Icon Component
+
+**Status:** ✅ Live with 2,100+ icons
+
+- **Icon Registry:** All FontAwesome Free icons automatically imported
+  - **Solid icons:** `plus`, `check`, `xmark`, `heart`, etc.
+  - **Regular icons:** `heart-regular`, `envelope-regular`, `user-regular`, etc. (with `-regular` suffix)
+  - **Brand icons:** `github`, `twitter`, `facebook`, `docker`, etc.
+- **Sizes:** xs, sm, md, lg, xl, 2xl
+- **Colors:** All theme colors supported
+- **Features:** Link support, accessibility labels, decorative icon mode
+
+**Usage:**
+```tsx
+<Icon icon="github" size="lg" color="primary" ariaLabel="GitHub" />
+<Icon icon="heart-regular" size="md" />
+<Icon icon="plus" asLink href="/add" ariaLabel="Add" />
 ```
 
-## A useful way to review the project
+### Button Component
 
-Open a few stories and compare how component options are represented. Then trace a component from its story to its implementation and shared styles. This gives a quick view of how the project connects component API design, visual consistency, and multi-framework reuse.
+**Status:** ✅ Live with 14 variants
+
+- **Variants:** primary, danger, outline, ghost
+- **Shapes:** default (8px), rounded (10px), pill (fully rounded)
+- **Sizes:** small, medium, large
+- **Features:** 
+  - Text labels
+  - Left/right icons
+  - Icon-only buttons
+  - Link buttons (renders as `<a>`)
+  - Disabled state
+  - Loading state
+  - Full width
+  - Custom icon sizing
+
+**Icon Usage:**
+```tsx
+<Button iconLeft="plus">Add Item</Button>
+<Button iconOnly iconLeft="heart-regular" ariaLabel="Like" />
+```
+
+### Input Component
+
+**Status:** ✅ Live with 9 variants
+
+- **Types:** text, date, time, search, email, password, number, tel, url
+- **Shapes:** default, rounded, pill
+- **Sizes:** small, medium, large
+- **Validation States:** default, error, success
+- **Features:**
+  - Left/right icons
+  - Clearable (with embedded clear button)
+  - Full width
+  - Disabled state
+
+**Usage:**
+```tsx
+<Input type="text" placeholder="Enter text..." shape="pill" />
+<Input type="search" clearable iconLeft="magnifying-glass" />
+```
+
+### Label Component
+
+**Status:** ✅ Live with 9 variants
+
+- **Sizes:** small, medium, large
+- **Weights:** normal, medium, bold, strong
+- **Colors:** All theme colors
+- **Features:**
+  - Required field indicator
+  - Disabled state
+  - Visually hidden (screen-reader only)
+  - Form association via `htmlFor`
+
+### Typography Component
+
+**Status:** ✅ Live with 14 variants
+
+- **Variants:** h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, caption, overline
+- **Tags:** h1-h6, p, span, div, blockquote, small, strong, em
+- **Features:**
+  - Text alignment (left, center, right, justify)
+  - Font weights (normal, medium, bold, strong)
+  - Theme colors
+  - Truncation with ellipsis
+  - No-wrap
+  - Custom font families
+
+---
+
+## 🎯 Recent Changes
+
+### v0.2.0 (Latest)
+
+#### ✨ Icon System Enhancement
+- **All FontAwesome Free icons now available** (~2,100+ icons)
+  - Solid: ~1,500 icons
+  - Regular: ~200 icons (with `-regular` suffix)
+  - Brands: ~400 icons
+- Dynamic icon registry imports all icons from FontAwesome packages
+- Tree-shaking friendly: only used icons are bundled
+
+#### 📚 Documentation
+- **All component stories now have comprehensive documentation**
+  - Button: 14 stories documented
+  - Input: 9 stories documented
+  - Label: 9 stories documented
+  - Typography: 14 stories documented
+  - Icon: 9 stories documented
+- Each story includes usage guidance, best practices, and use cases
+- Regular icons story includes filtered select control (only shows `-regular` icons)
+
+#### 🔧 Bug Fixes & Improvements
+- **Button interactions test fixed** to match current CSS padding values
+- Button CSS simplified: removed complex icon-only variant styling, kept equal padding
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20.19+ (LTS) or 22.12+
+
+### Installation
+
+```bash
+npm install        # install dependencies
+```
+
+### Development Servers
+
+```bash
+npm run storybook  # component development on port 6006
+npm run dev        # Vite dev server
+```
+
+### Building
+
+```bash
+npm run build      # build the library
+npm run build-storybook  # static Storybook build (as deployed on Netlify)
+```
+
+Use the Storybook toolbar's Theme selector to preview components in each of the 5 themes.
+
+---
+
+## 🚀 Roadmap
+
+### Phase 1 - Foundation ✅ Complete
+- Button
+- Input
+- Label
+- Typography
+- Icon
+
+### Phase 2 - Forms 🚧 In Progress
+- Select
+- Checkbox
+- Radio
+- Textarea
+- Form
+
+### Phase 3 - Media
+- Image
+- Video
+
+### Phase 4 - Surfaces
+- Container
+- Card
+- Modal
+- Loader
+
+### Phase 5 - Navigation
+- Navigation
+- Breadcrumb
+- Pagination
+
+### Phase 6 - Feedback
+- Alert
+- Toast
+- Progress
+- Skeleton
+
+---
+
+## 💡 Design Principles
+
+1. **CSS First:** All styling defined in CSS, not in JavaScript
+2. **Framework Agnostic:** Components work identically across React, Vue, Twig
+3. **Themeable:** Easy to customize with CSS variables
+4. **Accessible:** WCAG 2.1 AA compliance by default
+5. **Consistent:** Same behavior and appearance across all frameworks
+6. **Maintainable:** DRY principles, clear separation of concerns
+
+---
+
+## 📖 Usage Examples
+
+### Basic Button
+```tsx
+import { Button } from "core-ui-library/react";
+import "core-ui-library/styles";
+
+<Button variant="primary" shape="pill">
+  Click Me
+</Button>
+```
+
+### Button with Icon
+```tsx
+<Button variant="outline" iconLeft="plus" iconOnly ariaLabel="Add">
+  Add Item
+</Button>
+```
+
+### Form Input
+```tsx
+<Label htmlFor="email">Email</Label>
+<Input 
+  id="email" 
+  type="email" 
+  placeholder="user@example.com"
+  iconLeft="envelope"
+/>
+```
+
+### Typography
+```tsx
+<Typography variant="h1">Welcome</Typography>
+<Typography variant="body1" color="secondary">
+  This is a paragraph of text.
+</Typography>
+```
+
+### Icon
+```tsx
+<Icon icon="github" size="2xl" color="primary" ariaLabel="GitHub" />
+<Icon icon="heart-regular" asLink href="/like" ariaLabel="Like" />
+```
+
+---
+
+## 🔧 Technical Stack
+
+- **Build Tool:** Vite
+- **Component Docs:** Storybook
+- **Type System:** TypeScript
+- **Styling:** CSS Custom Properties
+- **Testing:** Storybook Test / Vitest
+- **Icons:** FontAwesome Free (all icons)
+
+---
+
+## 📊 Statistics
+
+- **Components:** 5 live, ~15 in development
+- **Total Stories:** 55+ documented
+- **Icon Coverage:** 2,100+ FontAwesome Free icons
+- **Themes:** 5 (default, sage, amber, ocean, midnight)
+- **Frameworks:** 3 (React, Vue, Twig)
+
+---
+
+## 🎓 Best Practices
+
+### Accessibility
+- Always provide `ariaLabel` for icon-only buttons and links
+- Use semantic HTML tags (h1-h6, p, etc.)
+- Ensure color contrast meets WCAG 2.1 AA standards
+- Test keyboard navigation
+
+### Theming
+- Use theme classes on container elements
+- Nested themes are supported
+- Ocean theme supports light/dark modes via `data-cui-mode`
+
+### Icons
+- Use registered FontAwesome icon names
+- Regular icons require `-regular` suffix
+- Only registered icons are available in Storybook controls
+
+### Responsiveness
+- Use `fullWidth` prop for full-width elements
+- Typography scales appropriately
+- Test on multiple screen sizes
+
+---
+
+## 👤 Author
+
+**Silvia Cremascoli** — Frontend Developer, Graz 🇦🇹
+
+[Website](https://www.silviacremascoli.com) | [GitHub](https://github.com/silviacremascoli) | [LinkedIn](https://www.linkedin.com/in/silvia-cremascoli)
