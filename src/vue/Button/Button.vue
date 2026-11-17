@@ -62,7 +62,7 @@
 import { defineComponent, PropType } from 'vue';
 import { ButtonVariant, ButtonShape, ButtonSize, ButtonType } from '../../components/Button/Button.types';
 import Icon from '../Icon/Icon.vue';
-import type { IconSize, FontAwesomeIconName } from '../../components/Icon/Icon.types';
+import type { IconSize } from '../../components/Icon/Icon.types';
 
 // Map Button sizes to Icon sizes
 const buttonSizeToIconSize: Record<ButtonSize, IconSize> = {
@@ -73,6 +73,7 @@ const buttonSizeToIconSize: Record<ButtonSize, IconSize> = {
 
 export default defineComponent({
   name: 'Button',
+  components: { Icon },
   inheritAttrs: false,
   emits: ['click'],
   props: {
