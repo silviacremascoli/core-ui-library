@@ -16,7 +16,7 @@ const meta: Meta<IconArgs> = {
     },
     size: { 
       control: 'select', 
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
       description: 'Icon size'
     },
     color: { 
@@ -138,6 +138,20 @@ export const ExtraLarge: Story = {
     docs: {
       description: {
         story: 'Extra large icon size (48px). Best for prominent display, hero sections, empty states, or as standalone focal points.',
+      },
+    },
+  },
+};
+
+export const ThreeXl: Story = {
+  args: {
+    icon: 'star',
+    size: '3xl'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '3XL icon size (64px). Best for hero sections, featured actions, or when maximum visual impact is needed.',
       },
     },
   },

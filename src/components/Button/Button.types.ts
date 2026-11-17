@@ -5,7 +5,7 @@ export type ButtonVariant = 'primary' | 'danger' | 'outline' | 'ghost';
 export type ButtonShape = 'default' | 'rounded' | 'pill';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
-export type ButtonIconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ButtonIconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 
 export interface ButtonProps {
   /** The text label displayed on the button */

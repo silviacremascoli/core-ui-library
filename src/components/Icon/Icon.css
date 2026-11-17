@@ -37,6 +37,7 @@
 .cui-icon--lg { font-size: var(--cui-font-size-lg); }
 .cui-icon--xl { font-size: var(--cui-font-size-xl); }
 .cui-icon--2xl { font-size: var(--cui-font-size-2xl); }
+.cui-icon--3xl { font-size: var(--cui-font-size-3xl); }
 
 /* ===== COLORS ===== */
 .cui-icon--color-primary { color: var(--cui-color-primary-text, var(--cui-color-primary)); }

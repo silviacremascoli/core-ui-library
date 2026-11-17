@@ -65,7 +65,7 @@ const meta: Meta<ButtonArgs> = {
     },
     iconSize: {
       control: "select",
-      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
+      options: ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"],
       description: "Size of the icon, independent of button size",
     },
   },

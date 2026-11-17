@@ -1,5 +1,4 @@
 {# Icon Component - Twig Template #}
-{# Note: SVG strings must be trusted. Never pass untrusted user input. #}
 {% set iconClass = 'cui-icon cui-icon--' ~ (size|default('md')) %}
 {% if color is defined %}
   {% set iconClass = iconClass ~ ' cui-icon--color-' ~ color %}

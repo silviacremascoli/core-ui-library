@@ -1,7 +1,7 @@
 // Icon Component - Shared TypeScript Types
 // Used by all framework implementations (React, Vue, Twig)
 
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 export type IconColor = 
   | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' 
   | 'text' | 'text-light' | 'inverse' | 'current';
