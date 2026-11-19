@@ -40,12 +40,12 @@
 .cui-icon--3xl { font-size: var(--cui-font-size-3xl); }
 
 /* ===== COLORS ===== */
-.cui-icon--color-primary { color: var(--cui-color-primary-text, var(--cui-color-primary)); }
-.cui-icon--color-secondary { color: var(--cui-color-secondary-text, var(--cui-color-secondary)); }
-.cui-icon--color-danger { color: var(--cui-color-danger-text, var(--cui-color-danger)); }
-.cui-icon--color-success { color: var(--cui-color-success-text, var(--cui-color-success)); }
-.cui-icon--color-warning { color: var(--cui-color-warning-text, var(--cui-color-warning)); }
-.cui-icon--color-info { color: var(--cui-color-info-text, var(--cui-color-info)); }
+.cui-icon--color-primary { color: var(--cui-color-primary); }
+.cui-icon--color-secondary { color: var(--cui-color-secondary); }
+.cui-icon--color-danger { color: var(--cui-color-danger); }
+.cui-icon--color-success { color: var(--cui-color-success); }
+.cui-icon--color-warning { color: var(--cui-color-warning); }
+.cui-icon--color-info { color: var(--cui-color-info); }
 .cui-icon--color-text { color: var(--cui-color-text); }
 .cui-icon--color-text-light { color: var(--cui-color-text-light); }
 .cui-icon--color-inverse { color: var(--cui-color-text-inverse); }
