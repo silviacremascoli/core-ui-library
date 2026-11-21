@@ -21,24 +21,31 @@
 }
 
 /* Base Input */
-.cui-input {
-  padding: var(--cui-spacing-sm) var(--cui-spacing-md);
-  border: 1px solid var(--cui-color-border);
+/* :where() keeps this a zero-specificity default so consumer classes always win.
+   Every visual value is driven by a custom property, so any theme or project
+   can restyle the input without touching this file or using a CSS framework. */
+:where(.cui-input) {
+  display: block;
+  width: 100%;
+  padding: var(--cui-input-padding, var(--cui-spacing-sm) var(--cui-spacing-md));
+  border: var(--cui-input-border-width, 1px) solid var(--cui-input-border-color, var(--cui-color-border));
   border-radius: var(--cui-input-border-radius, var(--cui-border-radius-md));
   font-size: var(--cui-font-size-base);
   font-family: var(--cui-font-family);
+  font-weight: var(--cui-font-weight-normal);
   line-height: var(--cui-line-height-normal);
-  transition: var(--cui-transition-normal);
+  color: var(--cui-input-color, var(--cui-color-text));
+  background-color: var(--cui-input-background, var(--cui-color-background));
   box-sizing: border-box;
-  background-color: var(--cui-color-background);
-  color: var(--cui-color-text);
+  transition: var(--cui-transition-normal);
 }
 
 .cui-input:focus-visible,
 .cui-input:focus {
   outline: none;
-  border-color: var(--cui-focus-ring-color);
-  box-shadow: var(--cui-control-focus-ring-shadow, var(--cui-focus-ring-shadow));
+  border-color: var(--cui-input-focus-border-color, var(--cui-focus-ring-color));
+  border-width: var(--cui-input-focus-border-width, 1px);
+  box-shadow: var(--cui-input-focus-box-shadow, var(--cui-control-focus-ring-shadow, var(--cui-focus-ring-shadow)));
 }
 
 .cui-input:disabled {
