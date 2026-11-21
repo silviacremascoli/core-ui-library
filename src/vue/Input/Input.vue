@@ -1,7 +1,7 @@
 <template>
   <div v-if="hasWrapper" :class="wrapperClasses">
-    <span v-if="$slots.iconLeft" class="cui-input__icon-left">
-      <slot name="iconLeft" />
+    <span v-if="$slots.iconLeft || iconLeft" class="cui-input__icon-left">
+      <slot name="iconLeft"><Icon v-if="iconLeft" :icon="iconLeft" :aria-hidden="true" /></slot>
     </span>
     <input
       :type="type"
@@ -25,8 +25,8 @@
     >
       &#x2715;
     </button>
-    <span v-else-if="$slots.iconRight" class="cui-input__icon-right">
-      <slot name="iconRight" />
+    <span v-else-if="$slots.iconRight || iconRight" class="cui-input__icon-right">
+      <slot name="iconRight"><Icon v-if="iconRight" :icon="iconRight" :aria-hidden="true" /></slot>
     </span>
   </div>
   <input
@@ -47,7 +47,9 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import Icon from '../Icon/Icon.vue';
 import { InputType, InputVariant, InputShape, InputSize } from '../../components/Input/Input.types';
+import type { FontAwesomeIconName } from '../../components/Icon/Icon.types';
 
 export default defineComponent({
   name: 'Input',
@@ -80,11 +82,13 @@ export default defineComponent({
     },
     fullWidth: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
+    iconLeft: { type: String as PropType<FontAwesomeIconName>, default: '' },
+    iconRight: { type: String as PropType<FontAwesomeIconName>, default: '' },
     className: { type: String, default: '' }
   },
   computed: {
     hasWrapper(): boolean {
-      return Boolean(this.$slots.iconLeft || this.$slots.iconRight || this.clearable || this.fullWidth);
+      return Boolean(this.iconLeft || this.iconRight || this.$slots.iconLeft || this.$slots.iconRight || this.clearable || this.fullWidth);
     },
     inputClasses(): Record<string, boolean> {
       return {
@@ -94,8 +98,8 @@ export default defineComponent({
         'cui-input--rounded': this.shape === 'rounded',
         'cui-input--pill': this.shape === 'pill',
         'cui-input--full-width': this.fullWidth && !this.hasWrapper,
-        'cui-input--has-icon-left': Boolean(this.$slots.iconLeft),
-        'cui-input--has-icon-right': Boolean(this.$slots.iconRight || this.clearable),
+        'cui-input--has-icon-left': Boolean(this.iconLeft || this.$slots.iconLeft),
+        'cui-input--has-icon-right': Boolean(this.iconRight || this.$slots.iconRight || this.clearable),
         [this.className]: !this.hasWrapper && Boolean(this.className)
       };
     },

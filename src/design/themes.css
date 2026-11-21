@@ -114,7 +114,6 @@
   --cui-input-padding: 0.375rem 0.75rem;
   --cui-input-background: #ffffff;
   --cui-input-border-radius: 0.375rem;
-  --cui-input-focus-border-width: 2px;
   --cui-input-focus-box-shadow: none;
 
   --cui-color-background: #fcf9f4;
@@ -137,7 +136,7 @@
   --cui-focus-ring-width: 2px;
   --cui-focus-ring-offset: 3px;
   --cui-focus-ring-shadow: none;
-  --cui-control-focus-ring-shadow: 0 0 0 3px #272142;
+  --cui-control-focus-ring-shadow: none;
 
   /* Radius */
   --cui-border-radius-md: 8px;

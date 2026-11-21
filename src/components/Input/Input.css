@@ -37,15 +37,19 @@
   color: var(--cui-input-color, var(--cui-color-text));
   background-color: var(--cui-input-background, var(--cui-color-background));
   box-sizing: border-box;
+  /* Explicit outline baseline: without it, "transition: all" animates
+     outline-color from currentcolor (dark text color) on focus, causing a
+     brief black ring before the focus ring color takes over */
+  outline: 0 solid transparent;
   transition: var(--cui-transition-normal);
 }
 
+/* Focus uses outline (not border) so surrounding layout never shifts */
 .cui-input:focus-visible,
 .cui-input:focus {
-  outline: none;
-  border-color: var(--cui-input-focus-border-color, var(--cui-focus-ring-color));
-  border-width: var(--cui-input-focus-border-width, 1px);
-  box-shadow: var(--cui-input-focus-box-shadow, var(--cui-control-focus-ring-shadow, var(--cui-focus-ring-shadow)));
+  outline: var(--cui-input-focus-outline-width, var(--cui-focus-ring-width)) solid var(--cui-input-focus-outline-color, var(--cui-focus-ring-color));
+  outline-offset: var(--cui-input-focus-outline-offset, var(--cui-focus-ring-offset));
+  box-shadow: var(--cui-input-focus-box-shadow, none);
 }
 
 .cui-input:disabled {
@@ -97,8 +101,7 @@
 
 .cui-input--error:focus-visible,
 .cui-input--error:focus {
-  border-color: var(--cui-color-danger-border, var(--cui-color-danger));
-  box-shadow: var(--cui-focus-ring-shadow-error, var(--cui-focus-ring-shadow));
+  outline-color: var(--cui-color-danger-border, var(--cui-color-danger));
 }
 
 .cui-input--success {
@@ -107,8 +110,7 @@
 
 .cui-input--success:focus-visible,
 .cui-input--success:focus {
-  border-color: var(--cui-color-success-border, var(--cui-color-success));
-  box-shadow: var(--cui-focus-ring-shadow-success, var(--cui-focus-ring-shadow));
+  outline-color: var(--cui-color-success-border, var(--cui-color-success));
 }
 
 /* ===== ADORNMENTS & ICONS ===== */

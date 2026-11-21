@@ -1,5 +1,6 @@
 import React from 'react';
 import type { InputProps } from '../../components/Input/Input.types';
+import { Icon } from '../Icon/Icon';
 import '../../components/Input/Input.css';
 
 export function Input({
@@ -81,7 +82,7 @@ export function Input({
 
   return (
     <div className={wrapperClassNames}>
-      {iconLeft && <span className="cui-input__icon-left">{iconLeft}</span>}
+      {iconLeft && <span className="cui-input__icon-left"><Icon icon={iconLeft} ariaHidden /></span>}
       {inputElement}
       {clearable && (
         <button
@@ -93,7 +94,7 @@ export function Input({
           &#x2715;
         </button>
       )}
-      {!clearable && iconRight && <span className="cui-input__icon-right">{iconRight}</span>}
+      {!clearable && iconRight && <span className="cui-input__icon-right"><Icon icon={iconRight} ariaHidden /></span>}
     </div>
   );
 }
