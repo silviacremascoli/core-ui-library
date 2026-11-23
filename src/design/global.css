@@ -4,6 +4,7 @@
 
 :root {
   /* SPACING */
+  --cui-spacing-0: 0px;
   --cui-spacing-2xs: 2px;
   --cui-spacing-xs: 4px;
   --cui-spacing-xs-sm: 6px;
@@ -68,6 +69,7 @@
 .cui-p-xl { padding: var(--cui-spacing-xl); }
 .cui-p-2xl { padding: var(--cui-spacing-2xl); }
 
+.cui-m-0 { margin: var(--cui-spacing-0); }
 .cui-m-xs { margin: var(--cui-spacing-xs); }
 .cui-m-sm { margin: var(--cui-spacing-sm); }
 .cui-m-md { margin: var(--cui-spacing-md); }
@@ -76,6 +78,7 @@
 .cui-m-2xl { margin: var(--cui-spacing-2xl); }
 .cui-m-3xl { margin: var(--cui-spacing-3xl); }
 
+.cui-mt-0 { margin-top: var(--cui-spacing-0); }
 .cui-mt-xs { margin-top: var(--cui-spacing-xs); }
 .cui-mt-sm { margin-top: var(--cui-spacing-sm); }
 .cui-mt-md { margin-top: var(--cui-spacing-md); }
@@ -84,6 +87,7 @@
 .cui-mt-2xl { margin-top: var(--cui-spacing-2xl); }
 .cui-mt-3xl { margin-top: var(--cui-spacing-3xl); }
 
+.cui-mb-0 { margin-bottom: var(--cui-spacing-0); }
 .cui-mb-xs { margin-bottom: var(--cui-spacing-xs); }
 .cui-mb-sm { margin-bottom: var(--cui-spacing-sm); }
 .cui-mb-md { margin-bottom: var(--cui-spacing-md); }
