@@ -82,7 +82,7 @@ export function Input({
 
   return (
     <div className={wrapperClassNames}>
-      {iconLeft && <span className="cui-input__icon-left"><Icon icon={iconLeft} ariaHidden /></span>}
+      {iconLeft && <span className="cui-input--icon-left"><Icon icon={iconLeft} ariaHidden /></span>}
       {inputElement}
       {clearable && (
         <button
@@ -94,7 +94,7 @@ export function Input({
           &#x2715;
         </button>
       )}
-      {!clearable && iconRight && <span className="cui-input__icon-right"><Icon icon={iconRight} ariaHidden /></span>}
+      {!clearable && iconRight && <span className="cui-input--icon-right"><Icon icon={iconRight} ariaHidden /></span>}
     </div>
   );
 }

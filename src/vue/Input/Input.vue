@@ -1,6 +1,6 @@
 <template>
   <div v-if="hasWrapper" :class="wrapperClasses">
-    <span v-if="$slots.iconLeft || iconLeft" class="cui-input__icon-left">
+    <span v-if="$slots.iconLeft || iconLeft" class="cui-input--icon-left">
       <slot name="iconLeft"><Icon v-if="iconLeft" :icon="iconLeft" :aria-hidden="true" /></slot>
     </span>
     <input
@@ -25,7 +25,7 @@
     >
       &#x2715;
     </button>
-    <span v-else-if="$slots.iconRight || iconRight" class="cui-input__icon-right">
+    <span v-else-if="$slots.iconRight || iconRight" class="cui-input--icon-right">
       <slot name="iconRight"><Icon v-if="iconRight" :icon="iconRight" :aria-hidden="true" /></slot>
     </span>
   </div>

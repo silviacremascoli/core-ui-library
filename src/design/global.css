@@ -86,6 +86,12 @@
 .cui-mb-lg { margin-bottom: var(--cui-spacing-lg); }
 .cui-mb-xl { margin-bottom: var(--cui-spacing-xl); }
 
+/* Form utilities */
+/* :where() keeps this a zero-specificity default, so framework utilities always win when both are present */
+:where(.cui-form-group) {
+  margin-bottom: var(--cui-form-group-margin, var(--cui-spacing-lg));
+}
+
 /* Typography utilities */
 .cui-text-xs { font-size: var(--cui-font-size-xs); }
 .cui-text-sm { font-size: var(--cui-font-size-sm); }

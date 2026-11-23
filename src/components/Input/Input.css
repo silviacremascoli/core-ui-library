@@ -21,9 +21,7 @@
 }
 
 /* Base Input */
-/* :where() keeps this a zero-specificity default so consumer classes always win.
-   Every visual value is driven by a custom property, so any theme or project
-   can restyle the input without touching this file or using a CSS framework. */
+/* :where() keeps this a zero-specificity default so consumer classes can always override it. */
 :where(.cui-input) {
   display: block;
   width: 100%;
@@ -37,14 +35,11 @@
   color: var(--cui-input-color, var(--cui-color-text));
   background-color: var(--cui-input-background, var(--cui-color-background));
   box-sizing: border-box;
-  /* Explicit outline baseline: without it, "transition: all" animates
-     outline-color from currentcolor (dark text color) on focus, causing a
-     brief black ring before the focus ring color takes over */
   outline: 0 solid transparent;
   transition: var(--cui-transition-normal);
 }
 
-/* Focus uses outline (not border) so surrounding layout never shifts */
+/* Focus uses outline (not border) to prevent surrounding layout from shifting */
 .cui-input:focus-visible,
 .cui-input:focus {
   outline: var(--cui-input-focus-outline-width, var(--cui-focus-ring-width)) solid var(--cui-input-focus-outline-color, var(--cui-focus-ring-color));
@@ -114,8 +109,8 @@
 }
 
 /* ===== ADORNMENTS & ICONS ===== */
-.cui-input__icon-left,
-.cui-input__icon-right {
+.cui-input--icon-left,
+.cui-input--icon-right {
   position: absolute;
   display: inline-flex;
   align-items: center;
@@ -125,11 +120,11 @@
   line-height: 1;
 }
 
-.cui-input__icon-left {
+.cui-input--icon-left {
   left: var(--cui-spacing-md);
 }
 
-.cui-input__icon-right {
+.cui-input--icon-right {
   right: var(--cui-spacing-md);
 }
 
@@ -141,7 +136,7 @@
   padding-right: var(--cui-input-padding-adornment);
 }
 
-/* Clear button (React Weather App style) */
+/* Button with clear icon */
 .cui-input__clear-btn {
   position: absolute;
   right: var(--cui-spacing-sm);

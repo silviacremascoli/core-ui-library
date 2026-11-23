@@ -10,7 +10,7 @@
 
 {% if hasWrapper %}
 <div class="cui-input-wrapper{% if fullWidth %} cui-input-wrapper--full-width{% endif %}{% if className %} {{ className }}{% endif %}">
-  {% if iconLeft %}<span class="cui-input__icon-left">{{ iconLeft|raw }}</span>{% endif %}
+  {% if iconLeft %}<span class="cui-input--icon-left">{{ iconLeft|raw }}</span>{% endif %}
   <input
     type="{{ type|default('text') }}"
     class="{{ inputClasses }}"
@@ -27,7 +27,7 @@
   {% if clearable %}
     <button type="button" class="cui-input__clear-btn" aria-label="Clear search input">&#x2715;</button>
   {% elseif iconRight %}
-    <span class="cui-input__icon-right">{{ iconRight|raw }}</span>
+    <span class="cui-input--icon-right">{{ iconRight|raw }}</span>
   {% endif %}
 </div>
 {% else %}
