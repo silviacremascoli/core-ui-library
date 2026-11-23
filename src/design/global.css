@@ -13,6 +13,7 @@
   --cui-spacing-lg: 16px;
   --cui-spacing-xl: 24px;
   --cui-spacing-2xl: 32px;
+  --cui-spacing-3xl: 48px;
 
   /* TYPOGRAPHY */
   --cui-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
@@ -73,18 +74,23 @@
 .cui-m-lg { margin: var(--cui-spacing-lg); }
 .cui-m-xl { margin: var(--cui-spacing-xl); }
 .cui-m-2xl { margin: var(--cui-spacing-2xl); }
+.cui-m-3xl { margin: var(--cui-spacing-3xl); }
 
 .cui-mt-xs { margin-top: var(--cui-spacing-xs); }
 .cui-mt-sm { margin-top: var(--cui-spacing-sm); }
 .cui-mt-md { margin-top: var(--cui-spacing-md); }
 .cui-mt-lg { margin-top: var(--cui-spacing-lg); }
 .cui-mt-xl { margin-top: var(--cui-spacing-xl); }
+.cui-mt-2xl { margin-top: var(--cui-spacing-2xl); }
+.cui-mt-3xl { margin-top: var(--cui-spacing-3xl); }
 
 .cui-mb-xs { margin-bottom: var(--cui-spacing-xs); }
 .cui-mb-sm { margin-bottom: var(--cui-spacing-sm); }
 .cui-mb-md { margin-bottom: var(--cui-spacing-md); }
 .cui-mb-lg { margin-bottom: var(--cui-spacing-lg); }
 .cui-mb-xl { margin-bottom: var(--cui-spacing-xl); }
+.cui-mb-2xl { margin-bottom: var(--cui-spacing-2xl); }
+.cui-mb-3xl { margin-bottom: var(--cui-spacing-3xl); }
 
 /* Form utilities */
 /* :where() keeps this a zero-specificity default, so framework utilities always win when both are present */
