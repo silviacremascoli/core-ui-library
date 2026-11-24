@@ -1,0 +1,81 @@
+/* Container Component - Shared Styles */
+/* This CSS is imported by all framework implementations (React, Vue, Twig) */
+/* Uses CSS custom properties defined in global.cui-css */
+
+.cui-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* Half the grid gutter, so .cui-row's negative margins align content with the container edge */
+  padding-left: calc(var(--cui-grid-gutter-x, 1.5rem) / 2);
+  padding-right: calc(var(--cui-grid-gutter-x, 1.5rem) / 2);
+  box-sizing: border-box;
+}
+
+/* ===== SIZES (MAX-WIDTH) ===== */
+.cui-container--small {
+  max-width: 576px;
+}
+
+.cui-container--medium {
+  max-width: 768px;
+}
+
+.cui-container--large {
+  max-width: 992px;
+}
+
+.cui-container--full {
+  max-width: 1200px;
+}
+
+/* ===== FLUID CONTAINER ===== */
+.cui-container--fluid {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ===== NO PADDING ===== */
+.cui-container--no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ===== ALIGNMENT ===== */
+.cui-container--align-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.cui-container--align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cui-container--align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 576px) {
+  .cui-container--small,
+  .cui-container--medium,
+  .cui-container--large,
+  .cui-container--full {
+    padding-left: var(--cui-spacing-sm);
+    padding-right: var(--cui-spacing-sm);
+  }
+  
+  .cui-container--small { max-width: 100%; }
+  .cui-container--medium { max-width: 100%; }
+  .cui-container--large { max-width: 100%; }
+  .cui-container--full { max-width: 100%; }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.cui-container--responsive-padding {
+  padding-left: clamp(var(--cui-spacing-sm), 5vw, var(--cui-spacing-xl));
+  padding-right: clamp(var(--cui-spacing-sm), 5vw, var(--cui-spacing-xl));
+}

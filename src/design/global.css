@@ -53,10 +53,21 @@
   /* ADORNMENT PADDING */
   --cui-input-padding-adornment: 2.5rem;
 
+  /* GRID GUTTERS */
+  --cui-grid-gutter-x: 1.5rem;
+  --cui-grid-gutter-y: 0px;
+
   /* TRANSITIONS */
   --cui-transition-fast: all 0.1s ease;
   --cui-transition-normal: all 0.2s ease;
   --cui-transition-slow: all 0.3s ease;
+}
+
+/* FONTS */
+/* Apply the theme font to the page; components also use the token directly,
+   but plain markup (e.g. grid cells) inherits it from here */
+body {
+  font-family: var(--cui-font-family);
 }
 
 /* UTILITY CLASSES */

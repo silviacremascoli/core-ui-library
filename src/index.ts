@@ -9,6 +9,7 @@ import './design/themes.css';
 
 // Re-export shared types (the single source of truth for all component types)
 export type * from './components/Button/Button.types';
+export type * from './components/Grid/Grid.types';
 export type * from './components/Input/Input.types';
 export type * from './components/Label/Label.types';
 export type * from './components/Typography/Typography.types';

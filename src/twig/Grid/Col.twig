@@ -1,0 +1,22 @@
+{# Grid Column Component - Twig Template #}
+{% set cls = 'cui-col' %}
+{% if span is defined and span %}{% set cls = cls ~ ' ' ~ (span == 'auto' ? 'cui-col-auto' : 'cui-col-' ~ span) %}{% endif %}
+{% if sm is defined and sm %}{% set cls = cls ~ ' ' ~ (sm == 'auto' ? 'cui-col-sm-auto' : 'cui-col-sm-' ~ sm) %}{% endif %}
+{% if md is defined and md %}{% set cls = cls ~ ' ' ~ (md == 'auto' ? 'cui-col-md-auto' : 'cui-col-md-' ~ md) %}{% endif %}
+{% if lg is defined and lg %}{% set cls = cls ~ ' ' ~ (lg == 'auto' ? 'cui-col-lg-auto' : 'cui-col-lg-' ~ lg) %}{% endif %}
+{% if xl is defined and xl %}{% set cls = cls ~ ' ' ~ (xl == 'auto' ? 'cui-col-xl-auto' : 'cui-col-xl-' ~ xl) %}{% endif %}
+{% if xxl is defined and xxl %}{% set cls = cls ~ ' ' ~ (xxl == 'auto' ? 'cui-col-xxl-auto' : 'cui-col-xxl-' ~ xxl) %}{% endif %}
+{% if offset is defined and offset is not null %}{% set cls = cls ~ ' cui-col--offset-' ~ offset %}{% endif %}
+{% if offsetSm is defined and offsetSm is not null %}{% set cls = cls ~ ' cui-col--offset-sm-' ~ offsetSm %}{% endif %}
+{% if offsetMd is defined and offsetMd is not null %}{% set cls = cls ~ ' cui-col--offset-md-' ~ offsetMd %}{% endif %}
+{% if offsetLg is defined and offsetLg is not null %}{% set cls = cls ~ ' cui-col--offset-lg-' ~ offsetLg %}{% endif %}
+{% if offsetXl is defined and offsetXl is not null %}{% set cls = cls ~ ' cui-col--offset-xl-' ~ offsetXl %}{% endif %}
+{% if offsetXxl is defined and offsetXxl is not null %}{% set cls = cls ~ ' cui-col--offset-xxl-' ~ offsetXxl %}{% endif %}
+{% if order is defined and order is not null %}{% set cls = cls ~ ' cui-col--order-' ~ order %}{% endif %}
+{% if orderSm is defined and orderSm is not null %}{% set cls = cls ~ ' cui-col--order-sm-' ~ orderSm %}{% endif %}
+{% if orderMd is defined and orderMd is not null %}{% set cls = cls ~ ' cui-col--order-md-' ~ orderMd %}{% endif %}
+{% if orderLg is defined and orderLg is not null %}{% set cls = cls ~ ' cui-col--order-lg-' ~ orderLg %}{% endif %}
+{% if orderXl is defined and orderXl is not null %}{% set cls = cls ~ ' cui-col--order-xl-' ~ orderXl %}{% endif %}
+{% if orderXxl is defined and orderXxl is not null %}{% set cls = cls ~ ' cui-col--order-xxl-' ~ orderXxl %}{% endif %}
+{% if className is defined and className %} {{ className|raw }}{% endif %}
+<div class="{{ cls }}">{{ content|raw }}</div>
