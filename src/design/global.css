@@ -57,6 +57,13 @@
   --cui-grid-gutter-x: 1.5rem;
   --cui-grid-gutter-y: 0px;
 
+  /* CONTAINER MAX-WIDTH LADDER (consumed by .cui-container--* size classes) */
+  --cui-container-sm: 540px;
+  --cui-container-md: 720px;
+  --cui-container-lg: 960px;
+  --cui-container-xl: 1140px;
+  --cui-container-xxl: 1320px;
+
   /* TRANSITIONS */
   --cui-transition-fast: all 0.1s ease;
   --cui-transition-normal: all 0.2s ease;

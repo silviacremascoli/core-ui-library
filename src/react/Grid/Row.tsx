@@ -27,6 +27,8 @@ export function Row({
   gyLg,
   gyXl,
   gyXxl,
+  alignItems,
+  justifyContent,
   className = '',
   children,
   ...props
@@ -57,6 +59,8 @@ export function Row({
     gyLg ? `cui-row--gy-lg-${gyLg}` : '',
     gyXl ? `cui-row--gy-xl-${gyXl}` : '',
     gyXxl ? `cui-row--gy-xxl-${gyXxl}` : '',
+    alignItems ? `cui-row--align-items-${alignItems}` : '',
+    justifyContent ? `cui-row--justify-content-${justifyContent}` : '',
     className
   ].filter(Boolean).join(' ');
 

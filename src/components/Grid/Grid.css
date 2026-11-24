@@ -20,6 +20,21 @@
   padding-left: calc(var(--cui-grid-gutter-x, 1.5rem) * 0.5);
   margin-top: var(--cui-grid-gutter-y, 0px);
 }
+
+/* ===== ROW ALIGNMENT (cross axis) ===== */
+.cui-row--align-items-start { align-items: flex-start; }
+.cui-row--align-items-center { align-items: center; }
+.cui-row--align-items-end { align-items: flex-end; }
+.cui-row--align-items-stretch { align-items: stretch; }
+.cui-row--align-items-baseline { align-items: baseline; }
+
+/* ===== ROW JUSTIFICATION (main axis) ===== */
+.cui-row--justify-content-start { justify-content: flex-start; }
+.cui-row--justify-content-center { justify-content: center; }
+.cui-row--justify-content-end { justify-content: flex-end; }
+.cui-row--justify-content-between { justify-content: space-between; }
+.cui-row--justify-content-around { justify-content: space-around; }
+.cui-row--justify-content-evenly { justify-content: space-evenly; }
 /* ===== COLUMNS (base, mobile-first) ===== */
 .cui-col { flex: 1 0 0%; }
 .cui-col-auto { flex: 0 0 auto; width: auto; }

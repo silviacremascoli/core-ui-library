@@ -22,6 +22,12 @@ export type GridOrder = 0 | 1 | 2 | 3 | 4 | 5 | 'first' | 'last';
 /** Gutter level 0-5 (scale: 0, .25rem, .5rem, 1rem, 1.5rem, 3rem) */
 export type GridGutter = 0 | 1 | 2 | 3 | 4 | 5;
 
+/** Cross-axis alignment of the row's items (align-items) */
+export type GridAlignItems = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
+
+/** Main-axis distribution of the row's items (justify-content) */
+export type GridJustifyContent = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+
 export interface RowProps {
   /** Equal-width columns per row at the base (mobile-first) breakpoint */
   cols?: GridRowCols;
@@ -51,6 +57,10 @@ export interface RowProps {
   gyLg?: GridGutter;
   gyXl?: GridGutter;
   gyXxl?: GridGutter;
+  /** Cross-axis alignment of the row's items */
+  alignItems?: GridAlignItems;
+  /** Main-axis distribution of the row's items */
+  justifyContent?: GridJustifyContent;
   /** Additional CSS class name(s) */
   className?: string;
   /** Row content (columns) */
@@ -83,6 +93,8 @@ export interface RowArgs {
   gyLg?: GridGutter;
   gyXl?: GridGutter;
   gyXxl?: GridGutter;
+  alignItems?: GridAlignItems;
+  justifyContent?: GridJustifyContent;
   className?: string;
 }
 

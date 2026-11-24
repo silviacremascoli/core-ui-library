@@ -4,6 +4,9 @@
 
 .cui-container {
   display: block;
+  width: 100%;
+  /* Escape hatch: set --cui-container-max-width on the element (inline style or utility class) for a custom width */
+  max-width: var(--cui-container-max-width, 100%);
   margin-left: auto;
   margin-right: auto;
   /* Half the grid gutter, so .cui-row's negative margins align content with the container edge */
@@ -13,27 +16,49 @@
 }
 
 /* ===== SIZES (MAX-WIDTH) ===== */
-.cui-container--small {
-  max-width: 576px;
+/* Mobile-first ladder mirroring Bootstrap's .container: each size is fixed-width from its
+   breakpoint up and fluid (100%) below it; `full` runs the whole ladder.
+   Breakpoints match Grid.css: sm 576px, md 768px, lg 992px, xl 1200px, xxl 1400px.
+   Widths come from the --cui-container-* tokens in global.css, so themes can re-scale them. */
+@media (min-width: 576px) {
+  .cui-container--small,
+  .cui-container--medium,
+  .cui-container--large,
+  .cui-container--full {
+    --cui-container-max-width: var(--cui-container-sm);
+  }
 }
 
-.cui-container--medium {
-  max-width: 768px;
+@media (min-width: 768px) {
+  .cui-container--medium,
+  .cui-container--large,
+  .cui-container--full {
+    --cui-container-max-width: var(--cui-container-md);
+  }
 }
 
-.cui-container--large {
-  max-width: 992px;
+@media (min-width: 992px) {
+  .cui-container--large,
+  .cui-container--full {
+    --cui-container-max-width: var(--cui-container-lg);
+  }
 }
 
-.cui-container--full {
-  max-width: 1200px;
+@media (min-width: 1200px) {
+  .cui-container--full {
+    --cui-container-max-width: var(--cui-container-xl);
+  }
+}
+
+@media (min-width: 1400px) {
+  .cui-container--full {
+    --cui-container-max-width: var(--cui-container-xxl);
+  }
 }
 
 /* ===== FLUID CONTAINER ===== */
 .cui-container--fluid {
   max-width: 100%;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 /* ===== NO PADDING ===== */
@@ -56,22 +81,6 @@
 .cui-container--align-right {
   margin-left: auto;
   margin-right: 0;
-}
-
-/* ===== RESPONSIVE BEHAVIOR ===== */
-@media (max-width: 576px) {
-  .cui-container--small,
-  .cui-container--medium,
-  .cui-container--large,
-  .cui-container--full {
-    padding-left: var(--cui-spacing-sm);
-    padding-right: var(--cui-spacing-sm);
-  }
-  
-  .cui-container--small { max-width: 100%; }
-  .cui-container--medium { max-width: 100%; }
-  .cui-container--large { max-width: 100%; }
-  .cui-container--full { max-width: 100%; }
 }
 
 /* ===== UTILITY CLASSES ===== */

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { rowTemplate, colTemplate } from '../../../twig/Grid';
 import { containerTemplate } from '../../../twig/Container';
-import type { GridColSize } from '../../../components/Grid/Grid.types';
+import type { GridColSize, GridAlignItems, GridJustifyContent } from '../../../components/Grid/Grid.types';
 import '../../../components/Grid/Grid.css';
 import '../../../components/Container/Container.css';
 
@@ -10,6 +10,8 @@ export interface GridStoryArgs {
   colSpan?: GridColSize;
   colLg?: GridColSize;
   container?: boolean;
+  alignItems?: GridAlignItems;
+  justifyContent?: GridJustifyContent;
 }
 
 const demoCol = (label: string, args: GridStoryArgs) =>
@@ -25,6 +27,8 @@ const meta: Meta<GridStoryArgs> = {
   render: (args) => {
     const row = rowTemplate({
       cols: args.cols,
+      alignItems: args.alignItems,
+      justifyContent: args.justifyContent,
       content: [1, 2, 3, 4, 5, 6].slice(0, args.cols ?? 3).map((i) => demoCol(`Column ${i}`, args)).join(''),
     });
     return args.container ? containerTemplate({ content: row }) : row;
@@ -48,6 +52,16 @@ const meta: Meta<GridStoryArgs> = {
     container: {
       control: 'boolean',
       description: 'Wrap the row in a `.cui-container` to preview gutter alignment: the container\'s half-gutter padding lines row content up with the container edge.',
+    },
+    alignItems: {
+      control: 'select',
+      options: [undefined, 'start', 'center', 'end', 'stretch', 'baseline'],
+      description: 'Cross-axis alignment of the row items: `.cui-row--align-items-*` (align-items).',
+    },
+    justifyContent: {
+      control: 'select',
+      options: [undefined, 'start', 'center', 'end', 'between', 'around', 'evenly'],
+      description: 'Main-axis distribution of the row items: `.cui-row--justify-content-*` (justify-content).',
     },
   },
   args: {

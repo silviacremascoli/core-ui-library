@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
-import type { GridRowCols, GridGutter } from '../../components/Grid/Grid.types';
+import type { GridRowCols, GridGutter, GridAlignItems, GridJustifyContent } from '../../components/Grid/Grid.types';
 
 export default defineComponent({
   name: 'Row',
@@ -35,6 +35,8 @@ export default defineComponent({
     gyLg: { type: Number as PropType<GridGutter>, default: undefined },
     gyXl: { type: Number as PropType<GridGutter>, default: undefined },
     gyXxl: { type: Number as PropType<GridGutter>, default: undefined },
+    alignItems: { type: String as PropType<GridAlignItems>, default: undefined },
+    justifyContent: { type: String as PropType<GridJustifyContent>, default: undefined },
     className: { type: String, default: '' },
   },
   setup(props) {
@@ -64,6 +66,8 @@ export default defineComponent({
       if (props.gyLg) classes.push(`cui-row--gy-lg-${props.gyLg}`);
       if (props.gyXl) classes.push(`cui-row--gy-xl-${props.gyXl}`);
       if (props.gyXxl) classes.push(`cui-row--gy-xxl-${props.gyXxl}`);
+      if (props.alignItems) classes.push(`cui-row--align-items-${props.alignItems}`);
+      if (props.justifyContent) classes.push(`cui-row--justify-content-${props.justifyContent}`);
       if (props.className) classes.push(props.className);
       return classes.join(' ');
     });

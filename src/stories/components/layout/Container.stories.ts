@@ -23,7 +23,7 @@ const meta: Meta<ContainerArgs> = {
     size: {
       control: 'select',
       options: ['small', 'medium', 'large', 'full'],
-      description: 'Max-width preset: small 576px, medium 768px, large 992px, full 1200px. All sizes collapse to 100% width below 576px.',
+      description: 'Max-width preset, mobile-first like Bootstrap .container-sm/md/lg/xl: fixed-width from its breakpoint up (540/720/960/1140/1320px, from the --cui-container-* tokens) and fluid below it; full runs the whole ladder. Set --cui-container-max-width on the element for a custom width.',
     },
     align: {
       control: 'select',
