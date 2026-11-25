@@ -4,7 +4,7 @@
 
 Core UI Library is a framework-agnostic component library built on a CSS-first design system architecture. Each component is implemented once in CSS and TypeScript, then exposed across **React**, **Vue**, and **Twig** frameworks.
 
-**Status:** Actively maintained with 5 live components and comprehensive documentation.
+**Status:** Actively maintained with 7 live components (Button, Input, Label, Typography, Icon, Container, Grid) and comprehensive documentation.
 
 ---
 
@@ -29,14 +29,17 @@ Core UI Library is a framework-agnostic component library built on a CSS-first d
 | **Label** | ✅ Live | 9 stories | ✅ Complete |
 | **Typography** | ✅ Live | 14 stories | ✅ Complete |
 | **Icon** | ✅ Live | 9 stories | ✅ Complete |
+| **Container** | ✅ Live | 9 stories | ✅ Complete |
+| **Grid** (Row + Col) | ✅ Live | 5 stories | ✅ Complete |
 
-**Total: 55 documented story variants**
+**Total: 69 documented story variants**
 
 ### 🚧 In Development
 
-- **Forms:** Select, Checkbox, Radio, Textarea, Form
-- **Media:** Image, Video  
-- **Surfaces:** Container, Card, Modal, Loader
+- **Forms:** Select, Textarea, Form, Checkbox, Radio
+- **Media:** Image, Video
+- **Surfaces:** Card, Modal, Loader
+- **Feedback:** Alert, Toast, Progress
 
 ---
 
@@ -62,6 +65,16 @@ All visual properties are defined as CSS custom properties in `global.css` and `
 - **Border Radius:** `--cui-border-radius-md`, `--cui-border-radius-full`, etc.
 - **Shadows:** `--cui-shadow-sm`, `--cui-shadow-md`, etc.
 - **Transitions:** `--cui-transition-normal`, etc.
+- **Grid:** `--cui-grid-gutter-x` (fluid: `clamp(1rem, 2.5vw, 1.5rem)`), `--cui-grid-gutter-y`, `--cui-grid-columns` (default 12)
+- **Container caps:** `--cui-container-small/medium/large/full` (36/48/62/80rem); per-instance override via `--cui-container-max-width`
+- **Fluid type scale:** `--cui-font-size-fluid-lg/xl/2xl/3xl` (clamp-based)
+
+### Layout system highlights
+
+- **Fluid, not stepped:** container width is `min(100%, cap)` and gutters are clamp-based — no breakpoint jumps in widths
+- **CSS Grid rows** with native `gap` gutters (no negative-margin compensation)
+- **Container queries:** `queryable` containers (`container-name: cui`) make every responsive grid class respond to the container's own width via `@container` rules (emitted alongside the viewport `@media` rules; breakpoints sm 576 / md 768 / lg 992 / xl 1200 / xxl 1400 px)
+- **Utility classes:** per-breakpoint display (`cui-block-lg`, `cui-hidden-lg`, …), `cui-img-fluid`, `cui-text-muted`, `cui-text-fluid-*`
 
 ---
 
@@ -74,24 +87,32 @@ src/
 │   └── themes.css           # Theme definitions
 ├── components/              # Framework-agnostic core
 │   ├── Button/              # Button.css + Button.types.ts
+│   ├── Container/           # Container.css + Container.types.ts
+│   ├── Grid/                # Grid.css + Grid.types.ts (Row + Col)
 │   ├── Icon/                # Icon.css + Icon.types.ts + Icon.registry.ts
 │   ├── Input/               # Input.css + Input.types.ts
 │   ├── Label/               # Label.css + Label.types.ts
 │   └── Typography/          # Typography.css + Typography.types.ts
 ├── react/                  # React adapters
 │   ├── Button/
+│   ├── Container/
+│   ├── Grid/
 │   ├── Icon/
 │   ├── Input/
 │   ├── Label/
 │   └── index.ts
 ├── vue/                    # Vue adapters
 │   ├── Button/
+│   ├── Container/
+│   ├── Grid/
 │   ├── Icon/
 │   ├── Input/
 │   ├── Label/
 │   └── index.ts
 ├── twig/                   # Twig templates
 │   ├── Button/
+│   ├── Container/
+│   ├── Grid/
 │   ├── Icon/
 │   ├── Input/
 │   ├── Label/
@@ -99,7 +120,8 @@ src/
 └── stories/components/     # Storybook stories
     ├── controls/
     ├── display/
-    └── forms/
+    ├── forms/
+    └── layout/
 ```
 
 ---
@@ -195,33 +217,44 @@ src/
   - No-wrap
   - Custom font families
 
+### Container & Grid (Layout)
+
+**Status:** ✅ Live (9 + 5 stories)
+
+- **Container**
+  - `size`: small / medium / large / full — fluid max-width caps from `--cui-container-*` tokens; width = `min(100%, cap)`, so no breakpoint steps
+  - `align` (left / center / right), `fluid`, `noPadding`
+  - `queryable`: makes the container a CSS query container (`container-name: cui`) so descendant grid classes also respond to the container width via `@container` rules
+  - `as` (render as any tag, e.g. `section`), `className`
+  - Escape hatch: `--cui-container-max-width` per instance (inline style or utility class)
+- **Row**
+  - CSS Grid engine: `repeat(var(--cui-grid-columns, 12), minmax(0, 1fr))` with native `gap` gutters (`g`/`gx`/`gy` levels 0–5, per breakpoint)
+  - `cols`–`colsXxl` equal columns per row; `auto` mode: `repeat(auto-fit, minmax(var(--cui-row-min-col, 16rem), 1fr))` — fully responsive without breakpoints
+  - `alignItems`, `justifyContent`, `as`, `className`
+- **Col**
+  - `span` + `sm`/`md`/`lg`/`xl`/`xxl` (1–12 or `auto`); plain `Col` = full width (mobile-first stacking)
+  - `offset*`, `order*`, `hide`, `hideBelow`, `showBelow` (container-aware visibility), `as`, `className`
+
+**Usage:**
+```tsx
+<Container size="full" queryable>
+  <Row alignItems="center" gLg={4}>
+    <Col lg={6}>…</Col>
+    <Col lg={6} hideBelow="lg">…</Col>
+  </Row>
+</Container>
+```
+
 ---
 
 ## 🎯 Recent Changes
 
-### v0.2.0 (Latest)
+Full versioned history lives in **[CHANGELOG.md](../CHANGELOG.md)**
 
-#### ✨ Icon System Enhancement
-- **All FontAwesome Free icons now available** (~2,100+ icons)
-  - Solid: ~1,500 icons
-  - Regular: ~200 icons (with `-regular` suffix)
-  - Brands: ~400 icons
-- Dynamic icon registry imports all icons from FontAwesome packages
-- Tree-shaking friendly: only used icons are bundled
+**At a glance:**
 
-#### 📚 Documentation
-- **All component stories now have comprehensive documentation**
-  - Button: 14 stories documented
-  - Input: 9 stories documented
-  - Label: 9 stories documented
-  - Typography: 14 stories documented
-  - Icon: 9 stories documented
-- Each story includes usage guidance, best practices, and use cases
-- Regular icons story includes filtered select control (only shows `-regular` icons)
-
-#### 🔧 Bug Fixes & Improvements
-- **Button interactions test fixed** to match current CSS padding values
-- Button CSS simplified: removed complex icon-only variant styling, kept equal padding
+- **v0.3.0 (2026-11-25) — layout system redesign:** fluid container caps (`min(100%, cap)`), container queries (`queryable` + `@container cui` rules), CSS-Grid rows with gap gutters, new props (`as`, `auto`, `hide`/`hideBelow`/`showBelow`, `alignItems`/`justifyContent`), new global utilities (`cui-block-*`/`cui-hidden-*` per breakpoint, `cui-img-fluid`, `cui-text-muted`, `cui-text-fluid-*`). Breaking: plain `Col` is now full-width; container sizes are fluid caps, not fixed widths
+- **v0.2.0 (2026-11-16):** full FontAwesome Free icon registry (~2,100 icons), documented stories for all live components, Button CSS simplification + test fix
 
 ---
 
@@ -264,33 +297,28 @@ Use the Storybook toolbar's Theme selector to preview components in each of the 
 - Typography
 - Icon
 
-### Phase 2 - Forms 🚧 In Progress
+### Phase 2 - Layout ✅ Complete
+- Container
+- Grid (Row + Col)
+
+### Phase 3 - Forms 🚧 In Progress
 - Select
-- Checkbox
-- Radio
 - Textarea
 - Form
+- Checkbox, Radio
 
-### Phase 3 - Media
+### Phase 4 - Media
 - Image
 - Video
 
-### Phase 4 - Surfaces
-- Container
+### Phase 5 - Surfaces
 - Card
 - Modal
 - Loader
 
-### Phase 5 - Navigation
-- Navigation
-- Breadcrumb
-- Pagination
-
 ### Phase 6 - Feedback
-- Alert
-- Toast
+- Alert, Toast
 - Progress
-- Skeleton
 
 ---
 
@@ -364,8 +392,8 @@ import "core-ui-library/styles";
 
 ## 📊 Statistics
 
-- **Components:** 5 live, ~15 in development
-- **Total Stories:** 55+ documented
+- **Components:** 7 live, ~13 in development
+- **Total Stories:** 69+ documented
 - **Icon Coverage:** 2,100+ FontAwesome Free icons
 - **Themes:** 5 (default, sage, amber, ocean, midnight)
 - **Frameworks:** 3 (React, Vue, Twig)
@@ -392,7 +420,11 @@ import "core-ui-library/styles";
 
 ### Responsiveness
 - Use `fullWidth` prop for full-width elements
-- Typography scales appropriately
+- Containers are fluid up to their size cap; override per instance with `--cui-container-max-width`
+- Use `queryable` containers so nested grids respond to the container width (`@container`), not just the viewport
+- Use `hideBelow`/`showBelow` on columns instead of hand-written display media queries
+- Use `auto` rows for breakpoint-free auto-fit layouts
+- Typography scales appropriately; opt into fluid type with `cui-text-fluid-*`
 - Test on multiple screen sizes
 
 ---

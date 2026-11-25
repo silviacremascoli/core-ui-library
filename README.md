@@ -4,13 +4,14 @@
 
 A framework-agnostic component library: each component is implemented once in CSS and TypeScript, then exposed as **React**, **Vue**, and **Twig** — mirroring the multi-framework, CMS-integrated design systems I build professionally (Storybook + Twig in TYPO3 environments).
 
-> **Status: work in progress.** **Button**, **Input**, **Label**, **Typography**, and **Icon** are live in the library across React, Vue, and Twig. The remaining components are in local development. See the [Roadmap](#roadmap) for what's coming next.
+> **Status: work in progress.** **Button**, **Input**, **Label**, **Typography**, **Icon**, **Container**, and **Grid** are live in the library across React, Vue, and Twig. The remaining components are in local development. See the [Roadmap](#roadmap) for what's coming next.
 
 ## Why this project exists
 
 At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3, WCAG 2.1 AA). This library is my personal take on that architecture — small enough to read in one sitting, but covering the real problems of a design system:
 
 - **One source of truth:** a CSS-first design-token layer (`global.css`, `themes.css`) drives every component — no duplicated styling logic between frameworks
+- **Fluid, container-aware layout:** the Container and Grid primitives scale smoothly with the viewport (fluid widths and gutters, no stepped breakpoints) and support CSS container queries, so nested layouts respond to their own container, not just the screen
 - **Tonal theming:** an intentional default palette plus four reusable, app-agnostic themes (`.cui-theme--default`, `.cui-theme--sage`, `.cui-theme--amber`, `.cui-theme--ocean`, `.cui-theme--midnight`)
 - **Write once, use everywhere:** a single `.css` + `.types.ts` pair per component, wrapped by thin React/Vue/Twig adapters
 - **Accessibility first:** components are built for keyboard navigation, visible focus states, and ARIA semantics (WCAG 2.1 AA target)
@@ -18,7 +19,7 @@ At work I built and maintained enterprise design systems (Storybook, Twig, TYPO3
 
 ## Current components
 
-Currently, **Button**, **Input**, **Label**, **Typography**, and **Icon** are live across all three framework adapters and have **fully documented Storybook stories** with usage guidance and best practices.
+Currently, **Button**, **Input**, **Label**, **Typography**, **Icon**, **Container**, and **Grid** are live across all three framework adapters and have **fully documented Storybook stories** with usage guidance and best practices.
 
 | Component | React | Vue | Twig | Stories | Status | Highlights |
 | --------- | :-----: | :---: | :----: | :-------: | :------: | :--------- |
@@ -27,8 +28,8 @@ Currently, **Button**, **Input**, **Label**, **Typography**, and **Icon** are li
 | **Label**  | ✅ | ✅ | ✅ | ✅ | **Live** | Associated form labels, size/weight/color options, required and disabled states, visually hidden accessibility mode |
 | **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Semantic headings (h1-h6), body text variants, subtitles, captions, text alignment, weights, colors, truncation, custom fonts |
 | **Icon** | ✅ | ✅ | ✅ | ✅ | **Live** | 2,100+ Font Awesome Free icons (solid, regular, brands), all sizes (xs-2xl), all colors, link support, accessibility features. Regular icons use `-regular` suffix (e.g., `envelope-regular`) |
-
-*Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
+| **Container** | ✅ | ✅ | ✅ | ✅ | **Live** | Fluid max-width caps from tokens (`--cui-container-small/medium/large/full`), `align`, `fluid`, `noPadding`, opt-in container queries (`queryable`), `as` tag override, `--cui-container-max-width` per-instance escape hatch |
+| **Grid** (`Row` + `Col`) | ✅ | ✅ | ✅ | ✅ | **Live** | CSS-Grid rows with native gap gutters (`--cui-grid-columns` adjustable), 12-col spans at sm–xxl, offsets, order, row-cols, `auto` auto-fit mode, `alignItems`/`justifyContent`, container-aware `hide`/`hideBelow`/`showBelow` on Col |
 
 *Note: The other components shown in the roadmap below are currently in local development and have not been committed to Git yet. They are rolling out in upcoming releases.*
 
@@ -190,6 +191,34 @@ Only registered icon names resolve in the Icon component and Storybook controls.
 
 Twig Button accepts `className` and an `attributes` map for `id`, `title`, `target`, `rel`, `download`, `name`, `value`, `form`, `lang`, `dir`, `role`, `tabindex`, and `aria-*` or `data-*` attributes. Attribute values must be strings or numbers. Component-controlled attributes such as `href`, `type`, and disabled states cannot be overridden through this map. Supply only trusted, validated URLs for `href`.
 
+### Container & Grid (layout)
+
+The layout primitives are **fluid by default**: the container scales smoothly with the viewport up to a max-width cap, and gutters are fluid (`--cui-grid-gutter-x: clamp(1rem, 2.5vw, 1.5rem)`) — widths never jump at breakpoints.
+
+```tsx
+import { Container, Row, Col } from "core-ui-library/react";
+import "core-ui-library/styles";
+
+<Container size="full" queryable>
+  <Row alignItems="center">
+    <Col lg={6}>…</Col>
+    <Col lg={6} hideBelow="lg">…</Col>
+  </Row>
+</Container>
+```
+
+**Container** props: `size` (`small`/`medium`/`large`/`full`, caps from the `--cui-container-*` tokens), `align` (`left`/`center`/`right`), `fluid`, `noPadding`, `queryable`, `as`, `className`.
+
+- Width is `min(100%, cap)`: fully fluid below the cap, capped above it. Override a single instance with `style="--cui-container-max-width: 720px"`.
+
+**Row** props: `cols`–`colsXxl` (N equal columns per row), `g`/`gx`/`gy` + per-breakpoint variants (gutter levels 0–5), `alignItems`, `justifyContent`, `auto` (auto-fit `minmax(var(--cui-row-min-col, 16rem), 1fr)` — responsive with no breakpoints at all), `as`, `className`. Rows are CSS Grid: `grid-template-columns: repeat(var(--cui-grid-columns, 12), minmax(0, 1fr))` with native `gap` gutters — no negative-margin hacks.
+
+**Col** props: `span` plus `sm`/`md`/`lg`/`xl`/`xxl` (1–12 or `'auto'`), `offset*`, `order*`, `hide`, `hideBelow`, `showBelow`, `as`, `className`. A plain `<Col>` is full-width (mobile-first stacking); use spans or `cols` on the row for side-by-side columns.
+
+**Container queries:** pass `queryable` to `Container` to make it a query container (`container-type: inline-size; container-name: cui`). Every responsive grid class is emitted both as a viewport `@media` rule and as a `@container cui` rule; inside a queryable container the `@container` rules win, so columns follow the container's own width. Shared breakpoints: sm 576px, md 768px, lg 992px, xl 1200px, xxl 1400px.
+
+**Utility classes** (in `global.css`): per-breakpoint display helpers (`cui-block-lg`, `cui-hidden-lg`, …), `cui-img-fluid`, `cui-text-muted`, and a clamp-based fluid type scale (`cui-text-fluid-lg`/`xl`/`2xl`/`3xl` via `--cui-font-size-fluid-*`).
+
 ## Project Structure
 
 ```
@@ -199,6 +228,8 @@ src/
 │   └── themes.css           # Default and named theme definitions
 ├── components/              # Framework-agnostic core: CSS + types
 │   ├── Button/  (Button.css, Button.types.ts)
+│   ├── Container/ (Container.css, Container.types.ts)
+│   ├── Grid/    (Grid.css, Grid.types.ts)
 │   ├── Icon/    (Icon.css, Icon.types.ts, Icon.registry.ts)
 │   ├── Input/   (Input.css, Input.types.ts)
 │   ├── Label/   (Label.css, Label.types.ts)
@@ -206,7 +237,7 @@ src/
 ├── react/                  # React adapters + exports
 ├── vue/                    # Vue adapters + exports
 ├── twig/                   # Twig templates + exports
-├── stories/components/     # Storybook stories (controls/, display/, forms/)
+├── stories/components/     # Storybook stories (controls/, display/, forms/, layout/)
 └── index.ts                # Library entry point (imports global.css)
 ```
 
@@ -387,12 +418,16 @@ export const Elevated: Story = { args: { variant: 'elevated', content: 'Elevated
 
 ## Roadmap
 
-- [x] **Phase 1 — Foundation:** Button (✅ live), Input (✅ live), Label (✅ live), Typography (✅ live), Icon (✅ live)
-- [ ] **Phase 2 — Forms:** Select, Checkbox, Radio, Textarea, Form (in development)
-- [ ] **Phase 3 — Media:** Image, Video (in development)
-- [ ] **Phase 4 — Surfaces:** Container, Card, Modal, Loader (in development)
+- [x] **Phase 1 — Foundation ✅ Complete:** Button, Input, Label, Typography, Icon
+- [x] **Phase 2 — Layout ✅ Complete:** Container, Grid (Row + Col)
+- [ ] **Phase 3 — Forms 🚧 In progress:** Select, Textarea, Form, Checkbox, Radio
+- [ ] **Phase 4 — Media:** Image, Video
+- [ ] **Phase 5 — Surfaces:** Card, Modal, Loader
+- [ ] **Phase 6 — Feedback:** Alert, Toast, Progress
 
 - **Ongoing — Integration:** use and expand the library in my own projects (starting with my portfolio site)
+
+Release history: see [CHANGELOG.md](CHANGELOG.md).
 
 ## Author
 
