@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Utilities (global.css):** text alignment (`cui-text-left/center/right/justify`), `cui-text-nowrap`, and screen-reader-only helpers `cui-visually-hidden` / `cui-visually-hidden-focusable` (the latter reveals on focus, e.g. skip links)
+- **Utilities (global.css):** axis padding utilities `cui-pt-*` / `cui-pb-*` / `cui-px-*` / `cui-py-*` (same scale as `cui-p-*`) and axis margin utilities `cui-mr-*` / `cui-ml-*` / `cui-mx-*` / `cui-my-*` (same scale as `cui-m-*`), all driven by the existing `--cui-spacing-*` tokens
+
+### Changed
+
+- **Utilities (global.css):** `cui-visually-hidden*` also sets `clip-path: inset(50%)` alongside the legacy `clip` property
+
 ## [0.3.0] - 2026-11-25
 
 ### Breaking

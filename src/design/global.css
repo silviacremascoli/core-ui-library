@@ -93,6 +93,34 @@ body {
 .cui-p-xl { padding: var(--cui-spacing-xl); }
 .cui-p-2xl { padding: var(--cui-spacing-2xl); }
 
+.cui-pt-xs { padding-top: var(--cui-spacing-xs); }
+.cui-pt-sm { padding-top: var(--cui-spacing-sm); }
+.cui-pt-md { padding-top: var(--cui-spacing-md); }
+.cui-pt-lg { padding-top: var(--cui-spacing-lg); }
+.cui-pt-xl { padding-top: var(--cui-spacing-xl); }
+.cui-pt-2xl { padding-top: var(--cui-spacing-2xl); }
+
+.cui-pb-xs { padding-bottom: var(--cui-spacing-xs); }
+.cui-pb-sm { padding-bottom: var(--cui-spacing-sm); }
+.cui-pb-md { padding-bottom: var(--cui-spacing-md); }
+.cui-pb-lg { padding-bottom: var(--cui-spacing-lg); }
+.cui-pb-xl { padding-bottom: var(--cui-spacing-xl); }
+.cui-pb-2xl { padding-bottom: var(--cui-spacing-2xl); }
+
+.cui-px-xs { padding-right: var(--cui-spacing-xs); padding-left: var(--cui-spacing-xs); }
+.cui-px-sm { padding-right: var(--cui-spacing-sm); padding-left: var(--cui-spacing-sm); }
+.cui-px-md { padding-right: var(--cui-spacing-md); padding-left: var(--cui-spacing-md); }
+.cui-px-lg { padding-right: var(--cui-spacing-lg); padding-left: var(--cui-spacing-lg); }
+.cui-px-xl { padding-right: var(--cui-spacing-xl); padding-left: var(--cui-spacing-xl); }
+.cui-px-2xl { padding-right: var(--cui-spacing-2xl); padding-left: var(--cui-spacing-2xl); }
+
+.cui-py-xs { padding-top: var(--cui-spacing-xs); padding-bottom: var(--cui-spacing-xs); }
+.cui-py-sm { padding-top: var(--cui-spacing-sm); padding-bottom: var(--cui-spacing-sm); }
+.cui-py-md { padding-top: var(--cui-spacing-md); padding-bottom: var(--cui-spacing-md); }
+.cui-py-lg { padding-top: var(--cui-spacing-lg); padding-bottom: var(--cui-spacing-lg); }
+.cui-py-xl { padding-top: var(--cui-spacing-xl); padding-bottom: var(--cui-spacing-xl); }
+.cui-py-2xl { padding-top: var(--cui-spacing-2xl); padding-bottom: var(--cui-spacing-2xl); }
+
 .cui-m-0 { margin: var(--cui-spacing-0); }
 .cui-m-xs { margin: var(--cui-spacing-xs); }
 .cui-m-sm { margin: var(--cui-spacing-sm); }
@@ -119,6 +147,42 @@ body {
 .cui-mb-xl { margin-bottom: var(--cui-spacing-xl); }
 .cui-mb-2xl { margin-bottom: var(--cui-spacing-2xl); }
 .cui-mb-3xl { margin-bottom: var(--cui-spacing-3xl); }
+
+.cui-mr-0 { margin-right: var(--cui-spacing-0); }
+.cui-mr-xs { margin-right: var(--cui-spacing-xs); }
+.cui-mr-sm { margin-right: var(--cui-spacing-sm); }
+.cui-mr-md { margin-right: var(--cui-spacing-md); }
+.cui-mr-lg { margin-right: var(--cui-spacing-lg); }
+.cui-mr-xl { margin-right: var(--cui-spacing-xl); }
+.cui-mr-2xl { margin-right: var(--cui-spacing-2xl); }
+.cui-mr-3xl { margin-right: var(--cui-spacing-3xl); }
+
+.cui-ml-0 { margin-left: var(--cui-spacing-0); }
+.cui-ml-xs { margin-left: var(--cui-spacing-xs); }
+.cui-ml-sm { margin-left: var(--cui-spacing-sm); }
+.cui-ml-md { margin-left: var(--cui-spacing-md); }
+.cui-ml-lg { margin-left: var(--cui-spacing-lg); }
+.cui-ml-xl { margin-left: var(--cui-spacing-xl); }
+.cui-ml-2xl { margin-left: var(--cui-spacing-2xl); }
+.cui-ml-3xl { margin-left: var(--cui-spacing-3xl); }
+
+.cui-mx-0 { margin-right: var(--cui-spacing-0); margin-left: var(--cui-spacing-0); }
+.cui-mx-xs { margin-right: var(--cui-spacing-xs); margin-left: var(--cui-spacing-xs); }
+.cui-mx-sm { margin-right: var(--cui-spacing-sm); margin-left: var(--cui-spacing-sm); }
+.cui-mx-md { margin-right: var(--cui-spacing-md); margin-left: var(--cui-spacing-md); }
+.cui-mx-lg { margin-right: var(--cui-spacing-lg); margin-left: var(--cui-spacing-lg); }
+.cui-mx-xl { margin-right: var(--cui-spacing-xl); margin-left: var(--cui-spacing-xl); }
+.cui-mx-2xl { margin-right: var(--cui-spacing-2xl); margin-left: var(--cui-spacing-2xl); }
+.cui-mx-3xl { margin-right: var(--cui-spacing-3xl); margin-left: var(--cui-spacing-3xl); }
+
+.cui-my-0 { margin-top: var(--cui-spacing-0); margin-bottom: var(--cui-spacing-0); }
+.cui-my-xs { margin-top: var(--cui-spacing-xs); margin-bottom: var(--cui-spacing-xs); }
+.cui-my-sm { margin-top: var(--cui-spacing-sm); margin-bottom: var(--cui-spacing-sm); }
+.cui-my-md { margin-top: var(--cui-spacing-md); margin-bottom: var(--cui-spacing-md); }
+.cui-my-lg { margin-top: var(--cui-spacing-lg); margin-bottom: var(--cui-spacing-lg); }
+.cui-my-xl { margin-top: var(--cui-spacing-xl); margin-bottom: var(--cui-spacing-xl); }
+.cui-my-2xl { margin-top: var(--cui-spacing-2xl); margin-bottom: var(--cui-spacing-2xl); }
+.cui-my-3xl { margin-top: var(--cui-spacing-3xl); margin-bottom: var(--cui-spacing-3xl); }
 
 /* Form utilities */
 /* :where() keeps this a zero-specificity default, so framework utilities always win when both are present */
