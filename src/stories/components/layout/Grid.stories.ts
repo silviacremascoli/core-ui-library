@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { rowTemplate, colTemplate } from '../../../twig/Grid';
 import { containerTemplate } from '../../../twig/Container';
-import type { GridColSize, GridAlignItems, GridJustifyContent } from '../../../components/Grid/Grid.types';
+import type { GridColSize, GridAlignItems, GridJustifyContent, GridBreakpoint } from '../../../components/Grid/Grid.types';
 import '../../../components/Grid/Grid.css';
 import '../../../components/Container/Container.css';
 
@@ -10,8 +10,11 @@ export interface GridStoryArgs {
   colSpan?: GridColSize;
   colLg?: GridColSize;
   container?: boolean;
+  containerQueryable?: boolean;
   alignItems?: GridAlignItems;
   justifyContent?: GridJustifyContent;
+  auto?: boolean;
+  hideBelow?: GridBreakpoint;
 }
 
 const demoCol = (label: string, args: GridStoryArgs) =>
@@ -19,6 +22,7 @@ const demoCol = (label: string, args: GridStoryArgs) =>
     content: `<div style="background:var(--cui-color-secondary);padding:var(--cui-spacing-lg);border-radius:var(--cui-border-radius-md)">${label}</div>`,
     span: args.colSpan,
     lg: args.colLg,
+    hideBelow: args.hideBelow,
   });
 
 const meta: Meta<GridStoryArgs> = {
@@ -29,9 +33,10 @@ const meta: Meta<GridStoryArgs> = {
       cols: args.cols,
       alignItems: args.alignItems,
       justifyContent: args.justifyContent,
+      auto: args.auto,
       content: [1, 2, 3, 4, 5, 6].slice(0, args.cols ?? 3).map((i) => demoCol(`Column ${i}`, args)).join(''),
     });
-    return args.container ? containerTemplate({ content: row }) : row;
+    return args.container ? containerTemplate({ queryable: args.containerQueryable, content: row }) : row;
   },
   argTypes: {
     cols: {
@@ -63,6 +68,19 @@ const meta: Meta<GridStoryArgs> = {
       options: [undefined, 'start', 'center', 'end', 'between', 'around', 'evenly'],
       description: 'Main-axis distribution of the row items: `.cui-row--justify-content-*` (justify-content).',
     },
+    auto: {
+      control: 'boolean',
+      description: 'Auto mode `.cui-row--auto`: columns auto-fit the available width (min column width via --cui-row-min-col) — fully responsive without breakpoints.',
+    },
+    hideBelow: {
+      control: 'select',
+      options: [undefined, 'sm', 'md', 'lg', 'xl', 'xxl'],
+      description: 'Hide every column below this breakpoint (`.cui-col--hide-below-*`); inside a queryable container the breakpoint is container-relative.',
+    },
+    containerQueryable: {
+      control: 'boolean',
+      description: 'Render the container as `.cui-container--queryable` so the demo columns also respond to the container width via @container rules.',
+    },
   },
   args: {
     cols: 3,
@@ -78,7 +96,7 @@ type Story = StoryObj<GridStoryArgs>;
 
 export const EqualColumns: Story = {
   args: { cols: 3 },
-  parameters: { docs: { description: { story: 'Three equal-width columns (`.cui-col`) inside a `.cui-row`. Columns stack full-width on small screens, matching Bootstrap mobile-first behavior.' } } },
+  parameters: { docs: { description: { story: 'Three equal-width columns inside a `.cui-row` via `.cui-row--cols-3`. Without a span, a plain `.cui-col` is full-width (mobile-first stacking).' } } },
 };
 
 export const SizedColumns: Story = {
@@ -93,7 +111,7 @@ export const RowCols: Story = {
 
 export const InsideContainer: Story = {
   args: { cols: 3, container: true },
-  parameters: { docs: { description: { story: 'A `.cui-row` inside a `.cui-container`: the container\'s half-gutter padding aligns the row content with the container edges, same as Bootstrap.' } } },
+  parameters: { docs: { description: { story: 'A `.cui-row` inside a `.cui-container`: the container\'s half-gutter padding keeps row content aligned with the container edges while the row gap separates the columns.' } } },
 };
 
 export const OffsetOrderAndGutters: Story = {
@@ -107,5 +125,5 @@ export const OffsetOrderAndGutters: Story = {
         colTemplate({ content: '<div style="background:var(--cui-color-secondary);padding:var(--cui-spacing-lg);border-radius:var(--cui-border-radius-md)">Second in DOM</div>', span: 4, order: 'first' }) +
         colTemplate({ content: '<div style="background:var(--cui-color-secondary);padding:var(--cui-spacing-lg);border-radius:var(--cui-border-radius-md)">Third in DOM</div>', span: 4, offsetLg: 4 }),
     }),
-  parameters: { docs: { description: { story: '`.cui-col--offset-*` margins, `.cui-col--order-*` (incl. `first`/`last`) reordering, and `.cui-row--g-*`/`--gx-*` gutter levels (0-5, Bootstrap scale) — each also available per breakpoint, e.g. `.cui-col--offset-lg-4`, `.cui-row--gx-lg-2`.' } } },
+  parameters: { docs: { description: { story: '`.cui-col--offset-*` column-start offsets, `.cui-col--order-*` (incl. `first`/`last`) reordering, and `.cui-row--g-*`/`--gx-*` gutter levels 0-5 (0, .25, .5, 1, 1.5, 3rem) — each also available per breakpoint, e.g. `.cui-col--offset-lg-4`, `.cui-row--gx-lg-2`.' } } },
 };

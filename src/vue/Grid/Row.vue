@@ -1,7 +1,7 @@
 <template>
-  <div :class="classNames" v-bind="$attrs">
+  <component :is="as" :class="classNames" v-bind="$attrs">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -37,6 +37,8 @@ export default defineComponent({
     gyXxl: { type: Number as PropType<GridGutter>, default: undefined },
     alignItems: { type: String as PropType<GridAlignItems>, default: undefined },
     justifyContent: { type: String as PropType<GridJustifyContent>, default: undefined },
+    auto: { type: Boolean, default: false },
+    as: { type: String, default: 'div' },
     className: { type: String, default: '' },
   },
   setup(props) {
@@ -68,6 +70,7 @@ export default defineComponent({
       if (props.gyXxl) classes.push(`cui-row--gy-xxl-${props.gyXxl}`);
       if (props.alignItems) classes.push(`cui-row--align-items-${props.alignItems}`);
       if (props.justifyContent) classes.push(`cui-row--justify-content-${props.justifyContent}`);
+      if (props.auto) classes.push('cui-row--auto');
       if (props.className) classes.push(props.className);
       return classes.join(' ');
     });

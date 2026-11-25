@@ -1,70 +1,45 @@
 /* Container Component - Shared Styles */
 /* This CSS is imported by all framework implementations (React, Vue, Twig) */
-/* Uses CSS custom properties defined in global.cui-css */
+/* Uses CSS custom properties defined in global.css */
 
+/* Fluid by default: the container scales smoothly with the viewport and is only
+   capped by its size token — no breakpoint steps. The horizontal padding reserves
+   half the grid gutter, so gap-based .cui-row gutters align with the container edge. */
 .cui-container {
   display: block;
-  width: 100%;
-  /* Escape hatch: set --cui-container-max-width on the element (inline style or utility class) for a custom width */
-  max-width: var(--cui-container-max-width, 100%);
+  box-sizing: border-box;
+  width: min(100%, var(--cui-container-max-width, 100%));
   margin-left: auto;
   margin-right: auto;
-  /* Half the grid gutter, so .cui-row's negative margins align content with the container edge */
   padding-left: calc(var(--cui-grid-gutter-x, 1.5rem) / 2);
   padding-right: calc(var(--cui-grid-gutter-x, 1.5rem) / 2);
-  box-sizing: border-box;
 }
 
-/* ===== SIZES (MAX-WIDTH) ===== */
-/* Mobile-first ladder mirroring Bootstrap's .container: each size is fixed-width from its
-   breakpoint up and fluid (100%) below it; `full` runs the whole ladder.
-   Breakpoints match Grid.css: sm 576px, md 768px, lg 992px, xl 1200px, xxl 1400px.
-   Widths come from the --cui-container-* tokens in global.css, so themes can re-scale them. */
-@media (min-width: 576px) {
-  .cui-container--small,
-  .cui-container--medium,
-  .cui-container--large,
-  .cui-container--full {
-    --cui-container-max-width: var(--cui-container-sm);
-  }
-}
+/* ===== SIZES (MAX-WIDTH CAPS) ===== */
+/* Each size only sets the cap token; the container is fluid below the cap.
+   Escape hatch: set --cui-container-max-width on the element (inline style or
+   utility class) for a fully custom width. */
+.cui-container--small { --cui-container-max-width: var(--cui-container-small, 36rem); }
+.cui-container--medium { --cui-container-max-width: var(--cui-container-medium, 48rem); }
+.cui-container--large { --cui-container-max-width: var(--cui-container-large, 62rem); }
+.cui-container--full { --cui-container-max-width: var(--cui-container-full, 80rem); }
 
-@media (min-width: 768px) {
-  .cui-container--medium,
-  .cui-container--large,
-  .cui-container--full {
-    --cui-container-max-width: var(--cui-container-md);
-  }
-}
-
-@media (min-width: 992px) {
-  .cui-container--large,
-  .cui-container--full {
-    --cui-container-max-width: var(--cui-container-lg);
-  }
-}
-
-@media (min-width: 1200px) {
-  .cui-container--full {
-    --cui-container-max-width: var(--cui-container-xl);
-  }
-}
-
-@media (min-width: 1400px) {
-  .cui-container--full {
-    --cui-container-max-width: var(--cui-container-xxl);
-  }
-}
-
-/* ===== FLUID CONTAINER ===== */
-.cui-container--fluid {
-  max-width: 100%;
-}
+/* ===== FLUID CONTAINER (no cap) ===== */
+.cui-container--fluid { --cui-container-max-width: 100%; }
 
 /* ===== NO PADDING ===== */
 .cui-container--no-padding {
   padding-left: 0;
   padding-right: 0;
+}
+
+/* ===== CONTAINER QUERIES (opt-in) ===== */
+/* Makes this container a query container named "cui": descendant grid classes
+   (see Grid.css) then also respond to the container's own width via @container rules,
+   not just the viewport. */
+.cui-container--queryable {
+  container-type: inline-size;
+  container-name: cui;
 }
 
 /* ===== ALIGNMENT ===== */
@@ -81,10 +56,4 @@
 .cui-container--align-right {
   margin-left: auto;
   margin-right: 0;
-}
-
-/* ===== UTILITY CLASSES ===== */
-.cui-container--responsive-padding {
-  padding-left: clamp(var(--cui-spacing-sm), 5vw, var(--cui-spacing-xl));
-  padding-right: clamp(var(--cui-spacing-sm), 5vw, var(--cui-spacing-xl));
 }

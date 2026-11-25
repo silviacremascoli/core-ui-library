@@ -1,12 +1,12 @@
 <template>
-  <div :class="classNames" v-bind="$attrs">
+  <component :is="as" :class="classNames" v-bind="$attrs">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
-import type { GridColSize, GridOffset, GridOrder } from '../../components/Grid/Grid.types';
+import type { GridColSize, GridOffset, GridOrder, GridBreakpoint } from '../../components/Grid/Grid.types';
 
 function isValidSize(value: unknown): boolean {
   return value === 'auto' || (typeof value === 'number' && value >= 1 && value <= 12);
@@ -52,6 +52,10 @@ export default defineComponent({
     orderLg: { type: [Number, String] as PropType<GridOrder>, default: undefined, validator: isValidOrder },
     orderXl: { type: [Number, String] as PropType<GridOrder>, default: undefined, validator: isValidOrder },
     orderXxl: { type: [Number, String] as PropType<GridOrder>, default: undefined, validator: isValidOrder },
+    hide: { type: Boolean, default: false },
+    hideBelow: { type: String as PropType<GridBreakpoint>, default: undefined },
+    showBelow: { type: String as PropType<GridBreakpoint>, default: undefined },
+    as: { type: String, default: 'div' },
     className: { type: String, default: '' },
   },
   setup(props) {
@@ -81,6 +85,9 @@ export default defineComponent({
       const ordLg = orderClass('lg', props.orderLg); if (ordLg) classes.push(ordLg);
       const ordXl = orderClass('xl', props.orderXl); if (ordXl) classes.push(ordXl);
       const ordXxl = orderClass('xxl', props.orderXxl); if (ordXxl) classes.push(ordXxl);
+      if (props.hide) classes.push('cui-col--hide');
+      if (props.hideBelow) classes.push(`cui-col--hide-below-${props.hideBelow}`);
+      if (props.showBelow) classes.push(`cui-col--show-below-${props.showBelow}`);
       if (props.className) classes.push(props.className);
       return classes.filter(Boolean).join(' ');
     });

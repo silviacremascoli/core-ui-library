@@ -8,6 +8,8 @@ export interface ContainerArgs {
   align?: 'left' | 'center' | 'right';
   noPadding?: boolean;
   fluid?: boolean;
+  queryable?: boolean;
+  as?: string;
   className?: string;
 }
 
@@ -23,7 +25,7 @@ const meta: Meta<ContainerArgs> = {
     size: {
       control: 'select',
       options: ['small', 'medium', 'large', 'full'],
-      description: 'Max-width preset, mobile-first like Bootstrap .container-sm/md/lg/xl: fixed-width from its breakpoint up (540/720/960/1140/1320px, from the --cui-container-* tokens) and fluid below it; full runs the whole ladder. Set --cui-container-max-width on the element for a custom width.',
+      description: 'Max-width cap, fluid below it (width: min(100%, cap)) — no breakpoint steps. Caps come from the --cui-container-small/medium/large/full tokens (36/48/62/80rem). Set --cui-container-max-width on the element for a custom width.',
     },
     align: {
       control: 'select',
@@ -36,7 +38,15 @@ const meta: Meta<ContainerArgs> = {
     },
     fluid: {
       control: 'boolean',
-      description: 'Fluid container (.cui-container--fluid): always 100% width with no horizontal padding.',
+      description: 'Fluid container (.cui-container--fluid): no max-width cap, always full available width.',
+    },
+    queryable: {
+      control: 'boolean',
+      description: 'Container queries (.cui-container--queryable): makes this a query container named "cui" so descendant grid classes also respond to the container\'s own width via @container rules.',
+    },
+    as: {
+      control: 'text',
+      description: 'HTML tag to render instead of div (e.g. section, main).',
     },
     className: {
       control: 'text',
@@ -49,6 +59,7 @@ const meta: Meta<ContainerArgs> = {
     align: 'center',
     noPadding: false,
     fluid: false,
+    queryable: false,
     className: 'bg-background-secondary p-md rounded-md',
   },
 };
@@ -65,3 +76,4 @@ export const LeftAligned: Story = { args: { align: 'left', content: 'Left aligne
 export const RightAligned: Story = { args: { align: 'right', content: 'Right aligned container' } };
 export const NoPadding: Story = { args: { noPadding: true, content: 'Container without padding' } };
 export const Fluid: Story = { args: { fluid: true, content: 'Fluid container (full width)' } };
+export const Queryable: Story = { args: { queryable: true, content: 'Queryable container: grid children respond to this container\'s width via @container rules.' } };

@@ -1,10 +1,12 @@
 {# Container Component - Twig Template #}
-<div class="
+{% set tag = as|default('div') %}
+<{{ tag }} class="
   cui-container
   cui-container--{{ size|default('large') }}
   {% if align is defined and align != '' and align != 'center' %}cui-container--align-{{ align }}{% endif %}
   {% if noPadding %}cui-container--no-padding{% endif %}
   {% if fluid %}cui-container--fluid{% endif %}
+  {% if queryable %}cui-container--queryable{% endif %}
   {% if className is defined %} {{ className|raw }}{% endif %}">
   {{ content|raw }}
-</div>
+</{{ tag }}>

@@ -18,5 +18,9 @@
 {% if orderLg is defined and orderLg is not null %}{% set cls = cls ~ ' cui-col--order-lg-' ~ orderLg %}{% endif %}
 {% if orderXl is defined and orderXl is not null %}{% set cls = cls ~ ' cui-col--order-xl-' ~ orderXl %}{% endif %}
 {% if orderXxl is defined and orderXxl is not null %}{% set cls = cls ~ ' cui-col--order-xxl-' ~ orderXxl %}{% endif %}
+{% if hide %} cui-col--hide{% endif %}
+{% if hideBelow is defined and hideBelow %} cui-col--hide-below-{{ hideBelow }}{% endif %}
+{% if showBelow is defined and showBelow %} cui-col--show-below-{{ showBelow }}{% endif %}
 {% if className is defined and className %} {{ className|raw }}{% endif %}
-<div class="{{ cls }}">{{ content|raw }}</div>
+{% set tag = as|default('div') %}
+<{{ tag }} class="{{ cls }}">{{ content|raw }}</{{ tag }}>

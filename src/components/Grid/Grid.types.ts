@@ -61,6 +61,10 @@ export interface RowProps {
   alignItems?: GridAlignItems;
   /** Main-axis distribution of the row's items */
   justifyContent?: GridJustifyContent;
+  /** Auto mode: columns auto-fit the available width (repeat(auto-fit, minmax(--cui-row-min-col, 1fr))) — no breakpoints needed */
+  auto?: boolean;
+  /** HTML tag to render instead of div */
+  as?: string;
   /** Additional CSS class name(s) */
   className?: string;
   /** Row content (columns) */
@@ -95,6 +99,8 @@ export interface RowArgs {
   gyXxl?: GridGutter;
   alignItems?: GridAlignItems;
   justifyContent?: GridJustifyContent;
+  auto?: boolean;
+  as?: string;
   className?: string;
 }
 
@@ -120,6 +126,14 @@ export interface ColProps {
   orderLg?: GridOrder;
   orderXl?: GridOrder;
   orderXxl?: GridOrder;
+  /** Always hide the column */
+  hide?: boolean;
+  /** Hide the column below this breakpoint (container-aware inside .cui-container--queryable) */
+  hideBelow?: GridBreakpoint;
+  /** Show the column only below this breakpoint */
+  showBelow?: GridBreakpoint;
+  /** HTML tag to render instead of div */
+  as?: string;
   /** Additional CSS class name(s) */
   className?: string;
   /** Column content */
@@ -146,5 +160,9 @@ export interface ColArgs {
   orderLg?: GridOrder;
   orderXl?: GridOrder;
   orderXxl?: GridOrder;
+  hide?: boolean;
+  hideBelow?: GridBreakpoint;
+  showBelow?: GridBreakpoint;
+  as?: string;
   className?: string;
 }

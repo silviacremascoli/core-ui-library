@@ -53,16 +53,22 @@
   /* ADORNMENT PADDING */
   --cui-input-padding-adornment: 2.5rem;
 
-  /* GRID GUTTERS */
-  --cui-grid-gutter-x: 1.5rem;
+  /* GRID GUTTERS — fluid: grows smoothly with the viewport, capped at 1.5rem */
+  --cui-grid-gutter-x: clamp(1rem, 2.5vw, 1.5rem);
   --cui-grid-gutter-y: 0px;
 
-  /* CONTAINER MAX-WIDTH LADDER (consumed by .cui-container--* size classes) */
-  --cui-container-sm: 540px;
-  --cui-container-md: 720px;
-  --cui-container-lg: 960px;
-  --cui-container-xl: 1140px;
-  --cui-container-xxl: 1320px;
+  /* CONTAINER MAX-WIDTH CAPS (consumed by .cui-container--* size classes).
+     Containers are fluid below the cap: width = min(100%, cap) — no breakpoint steps. */
+  --cui-container-small: 36rem;
+  --cui-container-medium: 48rem;
+  --cui-container-large: 62rem;
+  --cui-container-full: 80rem;
+
+  /* FLUID TYPE SCALE (opt-in via .cui-text-fluid-* utilities, clamp-based) */
+  --cui-font-size-fluid-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+  --cui-font-size-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+  --cui-font-size-fluid-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --cui-font-size-fluid-3xl: clamp(1.85rem, 1.45rem + 2vw, 3rem);
 
   /* TRANSITIONS */
   --cui-transition-fast: all 0.1s ease;
@@ -201,6 +207,45 @@ body {
 .cui-inline-block { display: inline-block; }
 .cui-grid { display: grid; }
 .cui-inline { display: inline; }
+
+/* Display utilities, per breakpoint (viewport-based; grid columns have
+   container-aware hide/show props instead — see Grid.css) */
+/* Breakpoints: sm 576px, md 768px, lg 992px, xl 1200px, xxl 1400px */
+@media (min-width: 576px) {
+  .cui-block-sm { display: block; }
+  .cui-hidden-sm { display: none; }
+}
+@media (min-width: 768px) {
+  .cui-block-md { display: block; }
+  .cui-hidden-md { display: none; }
+}
+@media (min-width: 992px) {
+  .cui-block-lg { display: block; }
+  .cui-hidden-lg { display: none; }
+}
+@media (min-width: 1200px) {
+  .cui-block-xl { display: block; }
+  .cui-hidden-xl { display: none; }
+}
+@media (min-width: 1400px) {
+  .cui-block-xxl { display: block; }
+  .cui-hidden-xxl { display: none; }
+}
+
+/* Responsive image */
+.cui-img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Muted text */
+.cui-text-muted { color: var(--cui-color-text-light); }
+
+/* Fluid typography utilities */
+.cui-text-fluid-lg { font-size: var(--cui-font-size-fluid-lg); }
+.cui-text-fluid-xl { font-size: var(--cui-font-size-fluid-xl); }
+.cui-text-fluid-2xl { font-size: var(--cui-font-size-fluid-2xl); }
+.cui-text-fluid-3xl { font-size: var(--cui-font-size-fluid-3xl); }
 
 /* Cursor utilities */
 .cui-cursor-pointer { cursor: pointer; }

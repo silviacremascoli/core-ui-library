@@ -29,6 +29,8 @@ export function Row({
   gyXxl,
   alignItems,
   justifyContent,
+  auto = false,
+  as,
   className = '',
   children,
   ...props
@@ -61,12 +63,15 @@ export function Row({
     gyXxl ? `cui-row--gy-xxl-${gyXxl}` : '',
     alignItems ? `cui-row--align-items-${alignItems}` : '',
     justifyContent ? `cui-row--justify-content-${justifyContent}` : '',
+    auto ? 'cui-row--auto' : '',
     className
   ].filter(Boolean).join(' ');
 
+  const Tag = (as || 'div') as React.ElementType;
+
   return (
-    <div className={classNames} {...props}>
+    <Tag className={classNames} {...props}>
       {children}
-    </div>
+    </Tag>
   );
 }

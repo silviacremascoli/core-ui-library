@@ -1,7 +1,7 @@
 <template>
-  <div :class="classNames" v-bind="$attrs">
+  <component :is="as" :class="classNames" v-bind="$attrs">
     <slot>{{ content }}</slot>
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -16,6 +16,8 @@ export default defineComponent({
     align: { type: String as PropType<ContainerAlign>, default: 'center' },
     noPadding: { type: Boolean, default: false },
     fluid: { type: Boolean, default: false },
+    queryable: { type: Boolean, default: false },
+    as: { type: String, default: 'div' },
     className: { type: String, default: '' },
   },
   setup(props) {
@@ -26,6 +28,7 @@ export default defineComponent({
         props.align !== 'center' ? `cui-container--align-${props.align}` : '',
         props.noPadding ? 'cui-container--no-padding' : '',
         props.fluid ? 'cui-container--fluid' : '',
+        props.queryable ? 'cui-container--queryable' : '',
         props.className
       ].filter(Boolean).join(' ');
     });
