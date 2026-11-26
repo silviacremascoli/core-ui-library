@@ -10,8 +10,27 @@
   padding: 0;
 }
 
+/* ===== VARIANTS (DISPLAY) ===== */
+/* Hero-scale text, larger than h1. Renders as h1 by default. */
+.cui-typography--display1 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
+  font-size: var(--cui-font-size-4xl);
+  font-weight: var(--cui-font-weight-bold);
+  line-height: var(--cui-line-height-tight);
+  margin-bottom: var(--cui-spacing-xl);
+}
+
+.cui-typography--display2 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
+  font-size: var(--cui-font-size-3xl);
+  font-weight: var(--cui-font-weight-bold);
+  line-height: var(--cui-line-height-tight);
+  margin-bottom: var(--cui-spacing-xl);
+}
+
 /* ===== VARIANTS (HTML HEADINGS) ===== */
 .cui-typography--h1 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-2xl);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);
@@ -19,6 +38,7 @@
 }
 
 .cui-typography--h2 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-xl);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);
@@ -26,6 +46,7 @@
 }
 
 .cui-typography--h3 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-lg);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);
@@ -33,6 +54,7 @@
 }
 
 .cui-typography--h4 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-base);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);
@@ -40,6 +62,7 @@
 }
 
 .cui-typography--h5 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-sm);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);
@@ -47,6 +70,7 @@
 }
 
 .cui-typography--h6 {
+  font-family: var(--cui-font-family-heading, var(--cui-font-family));
   font-size: var(--cui-font-size-xs);
   font-weight: var(--cui-font-weight-bold);
   line-height: var(--cui-line-height-tight);

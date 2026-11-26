@@ -7,7 +7,7 @@ export type ReactTypographyProps = Omit<TypographyProps, 'children'> & React.HTM
 export function Typography({
   children = '',
   tag,
-  variant = 'body1',
+  variant,
   align,
   weight,
   fontFamily,
@@ -18,7 +18,8 @@ export function Typography({
   style,
   ...props
 }: ReactTypographyProps) {
-  const Tag = tag || getTagFromVariant(variant);
+  const resolvedVariant = variant || getVariantFromTag(tag) || 'body1';
+  const Tag = tag || getTagFromVariant(resolvedVariant);
   const resolvedFontFamily = fontFamily === 'text'
     ? 'var(--cui-font-family)'
     : fontFamily === 'heading'
@@ -27,7 +28,7 @@ export function Typography({
 
   const classNames = [
     'cui-typography',
-    `cui-typography--${variant}`,
+    `cui-typography--${resolvedVariant}`,
     align ? `cui-typography--align-${align}` : '',
     weight ? `cui-typography--weight-${weight}` : '',
     color ? `cui-typography--color-${color}` : '',
@@ -43,8 +44,22 @@ export function Typography({
   );
 }
 
+function getVariantFromTag(tag?: TypographyTag): TypographyVariant | '' {
+  switch (tag) {
+    case 'h1': return 'h1';
+    case 'h2': return 'h2';
+    case 'h3': return 'h3';
+    case 'h4': return 'h4';
+    case 'h5': return 'h5';
+    case 'h6': return 'h6';
+    default: return '';
+  }
+}
+
 function getTagFromVariant(variant: TypographyVariant): TypographyTag {
   switch (variant) {
+    case 'display1':
+    case 'display2':
     case 'h1': return 'h1';
     case 'h2': return 'h2';
     case 'h3': return 'h3';

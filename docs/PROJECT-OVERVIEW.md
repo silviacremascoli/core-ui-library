@@ -27,7 +27,7 @@ Core UI Library is a framework-agnostic component library built on a CSS-first d
 | **Button** | ✅ Live | 14 stories | ✅ Complete |
 | **Input** | ✅ Live | 9 stories | ✅ Complete |
 | **Label** | ✅ Live | 9 stories | ✅ Complete |
-| **Typography** | ✅ Live | 14 stories | ✅ Complete |
+| **Typography** | ✅ Live | 15 stories | ✅ Complete |
 | **Icon** | ✅ Live | 9 stories | ✅ Complete |
 | **Container** | ✅ Live | 9 stories | ✅ Complete |
 | **Grid** (Row + Col) | ✅ Live | 5 stories | ✅ Complete |
@@ -207,7 +207,7 @@ src/
 
 **Status:** ✅ Live with 14 variants
 
-- **Variants:** h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, caption, overline
+- **Variants:** display1, display2, h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, caption, overline (display variants render as h1)
 - **Tags:** h1-h6, p, span, div, blockquote, small, strong, em
 - **Features:**
   - Text alignment (left, center, right, justify)

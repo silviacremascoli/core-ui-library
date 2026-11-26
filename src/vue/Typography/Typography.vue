@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     content: { type: String, default: '' },
     tag: { type: String as PropType<TypographyTag>, default: '' },
-    variant: { type: String as PropType<TypographyVariant>, default: 'body1' },
+    variant: { type: String as PropType<TypographyVariant>, default: '' },
     align: { type: String as PropType<TypographyAlign>, default: '' },
     weight: { type: String as PropType<TypographyWeight>, default: '' },
     fontFamily: { type: String as PropType<TypographyFontFamily>, default: '' },
@@ -28,8 +28,12 @@ export default defineComponent({
     className: { type: String, default: '' },
   },
   setup(props) {
+    const resolvedVariant = computed<TypographyVariant>(() => {
+      return props.variant || getVariantFromTag(props.tag) || 'body1';
+    });
+
     const computedTag = computed(() => {
-      return props.tag || getTagFromVariant(props.variant);
+      return props.tag || getTagFromVariant(resolvedVariant.value);
     });
 
     const fontFamilyStyle = computed(() => {
@@ -42,7 +46,7 @@ export default defineComponent({
     const classNames = computed(() => {
       return [
         'cui-typography',
-        `cui-typography--${props.variant}`,
+        `cui-typography--${resolvedVariant.value}`,
         props.align ? `cui-typography--align-${props.align}` : '',
         props.weight ? `cui-typography--weight-${props.weight}` : '',
         props.color ? `cui-typography--color-${props.color}` : '',
@@ -56,8 +60,22 @@ export default defineComponent({
   }
 });
 
+function getVariantFromTag(tag: TypographyTag | ''): TypographyVariant | '' {
+  switch (tag) {
+    case 'h1': return 'h1';
+    case 'h2': return 'h2';
+    case 'h3': return 'h3';
+    case 'h4': return 'h4';
+    case 'h5': return 'h5';
+    case 'h6': return 'h6';
+    default: return '';
+  }
+}
+
 function getTagFromVariant(variant: TypographyVariant): TypographyTag {
   switch (variant) {
+    case 'display1':
+    case 'display2':
     case 'h1': return 'h1';
     case 'h2': return 'h2';
     case 'h3': return 'h3';

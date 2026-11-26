@@ -18,14 +18,14 @@ const meta: Meta<TypographyStoryArgs> = {
       control: 'text',
     },
     tag: {
-      description: 'Semantic HTML element, independent of the visual variant. By default, heading variants use matching headings, body and subtitle variants use p, and caption and overline use span.',
+      description: 'Semantic HTML element, independent of the visual variant. By default, display and heading variants use matching headings (display variants render h1), body and subtitle variants use p, and caption and overline use span. Setting a heading tag (h1–h6) also defaults the variant to that heading.',
       control: 'select',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'blockquote', 'small', 'strong', 'em'],
     },
     variant: { 
-      description: 'Visual text style, including size, default weight, line height, and heading spacing. Defaults to body1.',
+      description: 'Visual text style, including size, default weight, line height, and heading spacing. Defaults to body1, or to the matching heading when tag is h1–h6.',
       control: 'select', 
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'overline'] 
+      options: ['display1', 'display2', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'overline']
     },
     align: {
       description: 'Aligns text within its element. When omitted, alignment is inherited.',
@@ -107,6 +107,28 @@ const meta: Meta<TypographyStoryArgs> = {
 export default meta;
 
 type Story = StoryObj<TypographyStoryArgs>;
+
+export const Display1: Story = {
+  args: { content: 'Display 1', variant: 'display1' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Hero-scale text (display1 variant), larger than h1. Renders as h1 by default. Use for landing page heroes and major statements.',
+      },
+    },
+  },
+};
+
+export const Display2: Story = {
+  args: { content: 'Display 2', variant: 'display2' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Second display size (display2 variant), between display1 and h1. Renders as h1 by default.',
+      },
+    },
+  },
+};
 
 export const Heading1: Story = {
   args: { content: 'Heading 1', variant: 'h1' },

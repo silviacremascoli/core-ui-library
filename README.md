@@ -26,7 +26,7 @@ Currently, **Button**, **Input**, **Label**, **Typography**, **Icon**, **Contain
 | **Button** | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, outline & ghost variants, left/right/icon-only icons, active press effect, theme focus rings, loading & disabled states |
 | **Input**  | ✅ | ✅ | ✅ | ✅ | **Live** | Pill & default shapes, clearable search with embedded clear button, left/right icons, error/success validation, theme focus glow, all input types |
 | **Label**  | ✅ | ✅ | ✅ | ✅ | **Live** | Associated form labels, size/weight/color options, required and disabled states, visually hidden accessibility mode |
-| **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Semantic headings (h1-h6), body text variants, subtitles, captions, text alignment, weights, colors, truncation, custom fonts |
+| **Typography** | ✅ | ✅ | ✅ | ✅ | **Live** | Display sizes (display1/display2), semantic headings (h1-h6), body text variants, subtitles, captions, text alignment, weights, colors, truncation, custom fonts |
 | **Icon** | ✅ | ✅ | ✅ | ✅ | **Live** | 2,100+ Font Awesome Free icons (solid, regular, brands), all sizes (xs-2xl), all colors, link support, accessibility features. Regular icons use `-regular` suffix (e.g., `envelope-regular`) |
 | **Container** | ✅ | ✅ | ✅ | ✅ | **Live** | Fluid max-width caps from tokens (`--cui-container-small/medium/large/full`), `align`, `fluid`, `noPadding`, opt-in container queries (`queryable`), `as` tag override, `--cui-container-max-width` per-instance escape hatch |
 | **Grid** (`Row` + `Col`) | ✅ | ✅ | ✅ | ✅ | **Live** | CSS-Grid rows with native gap gutters (`--cui-grid-columns` adjustable), 12-col spans at sm–xxl, offsets, order, row-cols, `auto` auto-fit mode, `alignItems`/`justifyContent`, container-aware `hide`/`hideBelow`/`showBelow` on Col |
@@ -143,7 +143,8 @@ Button padding depends on size, not shape. Icon-only buttons use equal padding o
 
 Twig accepts plain text through `content` and escapes it as HTML. Twig also accepts `id`, `lang`, `dir`, `ariaLabel`, and `ariaDescribedby`; React and Vue pass standard HTML and ARIA attributes to the element.
 
-- Heading variants `h1` through `h6` render matching semantic headings, while `subtitle1`, `subtitle2`, `body1`, `body2` render paragraphs, and `caption` and `overline` render spans.
+- Display variants `display1` and `display2` render as `h1`; heading variants `h1` through `h6` render matching semantic headings, while `subtitle1`, `subtitle2`, `body1`, `body2` render paragraphs, and `caption` and `overline` render spans. Display and heading variants use the theme heading font (`--cui-font-family-heading`).
+- `tag` and `variant` default to each other: setting a heading `tag` (`h1`-`h6`) without a `variant` applies that heading's variant, so a `tag="h2"`-only usage renders an `h2` with `h2` styling. When neither is set, the variant is `body1` rendered as a `p`.
 - Use `tag` to choose a different semantic element without changing the visual `variant`, for example `<Typography variant="h1" tag="h2">Section</Typography>`.
 - Choose heading levels according to the document structure, and use an inline tag when nesting text inside a paragraph. Available tags are `h1`-`h6`, `p`, `span`, `div`, `blockquote`, `small`, `strong`, and `em`.
 - Use `align` for text alignment, `weight` for font weight, and `color` for theme-based text colors.

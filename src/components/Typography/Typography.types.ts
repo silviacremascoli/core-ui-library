@@ -2,6 +2,7 @@
 // Used by all framework implementations (React, Vue, Twig)
 
 export type TypographyVariant = 
+  | 'display1' | 'display2'
   | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' 
   | 'subtitle1' | 'subtitle2' 
   | 'body1' | 'body2' 
@@ -19,10 +20,10 @@ export interface TypographyProps {
   /** The text content to display */
   children?: string;
   
-  /** Semantic element, independent of the visual variant */
+  /** Semantic element. Defaults to the element matching the resolved variant (e.g. variant "h2" renders an h2). */
   tag?: TypographyTag;
   
-  /** Typography variant for styling */
+  /** Typography variant for styling. Defaults to "body1", or to the matching heading when tag is h1–h6. */
   variant?: TypographyVariant;
   
   /** Text alignment */

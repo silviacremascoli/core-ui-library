@@ -4,15 +4,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.1] - 2026-11-26
 
 ### Added
 
+- **Typography:** new `display1` / `display2` variants (larger than h1, render as `h1` by default) using the new `--cui-font-size-4xl` token (`--cui-font-size-fluid-4xl` for fluid type)
 - **Utilities (global.css):** text alignment (`cui-text-left/center/right/justify`), `cui-text-nowrap`, and screen-reader-only helpers `cui-visually-hidden` / `cui-visually-hidden-focusable` (the latter reveals on focus, e.g. skip links)
 - **Utilities (global.css):** axis padding utilities `cui-pt-*` / `cui-pb-*` / `cui-px-*` / `cui-py-*` (same scale as `cui-p-*`) and axis margin utilities `cui-mr-*` / `cui-ml-*` / `cui-mx-*` / `cui-my-*` (same scale as `cui-m-*`), all driven by the existing `--cui-spacing-*` tokens
 
 ### Changed
 
+- **Typography:** `tag` and `variant` now default to each other — a heading `tag` (h1–h6) without a `variant` applies that heading's variant, and a heading `variant` without a `tag` renders the matching heading element. Explicit props still override both defaults
+- **Typography:** display and heading variants (h1–h6) now use the theme heading font (`--cui-font-family-heading`) by default
+- **CSS source order:** utility classes moved to `src/design/utilities.css`, imported only from the last lib entry (`src/twig/index.ts`) so they are emitted after component styles in `dist/core-ui.css` — utilities now override component styles at equal specificity. Guarded by `scripts/check-css-order.mjs` in the build
 - **Utilities (global.css):** `cui-visually-hidden*` also sets `clip-path: inset(50%)` alongside the legacy `clip` property
 
 ## [0.3.0] - 2026-11-25

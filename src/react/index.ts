@@ -12,3 +12,4 @@ export { Row, Col } from './Grid';
 export type { ReactTypographyProps } from './Typography';
 export type { IconProps, IconSize, IconColor, IconTarget } from '../components/Icon/Icon.types';
 export type { TypographyProps, TypographyTag, TypographyVariant, TypographyAlign, TypographyWeight, TypographyColor } from '../components/Typography/Typography.types';
+
