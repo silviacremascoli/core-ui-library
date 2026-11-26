@@ -1,10 +1,7 @@
 // Core UI Library - Main Entry Point
 // This exports all components from all frameworks for convenience
 
-// Import global styles (CSS custom properties)
 import './design/global.css';
-
-// Import theme support (dark/light mode)
 import './design/themes.css';
 
 // Re-export shared types (the single source of truth for all component types)
