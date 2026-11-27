@@ -186,6 +186,9 @@
 .cui-gap-sm { gap: var(--cui-spacing-sm); }
 .cui-gap-md { gap: var(--cui-spacing-md); }
 .cui-gap-lg { gap: var(--cui-spacing-lg); }
+.cui-gap-xl { gap: var(--cui-spacing-xl); }
+.cui-gap-2xl { gap: var(--cui-spacing-2xl); }
+.cui-gap-3xl { gap: var(--cui-spacing-3xl); }
 
 /* Display utilities */
 .cui-block { display: block; }

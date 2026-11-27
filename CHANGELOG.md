@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Typography:** new `display1` / `display2` variants (larger than h1, render as `h1` by default) using the new `--cui-font-size-4xl` token (`--cui-font-size-fluid-4xl` for fluid type)
 - **Utilities (global.css):** text alignment (`cui-text-left/center/right/justify`), `cui-text-nowrap`, and screen-reader-only helpers `cui-visually-hidden` / `cui-visually-hidden-focusable` (the latter reveals on focus, e.g. skip links)
 - **Utilities (global.css):** axis padding utilities `cui-pt-*` / `cui-pb-*` / `cui-px-*` / `cui-py-*` (same scale as `cui-p-*`) and axis margin utilities `cui-mr-*` / `cui-ml-*` / `cui-mx-*` / `cui-my-*` (same scale as `cui-m-*`), all driven by the existing `--cui-spacing-*` tokens
+- **Utilities (utilities.css):** `cui-gap-xl` / `cui-gap-2xl` / `cui-gap-3xl`, extending the gap scale to match `--cui-spacing-xl/2xl/3xl`
 
 ### Changed
 
