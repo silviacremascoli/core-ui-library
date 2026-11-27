@@ -218,7 +218,7 @@ import "core-ui-library/styles";
 
 **Container queries:** pass `queryable` to `Container` to make it a query container (`container-type: inline-size; container-name: cui`). Every responsive grid class is emitted both as a viewport `@media` rule and as a `@container cui` rule; inside a queryable container the `@container` rules win, so columns follow the container's own width. Shared breakpoints: sm 576px, md 768px, lg 992px, xl 1200px, xxl 1400px.
 
-**Utility classes** (in `global.css`): per-breakpoint display helpers (`cui-block-lg`, `cui-hidden-lg`, …), `cui-img-fluid`, `cui-text-muted`, and a clamp-based fluid type scale (`cui-text-fluid-lg`/`xl`/`2xl`/`3xl` via `--cui-font-size-fluid-*`).
+**Utility classes** (in `utilities.css`): per-breakpoint display helpers (`cui-block-lg`, `cui-hidden-lg`, …) and per-breakpoint text alignment (`cui-text-left-lg`, `cui-text-center-md`, … — min-width media queries ordered sm → xxl, so the highest matching breakpoint wins), plus `cui-img-fluid`, `cui-text-muted`, and a clamp-based fluid type scale (`cui-text-fluid-lg`/`xl`/`2xl`/`3xl` via `--cui-font-size-fluid-*`). Combine a base class with a breakpoint variant to switch at a breakpoint, e.g. `class="cui-text-center cui-text-left-lg"` centers below lg and left-aligns from lg up.
 
 ## Project Structure
 

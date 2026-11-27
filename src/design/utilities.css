@@ -220,6 +220,41 @@
   .cui-hidden-xxl { display: none; }
 }
 
+/* Text alignment utilities, per breakpoint (viewport-based, min-width).
+   Blocks run sm → xxl so that when several apply, the higher breakpoint
+   wins (equal specificity, later source order). The base cui-text-* rules
+   above cover everything below sm. */
+@media (min-width: 576px) {
+  .cui-text-left-sm { text-align: left; }
+  .cui-text-center-sm { text-align: center; }
+  .cui-text-right-sm { text-align: right; }
+  .cui-text-justify-sm { text-align: justify; }
+}
+@media (min-width: 768px) {
+  .cui-text-left-md { text-align: left; }
+  .cui-text-center-md { text-align: center; }
+  .cui-text-right-md { text-align: right; }
+  .cui-text-justify-md { text-align: justify; }
+}
+@media (min-width: 992px) {
+  .cui-text-left-lg { text-align: left; }
+  .cui-text-center-lg { text-align: center; }
+  .cui-text-right-lg { text-align: right; }
+  .cui-text-justify-lg { text-align: justify; }
+}
+@media (min-width: 1200px) {
+  .cui-text-left-xl { text-align: left; }
+  .cui-text-center-xl { text-align: center; }
+  .cui-text-right-xl { text-align: right; }
+  .cui-text-justify-xl { text-align: justify; }
+}
+@media (min-width: 1400px) {
+  .cui-text-left-xxl { text-align: left; }
+  .cui-text-center-xxl { text-align: center; }
+  .cui-text-right-xxl { text-align: right; }
+  .cui-text-justify-xxl { text-align: justify; }
+}
+
 /* Responsive image */
 .cui-img-fluid {
   max-width: 100%;
